@@ -9,14 +9,14 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 })
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' className={`${pretendard.variable}`}>
-      <body className={pretendard.className}>
+      <body className={`${pretendard.className} px-12`}>
         <Header />
         {children}
       </body>
