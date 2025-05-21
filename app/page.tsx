@@ -1,3 +1,5 @@
 export default function Home() {
-  return <div>Home</div>
+  return (
+    <div className='bg-primary h-[calc(100vh-88px)] flex justify-center items-center'>Home</div>
+  )
 }

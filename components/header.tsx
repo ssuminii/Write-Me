@@ -4,11 +4,11 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header className='flex justify-between items-center py-6 font-semibold hover:accent'>
+    <header className='flex justify-between items-center h-22 px-12 font-semibold hover:accent'>
       <MainNav />
       <nav className='flex items-center gap-4'>
-        <ModeToggle />
         <Link href='/login'>Login</Link>
+        <ModeToggle />
       </nav>
     </header>
   )

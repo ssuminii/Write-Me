@@ -26,9 +26,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' className={`${pretendard.variable}`}>
-      <body className={`${pretendard.className} px-12`}>
+      <body className={`${pretendard.className} w-full`}>
         <Header />
-        {children}
+        <main className='flex-1'>{children}</main>
       </body>
     </html>
   )
