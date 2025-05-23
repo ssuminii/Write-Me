@@ -10,7 +10,7 @@ export default function MainNav() {
       </Link>
       <nav className='flex gap-4'>
         {mainNav.map((item) => (
-          <Link key={item.title} href={item.href}>
+          <Link key={item.title} href={item.href} className='hover:text-primary-hover'>
             {item.title}
           </Link>
         ))}
