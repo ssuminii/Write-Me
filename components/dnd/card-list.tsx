@@ -14,9 +14,10 @@ export interface CardItem {
 
 interface CardListProps {
   initialItems: CardItem[]
+  className: string
 }
 
-const DndCardList = ({ initialItems }: CardListProps) => {
+const DndCardList = ({ initialItems, className }: CardListProps) => {
   const [items, setItems] = useState(initialItems)
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -34,7 +35,7 @@ const DndCardList = ({ initialItems }: CardListProps) => {
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={items.map((item) => item.id)} strategy={verticalListSortingStrategy}>
-        <div className='flex flex-col gap-4 p-10'>
+        <div className={`flex flex-col gap-4 px-10 ${className}`}>
           {items.map((item) => (
             <DndCard key={item.id} id={item.id} title={item.title}>
               {item.content}
