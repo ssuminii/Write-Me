@@ -1,42 +1,42 @@
 'use client'
 
-import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
+import { DndContext, closestCenter, type DragEndEvent, type UniqueIdentifier } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import DndCard from './dnd-card'
 import type { ReactNode } from 'react'
 
 export interface CardItem {
-  id: string
+  id: UniqueIdentifier
   title: string
   content: ReactNode
 }
 
 interface CardListProps {
-  initialItems: CardItem[]
+  items: CardItem[]
   className: string
 }
 
-const DndCardList = ({ initialItems, className }: CardListProps) => {
-  const [items, setItems] = useState(initialItems)
+const DndCardList = ({ items, className }: CardListProps) => {
+  const [order, setOrder] = useState(items.map((item) => item.id))
+
+  const sortedItems = order.map((id) => items.find((item) => item.id === id)!)
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
     if (!over) return
-
     if (active.id !== over.id) {
-      const oldIndex = items.findIndex((item) => item.id === active.id)
-      const newIndex = items.findIndex((item) => item.id === over.id)
-
-      setItems(arrayMove(items, oldIndex, newIndex))
+      const oldIndex = order.indexOf(active.id)
+      const newIndex = order.indexOf(over.id)
+      setOrder(arrayMove(order, oldIndex, newIndex))
     }
   }
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={items.map((item) => item.id)} strategy={verticalListSortingStrategy}>
+      <SortableContext items={order} strategy={verticalListSortingStrategy}>
         <div className={`flex flex-col gap-4 px-10 ${className}`}>
-          {items.map((item) => (
+          {sortedItems.map((item) => (
             <DndCard key={item.id} id={item.id} title={item.title}>
               {item.content}
             </DndCard>

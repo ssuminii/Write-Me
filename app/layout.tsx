@@ -26,9 +26,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' className={`${pretendard.variable}`}>
-      <body className={`${pretendard.className} w-full`}>
+      <body className={`${pretendard.className} w-full h-screen flex flex-col`}>
         <Header />
-        <main className='flex-1'>{children}</main>
+        <main className='flex-1 overflow-auto'>{children}</main>
       </body>
     </html>
   )

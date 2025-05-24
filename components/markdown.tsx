@@ -1,18 +1,17 @@
 'use client'
 
-import { useState } from 'react'
 import MDEditor from '@uiw/react-md-editor'
 
 interface MarkdownProps {
   className: string
+  value: string
+  onChange: (value: string) => void
 }
 
-const Markdown = ({ className }: MarkdownProps) => {
-  const [markdown, setMarkdown] = useState<string>('')
-
+const Markdown = ({ className, value, onChange }: MarkdownProps) => {
   return (
     <div className={className}>
-      <MDEditor value={markdown} onChange={(val) => setMarkdown(val || '')} height='100%' />
+      <MDEditor value={value} onChange={(val) => onChange(val || '')} height='100%' />
     </div>
   )
 }
