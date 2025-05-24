@@ -5,9 +5,10 @@ import { Menu, CircleMinus, CirclePlus } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import type { UniqueIdentifier } from '@dnd-kit/core'
 
 interface DndCardProps {
-  id: string
+  id: UniqueIdentifier
   title: string
   children: ReactNode
 }
