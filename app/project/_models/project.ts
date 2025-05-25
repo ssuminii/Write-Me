@@ -4,6 +4,7 @@ export interface ProjectState {
   title: string
   overview: string
   site: SiteInfo
+  folderStructure: string
 }
 
 export interface ProjectHandlers {
@@ -11,4 +12,5 @@ export interface ProjectHandlers {
   onOverviewChange: (value: string) => void
   onSiteChange: (value: SiteInfo) => void
   onImageUpload: (html: string) => void
+  onFolderStructureChange: (value: string) => void
 }
