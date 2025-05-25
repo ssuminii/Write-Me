@@ -10,6 +10,7 @@ export interface CardItem {
   id: UniqueIdentifier
   title: string
   content: ReactNode
+  markdown?: string
 }
 
 interface CardListProps {
