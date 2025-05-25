@@ -75,14 +75,14 @@ const ImageUpload = ({ onImageUpload }: ImageUploadProps) => {
           <label htmlFor='width' className='w-16'>
             Width
           </label>
-          <Input id='width' name='width' value={size?.width ?? ''} />
+          <Input id='width' name='width' value={size?.width ?? ''} readOnly />
         </div>
 
         <div className='flex items-center gap-4'>
           <label htmlFor='height' className='w-16'>
             Height
           </label>
-          <Input id='height' name='height' value={size?.height ?? ''} />
+          <Input id='height' name='height' value={size?.height ?? ''} readOnly />
         </div>
       </div>
     </form>

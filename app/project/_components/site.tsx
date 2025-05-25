@@ -1,13 +1,5 @@
 import { Input } from '@/components/ui/input'
-
-export interface SiteInfo {
-  name: string
-  link: string
-}
-
-export interface SiteProps extends SiteInfo {
-  onChange: (value: SiteInfo) => void
-}
+import type { SiteProps } from '@/app/project/_models/site'
 
 const Site = ({ name, link, onChange }: SiteProps) => {
   return (
