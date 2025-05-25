@@ -10,7 +10,7 @@ interface SizeProps {
 }
 
 interface ImageUploadProps {
-  onImageUpload: (markdownImageHtml: string) => void // ✅ README용 이미지 HTML 삽입 함수
+  onImageUpload: (markdownImageHtml: string) => void
 }
 
 const ImageUpload = ({ onImageUpload }: ImageUploadProps) => {
@@ -71,15 +71,19 @@ const ImageUpload = ({ onImageUpload }: ImageUploadProps) => {
       {file && <span className='text-primary'>선택된 파일: {file.name}</span>}
 
       <div className='flex gap-6'>
-        <label className='flex items-center gap-4'>
-          <span>Width</span>
-          <Input name='width' value={size?.width ?? ''} />
-        </label>
+        <div className='flex items-center gap-4'>
+          <label htmlFor='width' className='w-16'>
+            Width
+          </label>
+          <Input id='width' name='width' value={size?.width ?? ''} />
+        </div>
 
-        <label className='flex items-center gap-4'>
-          <span>Height</span>
-          <Input name='height' value={size?.height ?? ''} />
-        </label>
+        <div className='flex items-center gap-4'>
+          <label htmlFor='height' className='w-16'>
+            Height
+          </label>
+          <Input id='height' name='height' value={size?.height ?? ''} />
+        </div>
       </div>
     </form>
   )
