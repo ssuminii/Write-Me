@@ -8,18 +8,26 @@ import { projectCards } from './data/project-data'
 export default function Project() {
   const [title, setTitle] = useState('')
   const [overview, setOverview] = useState('')
+  const [site, setSite] = useState({ name: '', link: '' })
 
-  // 제목 입력
+  // 제목
   const handleTitleChange = (value: string) => {
     const cleaned = value.replace(/^#+\s*/, '')
     setTitle(cleaned)
   }
 
+  // 메인 이미지 업로드
+  const handleImageUpload = () => {}
+
+  // 개요 및 간단 소개
   const handleOverviewChange = (value: string) => {
     setOverview(value)
   }
 
-  const handleImageUpload = (value: string) => {}
+  // 링크
+  const handleSiteChange = (value: { name: string; link: string }) => {
+    setSite(value)
+  }
 
   // projectCards 리팩토링
   const cards = projectCards(
@@ -27,7 +35,9 @@ export default function Project() {
     handleTitleChange,
     handleImageUpload,
     overview,
-    handleOverviewChange
+    handleOverviewChange,
+    site,
+    handleSiteChange
   )
 
   const markdown = cards
