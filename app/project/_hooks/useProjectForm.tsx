@@ -8,6 +8,7 @@ export function useProjectForm() {
     title: '',
     overview: '',
     site: { name: '', link: '' },
+    folderStructure: '',
   })
 
   const handlers: ProjectHandlers = {
@@ -15,6 +16,7 @@ export function useProjectForm() {
     onOverviewChange: (v) => setState((prev) => ({ ...prev, overview: v })),
     onSiteChange: (v) => setState((prev) => ({ ...prev, site: v })),
     onImageUpload: (html) => console.log('이미지 업로드:', html),
+    onFolderStructureChange: (v) => setState((prev) => ({ ...prev, folderStructure: v })),
   }
 
   return { state, handlers }

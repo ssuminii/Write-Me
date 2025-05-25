@@ -1,4 +1,4 @@
-import { Title, ImageUpload, Overview, Site } from '../_components'
+import { Title, ImageUpload, Overview, Site, FolderStructure } from '../_components'
 import type { CardItem } from '@/components/dnd/card-list'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
 
@@ -31,7 +31,14 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
   { id: 'card-5', title: '프로젝트 팀원', content: '' },
   { id: 'card-6', title: '프로젝트 기간', content: '' },
   { id: 'card-7', title: '기술 스택', content: '' },
-  { id: 'card-8', title: '폴더 구조', content: '' },
+  {
+    id: 'card-8',
+    title: '폴더 구조',
+    content: (
+      <FolderStructure value={state.folderStructure} onChange={handlers.onFolderStructureChange} />
+    ),
+    markdown: ['## 📁 폴더구조', '```', state.folderStructure, '```'].join('\n'),
+  },
   { id: 'card-9', title: '주요 기능', content: '' },
   { id: 'card-10', title: '담당 기능', content: '' },
   { id: 'card-11', title: 'Contact', content: '' },
