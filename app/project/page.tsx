@@ -7,14 +7,22 @@ import { projectCards } from './data/project-data'
 
 export default function Project() {
   const [title, setTitle] = useState('')
-  const markdown = `# ${title}`
+  const [markdown, setMarkdown] = useState('#')
 
+  // 제목 입력
   const handleTitleChange = (value: string) => {
     const cleaned = value.replace(/^#+\s*/, '')
     setTitle(cleaned)
+    setMarkdown(`# ${cleaned}`)
   }
 
-  const cards = projectCards(title, handleTitleChange)
+  // 이미지 업로드
+  const handleImageUpload = (imageMarkdown: string) => {
+    setMarkdown((prev) => `${prev}\n\n${imageMarkdown}`)
+  }
+
+  // projectCards 리팩토링
+  const cards = projectCards(title, handleTitleChange, handleImageUpload)
 
   return (
     <div className='flex w-full min-h-screen py-4'>
