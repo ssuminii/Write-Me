@@ -9,6 +9,7 @@ import {
 } from '../_components'
 import type { CardItem } from '@/components/dnd/card-list'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
+import { generateTeamMarkdownTable } from '@/utils/markdown'
 
 export const projectCards = (state: ProjectState, handlers: ProjectHandlers): CardItem[] => [
   {
@@ -40,7 +41,12 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
     markdown: `🔗 [${state.site.name}](${state.site.link})`,
   },
 
-  { id: 'card-5', title: '프로젝트 팀원', content: <TeamMembers /> },
+  {
+    id: 'card-5',
+    title: '프로젝트 팀원',
+    content: <TeamMembers members={state.members} onMembersChange={handlers.onMembersChange} />,
+    markdown: ['## 👥 팀원 소개', generateTeamMarkdownTable(state.members)].join('\n\n'),
+  },
 
   {
     id: 'card-6',
