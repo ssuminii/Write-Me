@@ -1,7 +1,7 @@
 'use client'
 
 import type { PhaseDurationsProps } from '../../_models'
-import RowInputCard from '@/components/row-input-card'
+import DateInputCard from './date-input-card'
 import { CalendarPlus } from 'lucide-react'
 
 const PhaseDurations = ({ phases, onChange }: PhaseDurationsProps) => {
@@ -25,7 +25,7 @@ const PhaseDurations = ({ phases, onChange }: PhaseDurationsProps) => {
       </header>
 
       {phases.map((phase, idx) => (
-        <RowInputCard
+        <DateInputCard
           key={phase.id}
           value={phase}
           onChange={(field, val) => handleChange(phase.id, field, val)}
