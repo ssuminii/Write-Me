@@ -11,7 +11,7 @@ interface RowInputCardProps extends RemovableItemControls {
   onChange: (field: 'name' | 'start' | 'end', val: string) => void
 }
 
-const RowInputCard = ({ onAdd, onRemove, isRemovable, value, onChange }: RowInputCardProps) => {
+const DateInputCard = ({ onAdd, onRemove, isRemovable, value, onChange }: RowInputCardProps) => {
   return (
     <div className='flex gap-6 items-center'>
       <Input
@@ -45,4 +45,4 @@ const RowInputCard = ({ onAdd, onRemove, isRemovable, value, onChange }: RowInpu
   )
 }
 
-export default RowInputCard
+export default DateInputCard

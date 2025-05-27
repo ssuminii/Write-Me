@@ -6,10 +6,11 @@ import {
   FolderStructure,
   TeamMembers,
   Timeframe,
+  Stack,
 } from '../_components'
 import type { CardItem } from '@/components/dnd/card-list'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
-import { generateTeamMarkdownTable } from '@/utils/markdown'
+import { generateStackMDTable, generateTeamMDTable } from '@/utils/markdown'
 
 export const projectCards = (state: ProjectState, handlers: ProjectHandlers): CardItem[] => [
   {
@@ -45,7 +46,7 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
     id: 'card-5',
     title: '프로젝트 팀원',
     content: <TeamMembers members={state.members} onMembersChange={handlers.onMembersChange} />,
-    markdown: ['## 👥 팀원 소개', generateTeamMarkdownTable(state.members)].join('\n\n'),
+    markdown: ['## 👥 팀원 소개', generateTeamMDTable(state.members)].join('\n\n'),
   },
 
   {
@@ -69,7 +70,13 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
     ].join('\n'),
   },
 
-  { id: 'card-7', title: '기술 스택', content: '' },
+  {
+    id: 'card-7',
+    title: '기술 스택',
+    content: <Stack stacks={state.stacks} onStacksChange={handlers.onStacksChange} />,
+    markdown: ['## 🛠️ 기술 스택', generateStackMDTable(state.stacks)].join('\n\n'),
+  },
+
   {
     id: 'card-8',
     title: '폴더 구조',
@@ -80,5 +87,4 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
   },
   { id: 'card-9', title: '주요 기능', content: '' },
   { id: 'card-10', title: '담당 기능', content: '' },
-  { id: 'card-11', title: 'Contact', content: '' },
 ]
