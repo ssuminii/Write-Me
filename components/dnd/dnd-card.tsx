@@ -2,7 +2,7 @@
 
 import { Card, CardTitle } from '@/components/ui/card'
 import { Menu, CircleMinus, CirclePlus } from 'lucide-react'
-import { useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { UniqueIdentifier } from '@dnd-kit/core'
@@ -11,11 +11,11 @@ interface DndCardProps {
   id: UniqueIdentifier
   title: string
   children: ReactNode
+  collapsed: boolean
+  onToggleCollapse: () => void
 }
 
-const DndCard = ({ id, title, children }: DndCardProps) => {
-  const [collapsed, setCollapsed] = useState(false)
-
+const DndCard = ({ id, title, children, collapsed, onToggleCollapse }: DndCardProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
   })
@@ -35,9 +35,9 @@ const DndCard = ({ id, title, children }: DndCardProps) => {
         </div>
 
         {collapsed ? (
-          <CirclePlus onClick={() => setCollapsed(false)} className='cursor-pointer' />
+          <CirclePlus onClick={onToggleCollapse} className='cursor-pointer' />
         ) : (
-          <CircleMinus onClick={() => setCollapsed(true)} className='cursor-pointer' />
+          <CircleMinus onClick={onToggleCollapse} className='cursor-pointer' />
         )}
       </section>
 

@@ -16,6 +16,15 @@ export function useProjectForm() {
     roles: [{ id: Date.now(), name: '', role: '' }],
   })
 
+  const [collapsedMap, setCollapsedMap] = useState<Record<string, boolean>>({})
+
+  const toggleCollapse = (id: string) => {
+    setCollapsedMap((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
+
   const handlers: ProjectHandlers = {
     onTitleChange: (v) => setState((prev) => ({ ...prev, title: v })),
     onOverviewChange: (v) => setState((prev) => ({ ...prev, overview: v })),
@@ -27,7 +36,8 @@ export function useProjectForm() {
     onMembersChange: (v) => setState((prev) => ({ ...prev, members: v })),
     onStacksChange: (v) => setState((prev) => ({ ...prev, stacks: v })),
     onRolesChange: (v) => setState((prev) => ({ ...prev, roles: v })),
+    onToggleCollapse: toggleCollapse,
   }
 
-  return { state, handlers }
+  return { state, handlers, collapsedMap }
 }

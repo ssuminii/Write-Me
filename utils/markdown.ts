@@ -3,7 +3,7 @@ import type { Member, Stack } from '@/app/project/_models'
 
 // Dnd 카드 정렬
 export const getMarkdownFromCards = (cards: CardItem[]) =>
-  cards.map((c) => c.markdown?.trim()).filter(Boolean).join('\n\n<br>\n\n')
+  cards.filter((card) => !card.collapsed).map((c) => c.markdown?.trim()).filter(Boolean).join('\n\n<br>\n\n')
 
 // 팀원 테이블
 export function generateTeamMDTable(members: Member[]): string {
