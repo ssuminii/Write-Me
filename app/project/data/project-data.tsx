@@ -86,5 +86,5 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
     markdown: ['## 📁 폴더구조', '```', state.folderStructure, '```'].join('\n'),
   },
   { id: 'card-9', title: '주요 기능', content: '' },
-  { id: 'card-10', title: '담당 기능', content: '' },
+  { id: 'card-10', title: '역할 분담', content: '' },
 ]
