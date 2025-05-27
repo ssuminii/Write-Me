@@ -7,6 +7,7 @@ import {
   TeamMembers,
   Timeframe,
   Stack,
+  Roles,
 } from '../_components'
 import type { CardItem } from '@/components/dnd/card-list'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
@@ -86,5 +87,14 @@ export const projectCards = (state: ProjectState, handlers: ProjectHandlers): Ca
     markdown: ['## 📁 폴더구조', '```', state.folderStructure, '```'].join('\n'),
   },
   { id: 'card-9', title: '주요 기능', content: '' },
-  { id: 'card-10', title: '역할 분담', content: '' },
+  {
+    id: 'card-10',
+    title: '역할분담',
+    content: <Roles roles={state.roles} onRolesChange={handlers.onRolesChange} />,
+    markdown: [
+      '## 👩🏻‍💻 역할분담',
+      '',
+      ...state.roles.flatMap(({ name, role }) => [`### ▪ ${name}`, '', role.trim(), '']),
+    ].join('\n'),
+  },
 ]

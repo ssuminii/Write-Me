@@ -1,5 +1,5 @@
 import type { Member } from '@/app/project/_models/members'
-import type { Phase, SiteInfo, TotalDurationInfo, Stack } from '../_models'
+import type { Phase, SiteInfo, TotalDurationInfo, Stack, Role } from '../_models'
 
 export interface ProjectState {
   title: string
@@ -10,6 +10,7 @@ export interface ProjectState {
   phases: Phase[]
   members: Member[]
   stacks: Stack[]
+  roles: Role[]
 }
 
 export interface ProjectHandlers {
@@ -22,4 +23,5 @@ export interface ProjectHandlers {
   onPhasesChange: (phases: Phase[]) => void
   onMembersChange: (members: Member[]) => void
   onStacksChange: (stacks: Stack[]) => void
+  onRolesChange: (roles: Role[]) => void
 }

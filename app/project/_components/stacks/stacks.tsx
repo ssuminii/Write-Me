@@ -3,7 +3,7 @@
 import type { StacksProps } from '../../_models'
 import StackInputCard from './stack-input-card'
 
-const Stack = ({ stacks, onStacksChange }: StacksProps) => {
+const Stacks = ({ stacks, onStacksChange }: StacksProps) => {
   const handleAddStack = () => {
     onStacksChange([...stacks, { id: Date.now(), stack: '', reason: '' }])
   }
@@ -33,4 +33,4 @@ const Stack = ({ stacks, onStacksChange }: StacksProps) => {
   )
 }
 
-export default Stack
+export default Stacks

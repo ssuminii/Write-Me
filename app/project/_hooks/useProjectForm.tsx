@@ -13,6 +13,7 @@ export function useProjectForm() {
     phases: [{ id: Date.now(), name: '', start: '', end: '' }],
     members: [{ id: Date.now(), role: '', name: '', github: '' }],
     stacks: [{ id: Date.now(), stack: '', reason: '' }],
+    roles: [{ id: Date.now(), name: '', role: '' }],
   })
 
   const handlers: ProjectHandlers = {
@@ -25,6 +26,7 @@ export function useProjectForm() {
     onPhasesChange: (v) => setState((prev) => ({ ...prev, phases: v })),
     onMembersChange: (v) => setState((prev) => ({ ...prev, members: v })),
     onStacksChange: (v) => setState((prev) => ({ ...prev, stacks: v })),
+    onRolesChange: (v) => setState((prev) => ({ ...prev, roles: v })),
   }
 
   return { state, handlers }
