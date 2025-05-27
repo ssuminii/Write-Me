@@ -1,3 +1,4 @@
+import { Member } from '@/app/project/_models/members'
 import type { Phase, SiteInfo, TotalDurationInfo } from '../_models'
 
 export interface ProjectState {
@@ -7,6 +8,7 @@ export interface ProjectState {
   folderStructure: string
   duration: TotalDurationInfo
   phases: Phase[]
+  members: Member[]
 }
 
 export interface ProjectHandlers {
@@ -17,4 +19,5 @@ export interface ProjectHandlers {
   onFolderStructureChange: (value: string) => void
   onDurationChange: (v: TotalDurationInfo) => void
   onPhasesChange: (phases: Phase[]) => void
+  onMembersChange: (members: Member[]) => void
 }

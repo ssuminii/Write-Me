@@ -26,7 +26,7 @@ const PhaseDurations = ({ phases, onChange }: PhaseDurationsProps) => {
 
       {phases.map((phase, idx) => (
         <RowInputCard
-          key={idx}
+          key={phase.id}
           value={phase}
           onChange={(field, val) => handleChange(phase.id, field, val)}
           onAdd={handleAddPhase}

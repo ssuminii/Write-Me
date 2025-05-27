@@ -11,6 +11,7 @@ export function useProjectForm() {
     folderStructure: '',
     duration: { start: '', end: '' },
     phases: [{ id: Date.now(), name: '', start: '', end: '' }],
+    members: [{ id: Date.now(), role: '', name: '', github: '' }],
   })
 
   const handlers: ProjectHandlers = {
@@ -21,6 +22,7 @@ export function useProjectForm() {
     onFolderStructureChange: (v) => setState((prev) => ({ ...prev, folderStructure: v })),
     onDurationChange: (v) => setState((prev) => ({ ...prev, duration: v })),
     onPhasesChange: (v) => setState((prev) => ({ ...prev, phases: v })),
+    onMembersChange: (v) => setState((prev) => ({ ...prev, members: v })),
   }
 
   return { state, handlers }
