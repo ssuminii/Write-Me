@@ -18,21 +18,24 @@ interface CardListProps {
   items: CardItem[]
   className: string
   onToggleCollapse: (id: string) => void
+  onReorder?: (newOrder: UniqueIdentifier[]) => void
 }
 
-const DndCardList = ({ items, className, onToggleCollapse }: CardListProps) => {
+const DndCardList = ({ items, className, onToggleCollapse, onReorder }: CardListProps) => {
   const [order, setOrder] = useState(items.map((item) => item.id))
 
   const sortedItems = order.map((id) => items.find((item) => item.id === id)!)
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    if (!over) return
-    if (active.id !== over.id) {
-      const oldIndex = order.indexOf(active.id)
-      const newIndex = order.indexOf(over.id)
-      setOrder(arrayMove(order, oldIndex, newIndex))
-    }
+    if (!over || active.id === over.id) return
+
+    const oldIndex = order.indexOf(active.id)
+    const newIndex = order.indexOf(over.id)
+
+    const newOrder = arrayMove(order, oldIndex, newIndex)
+    setOrder(newOrder)
+    onReorder?.(newOrder)
   }
 
   return (
