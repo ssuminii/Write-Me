@@ -9,6 +9,8 @@ export function useProjectForm() {
     overview: '',
     site: { name: '', link: '' },
     folderStructure: '',
+    duration: { start: '', end: '' },
+    phases: [{ id: Date.now(), name: '', start: '', end: '' }],
   })
 
   const handlers: ProjectHandlers = {
@@ -17,6 +19,8 @@ export function useProjectForm() {
     onSiteChange: (v) => setState((prev) => ({ ...prev, site: v })),
     onImageUpload: (html) => console.log('이미지 업로드:', html),
     onFolderStructureChange: (v) => setState((prev) => ({ ...prev, folderStructure: v })),
+    onDurationChange: (v) => setState((prev) => ({ ...prev, duration: v })),
+    onPhasesChange: (v) => setState((prev) => ({ ...prev, phases: v })),
   }
 
   return { state, handlers }

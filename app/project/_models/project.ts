@@ -1,10 +1,12 @@
-import type { SiteInfo } from '../_models/site'
+import type { Phase, SiteInfo, TotalDurationInfo } from '../_models'
 
 export interface ProjectState {
   title: string
   overview: string
   site: SiteInfo
   folderStructure: string
+  duration: TotalDurationInfo
+  phases: Phase[]
 }
 
 export interface ProjectHandlers {
@@ -13,4 +15,6 @@ export interface ProjectHandlers {
   onSiteChange: (value: SiteInfo) => void
   onImageUpload: (html: string) => void
   onFolderStructureChange: (value: string) => void
+  onDurationChange: (v: TotalDurationInfo) => void
+  onPhasesChange: (phases: Phase[]) => void
 }
