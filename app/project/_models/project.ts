@@ -24,4 +24,5 @@ export interface ProjectHandlers {
   onMembersChange: (members: Member[]) => void
   onStacksChange: (stacks: Stack[]) => void
   onRolesChange: (roles: Role[]) => void
+  onToggleCollapse: (id: string) => void
 }

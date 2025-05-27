@@ -11,14 +11,16 @@ export interface CardItem {
   title: string
   content: ReactNode
   markdown?: string
+  collapsed?: boolean
 }
 
 interface CardListProps {
   items: CardItem[]
   className: string
+  onToggleCollapse: (id: string) => void
 }
 
-const DndCardList = ({ items, className }: CardListProps) => {
+const DndCardList = ({ items, className, onToggleCollapse }: CardListProps) => {
   const [order, setOrder] = useState(items.map((item) => item.id))
 
   const sortedItems = order.map((id) => items.find((item) => item.id === id)!)
@@ -38,7 +40,13 @@ const DndCardList = ({ items, className }: CardListProps) => {
       <SortableContext items={order} strategy={verticalListSortingStrategy}>
         <div className={`flex flex-col gap-4 px-10 ${className}`}>
           {sortedItems.map((item) => (
-            <DndCard key={item.id} id={item.id} title={item.title}>
+            <DndCard
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              collapsed={item.collapsed ?? false}
+              onToggleCollapse={() => onToggleCollapse(item.id.toString())}
+            >
               {item.content}
             </DndCard>
           ))}
