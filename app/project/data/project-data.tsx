@@ -8,6 +8,7 @@ import {
   Timeframe,
   Stack,
   Roles,
+  FeatureSection,
 } from '../_components'
 import type { CardItem } from '@/components/dnd/card-list'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
@@ -98,7 +99,14 @@ export const projectCards = (
     markdown: ['## 📁 폴더구조', '```', state.folderStructure, '```'].join('\n'),
     collapsed: collapsedMap['card-8'] ?? false,
   },
-  { id: 'card-9', title: '주요 기능', content: '', collapsed: collapsedMap['card-9'] ?? false },
+
+  {
+    id: 'card-9',
+    title: '주요 기능',
+    content: <FeatureSection />,
+    collapsed: collapsedMap['card-9'] ?? false,
+  },
+
   {
     id: 'card-10',
     title: '역할분담',

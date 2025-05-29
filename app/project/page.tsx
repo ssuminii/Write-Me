@@ -1,6 +1,6 @@
 'use client'
 
-import DndCardList from '@/components/dnd/card-list'
+import { DndCardList } from '@/components/dnd'
 import Markdown from '@/components/markdown'
 import { projectCards } from './data/project-data'
 import { useProjectForm } from './_hooks/useProjectForm'

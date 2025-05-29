@@ -8,7 +8,7 @@ interface InputCardProps {
 
 const InputCard = ({ children }: InputCardProps) => {
   return (
-    <Card className='flex flex-row gap-8 p-10'>
+    <Card className='flex flex-row items-center gap-8 p-10'>
       <div className='flex flex-col gap-8 flex-1'>{children} </div>
       <SquarePlus className='text-ring cursor-pointer hover:text-gray-500' />
     </Card>
