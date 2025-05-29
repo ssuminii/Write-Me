@@ -103,7 +103,16 @@ export const projectCards = (
   {
     id: 'card-9',
     title: '주요 기능',
-    content: <FeatureSection />,
+    content: (
+      <FeatureSection features={state.features} onFeaturesChange={handlers.onFeaturesChange} />
+    ),
+    markdown: [
+      '## 🚀 주요 기능',
+      ...state.features.flatMap(({ feature, description }) => [
+        `### ${feature}`,
+        description.trim(),
+      ]),
+    ].join('\n\n'),
     collapsed: collapsedMap['card-9'] ?? false,
   },
 
@@ -113,9 +122,8 @@ export const projectCards = (
     content: <Roles roles={state.roles} onRolesChange={handlers.onRolesChange} />,
     markdown: [
       '## 👩🏻‍💻 역할분담',
-      '',
-      ...state.roles.flatMap(({ name, role }) => [`### ▪ ${name}`, '', role.trim(), '']),
-    ].join('\n'),
+      ...state.roles.flatMap(({ name, role }) => [`### ▪ ${name}`, role.trim()]),
+    ].join('\n\n'),
     collapsed: collapsedMap['card-10'] ?? false,
   },
 ]

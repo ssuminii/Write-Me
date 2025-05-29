@@ -1,5 +1,6 @@
 import type { Member } from '@/app/project/_models/members'
 import type { Phase, SiteInfo, TotalDurationInfo, Stack, Role } from '../_models'
+import { Featrue } from '@/app/project/_models/feature'
 
 export interface ProjectState {
   title: string
@@ -11,6 +12,7 @@ export interface ProjectState {
   members: Member[]
   stacks: Stack[]
   roles: Role[]
+  features: Featrue[]
 }
 
 export interface ProjectHandlers {
@@ -24,5 +26,6 @@ export interface ProjectHandlers {
   onMembersChange: (members: Member[]) => void
   onStacksChange: (stacks: Stack[]) => void
   onRolesChange: (roles: Role[]) => void
+  onFeaturesChange: (features: Featrue[]) => void
   onToggleCollapse: (id: string) => void
 }

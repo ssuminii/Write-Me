@@ -14,6 +14,7 @@ export function useProjectForm() {
     members: [{ id: Date.now(), role: '', name: '', github: '' }],
     stacks: [{ id: Date.now(), stack: '', reason: '' }],
     roles: [{ id: Date.now(), name: '', role: '' }],
+    features: [{ id: Date.now(), feature: '', description: '' }],
   })
 
   const [collapsedMap, setCollapsedMap] = useState<Record<string, boolean>>({})
@@ -36,6 +37,7 @@ export function useProjectForm() {
     onMembersChange: (v) => setState((prev) => ({ ...prev, members: v })),
     onStacksChange: (v) => setState((prev) => ({ ...prev, stacks: v })),
     onRolesChange: (v) => setState((prev) => ({ ...prev, roles: v })),
+    onFeaturesChange: (v) => setState((prev) => ({ ...prev, features: v })),
     onToggleCollapse: toggleCollapse,
   }
 
