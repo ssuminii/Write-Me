@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui'
 import { RemovableItemControls } from '@/types'
 import { SquarePlus, SquareMinus } from 'lucide-react'
 

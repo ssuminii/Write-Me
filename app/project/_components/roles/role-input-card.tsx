@@ -1,6 +1,5 @@
 import InputCard from '@/components/input-card'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Input, Textarea } from '@/components/ui'
 import type { RemovableItemControls } from '@/types'
 
 interface AddRolesProps extends RemovableItemControls {

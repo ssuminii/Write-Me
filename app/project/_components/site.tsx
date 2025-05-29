@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui'
 import type { SiteProps } from '@/app/project/_models/site'
 
 const Site = ({ name, link, onChange }: SiteProps) => {
