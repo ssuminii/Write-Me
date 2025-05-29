@@ -1,6 +1,10 @@
 import { Input } from '@/components/ui/input'
 import { CalendarRange } from 'lucide-react'
-import type { TotalDurationProps } from '../../_models'
+import type { TotalDurationInfo } from '../../_models'
+
+export interface TotalDurationProps extends TotalDurationInfo {
+  onChange: (v: TotalDurationInfo) => void
+}
 
 const TotalDuration = ({ start, end, onChange }: TotalDurationProps) => {
   return (

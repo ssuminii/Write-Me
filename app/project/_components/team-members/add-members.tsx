@@ -1,6 +1,5 @@
 import InputCard from '@/components/input-card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button, Input } from '@/components/ui'
 import type { RemovableItemControls } from '@/types'
 
 interface AddMembersProps extends RemovableItemControls {
