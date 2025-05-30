@@ -1,27 +1,12 @@
 'use client'
 
-import { DndContext, closestCenter, type DragEndEvent, type UniqueIdentifier } from '@dnd-kit/core'
+import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import DndCard from './dnd-card'
-import type { ReactNode } from 'react'
+import type { CardListProps } from '@/types'
 
-export interface CardItem {
-  id: UniqueIdentifier
-  title: string
-  content: ReactNode
-  markdown?: string
-  collapsed?: boolean
-}
-
-interface CardListProps {
-  items: CardItem[]
-  className: string
-  onToggleCollapse: (id: string) => void
-  onReorder?: (newOrder: UniqueIdentifier[]) => void
-}
-
-const DndCardList = ({ items, className, onToggleCollapse, onReorder }: CardListProps) => {
+const DndCardList = ({ items, className, onReorder }: CardListProps) => {
   const [order, setOrder] = useState(items.map((item) => item.id))
 
   const sortedItems = order.map((id) => items.find((item) => item.id === id)!)
@@ -48,7 +33,7 @@ const DndCardList = ({ items, className, onToggleCollapse, onReorder }: CardList
               id={item.id}
               title={item.title}
               collapsed={item.collapsed ?? false}
-              onToggleCollapse={() => onToggleCollapse(item.id.toString())}
+              onToggleCollapse={item.onToggleCollapse}
             >
               {item.content}
             </DndCard>
