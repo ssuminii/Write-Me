@@ -7,11 +7,15 @@ import { useProjectForm } from './_hooks/useProjectForm'
 import { getMarkdownFromCards } from '@/utils/markdown'
 import { useState, useEffect } from 'react'
 import type { UniqueIdentifier } from '@dnd-kit/core'
+import useCardCollapse from '@/hooks/useCardCollapse'
 
 export default function Project() {
   const [order, setOrder] = useState<UniqueIdentifier[]>([])
-  const { state, handlers, collapsedMap } = useProjectForm()
-  const cards = projectCards(state, handlers, collapsedMap)
+
+  const { state, handlers } = useProjectForm()
+  const { collapse, onToggleCollapse } = useCardCollapse()
+
+  const cards = projectCards(state, handlers, collapse, onToggleCollapse)
   const orderedCards = order.map((id) => cards.find((card) => card.id === id)!).filter(Boolean)
 
   const markdown = getMarkdownFromCards(orderedCards)
@@ -25,7 +29,7 @@ export default function Project() {
       <DndCardList
         className='flex-1'
         items={cards}
-        onToggleCollapse={handlers.onToggleCollapse}
+        onToggleCollapse={onToggleCollapse}
         onReorder={setOrder}
       />
       <Markdown className='flex-2' value={markdown} onChange={() => {}} />
