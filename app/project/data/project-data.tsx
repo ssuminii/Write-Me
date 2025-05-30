@@ -21,54 +21,54 @@ export const projectCards = (
   onToggleCollapse: (id: string) => void
 ): CardItem[] => [
   {
-    id: 'card-1',
+    id: 'project-title',
     title: '프로젝트 이름',
     content: <Title value={state.title} onChange={handlers.onTitleChange} />,
     markdown: `# ${state.title}`,
-    collapsed: collapse['card-1'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-1'),
+    collapsed: collapse['project-title'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-title'),
   },
 
   {
-    id: 'card-2',
+    id: 'project-image',
     title: '프로젝트 메인 이미지 업로드',
     content: <ImageUpload onImageUpload={handlers.onImageUpload} />,
     markdown: '',
-    collapsed: collapse['card-2'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-2'),
+    collapsed: collapse['project-image'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-image'),
   },
 
   {
-    id: 'card-3',
+    id: 'project-overview',
     title: '프로젝트 개요 및 간단 소개',
     content: <Overview value={state.overview} onChange={handlers.onOverviewChange} />,
     markdown: `**${state.overview}**`,
-    collapsed: collapse['card-3'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-3'),
+    collapsed: collapse['project-overview'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-overview'),
   },
 
   {
-    id: 'card-4',
+    id: 'project-link',
     title: '프로젝트 링크',
     content: (
       <Site name={state.site.name} link={state.site.link} onChange={handlers.onSiteChange} />
     ),
     markdown: `🔗 [${state.site.name}](${state.site.link})`,
-    collapsed: collapse['card-4'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-4'),
+    collapsed: collapse['project-link'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-link'),
   },
 
   {
-    id: 'card-5',
+    id: 'project-members',
     title: '프로젝트 팀원',
     content: <TeamMembers members={state.members} onMembersChange={handlers.onMembersChange} />,
     markdown: ['## 👥 팀원 소개', generateTeamMDTable(state.members)].join('\n\n'),
-    collapsed: collapse['card-5'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-5'),
+    collapsed: collapse['project-members'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-members'),
   },
 
   {
-    id: 'card-6',
+    id: 'project-period',
     title: '프로젝트 기간',
     content: (
       <Timeframe
@@ -86,32 +86,32 @@ export const projectCards = (
         ? state.phases.map((p) => `- ${p.name}: ${p.start} ~ ${p.end}`)
         : []),
     ].join('\n'),
-    collapsed: collapse['card-6'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-6'),
+    collapsed: collapse['project-period'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-period'),
   },
 
   {
-    id: 'card-7',
+    id: 'project-stack',
     title: '기술 스택',
     content: <Stack stacks={state.stacks} onStacksChange={handlers.onStacksChange} />,
     markdown: ['## 🛠️ 기술 스택', generateStackMDTable(state.stacks)].join('\n\n'),
-    collapsed: collapse['card-7'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-7'),
+    collapsed: collapse['project-stack'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-stack'),
   },
 
   {
-    id: 'card-8',
+    id: 'project-folder',
     title: '폴더 구조',
     content: (
       <FolderStructure value={state.folderStructure} onChange={handlers.onFolderStructureChange} />
     ),
     markdown: ['## 📁 폴더구조', '```', state.folderStructure, '```'].join('\n'),
-    collapsed: collapse['card-8'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-8'),
+    collapsed: collapse['project-folder'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-folder'),
   },
 
   {
-    id: 'card-9',
+    id: 'project-features',
     title: '주요 기능',
     content: (
       <FeatureSection features={state.features} onFeaturesChange={handlers.onFeaturesChange} />
@@ -123,19 +123,19 @@ export const projectCards = (
         description.trim(),
       ]),
     ].join('\n\n'),
-    collapsed: collapse['card-9'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-9'),
+    collapsed: collapse['project-features'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-features'),
   },
 
   {
-    id: 'card-10',
+    id: 'project-roles',
     title: '역할분담',
     content: <Roles roles={state.roles} onRolesChange={handlers.onRolesChange} />,
     markdown: [
       '## 👩🏻‍💻 역할분담',
       ...state.roles.flatMap(({ name, role }) => [`### ▪ ${name}`, role.trim()]),
     ].join('\n\n'),
-    collapsed: collapse['card-10'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('card-10'),
+    collapsed: collapse['project-roles'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-roles'),
   },
 ]
