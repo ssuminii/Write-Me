@@ -1,4 +1,4 @@
-import type { CardItem } from '@/components/dnd/card-list'
+import type { CardItem } from '@/types'
 import type { Member, Stack } from '@/app/project/_models'
 
 // Dnd 카드 정렬
