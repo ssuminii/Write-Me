@@ -1,6 +1,6 @@
+import { Introduce, Project } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
-import { Introduce } from '../_components'
 
 export const ProfileCards = (
   state: ProfileState,
@@ -15,5 +15,13 @@ export const ProfileCards = (
     markdown: `${state.introduce}`,
     collapsed: collapse['profile-introduce'] ?? false,
     onToggleCollapse: () => onToggleCollapse('profile-introduce'),
+  },
+  {
+    id: 'profile-project',
+    title: '프로젝트',
+    content: <Project />,
+    markdown: ``,
+    collapsed: collapse['profile-project'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('profile-project'),
   },
 ]
