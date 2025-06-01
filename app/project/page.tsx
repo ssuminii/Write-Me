@@ -2,7 +2,7 @@
 
 import { DndCardList } from '@/components/dnd'
 import Markdown from '@/components/markdown'
-import { projectCards } from './data/project-data'
+import { ProjectCards } from './data/project-data'
 import { useProjectForm } from './_hooks/useProjectForm'
 import { getMarkdownFromCards } from '@/utils/markdown'
 import { useState, useEffect } from 'react'
@@ -15,7 +15,7 @@ export default function Project() {
   const { state, handlers } = useProjectForm()
   const { collapse, onToggleCollapse } = useCardCollapse()
 
-  const cards = projectCards(state, handlers, collapse, onToggleCollapse)
+  const cards = ProjectCards(state, handlers, collapse, onToggleCollapse)
   const orderedCards = order.map((id) => cards.find((card) => card.id === id)!).filter(Boolean)
 
   const markdown = getMarkdownFromCards(orderedCards)
@@ -32,7 +32,7 @@ export default function Project() {
         onToggleCollapse={onToggleCollapse}
         onReorder={setOrder}
       />
-      <Markdown className='flex-2' value={markdown} onChange={() => {}} />
+      <Markdown className='flex-2' value={markdown} />
     </div>
   )
 }
