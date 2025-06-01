@@ -5,13 +5,12 @@ import MDEditor from '@uiw/react-md-editor'
 interface MarkdownProps {
   className: string
   value: string
-  onChange: (value: string) => void
 }
 
-const Markdown = ({ className, value, onChange }: MarkdownProps) => {
+const Markdown = ({ className, value }: MarkdownProps) => {
   return (
     <div className={className}>
-      <MDEditor value={value} onChange={(val) => onChange(val || '')} height='100%' />
+      <MDEditor value={value} height='100%' />
     </div>
   )
 }

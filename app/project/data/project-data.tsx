@@ -14,7 +14,7 @@ import type { CardItem } from '@/types'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
 import { generateStackMDTable, generateTeamMDTable } from '@/utils/markdown'
 
-export const projectCards = (
+export const ProjectCards = (
   state: ProjectState,
   handlers: ProjectHandlers,
   collapse: Record<string, boolean>,
