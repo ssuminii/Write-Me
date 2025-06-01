@@ -1,10 +1,29 @@
+'use client'
+
 import Image from 'next/image'
 import { Button } from '@/components/ui'
+import { supabase } from '@/lib/supabaseClient'
 
 const SocialLogin = () => {
+  const handleOAuthLogin = async (provider: 'google' | 'github') => {
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/`,
+        },
+      })
+    } catch (error) {
+      console.error(`${provider} 로그인 실패:`, error)
+    }
+  }
+
   return (
     <div className='flex flex-col gap-4'>
-      <Button className='relative h-12 bg-gray-300 hover:bg-gray-400'>
+      <Button
+        onClick={() => handleOAuthLogin('google')}
+        className='relative h-12 bg-gray-300 hover:bg-gray-400'
+      >
         <Image
           src='/icons/google.png'
           alt='Google 아이콘'
@@ -14,7 +33,10 @@ const SocialLogin = () => {
         />
         Google로 로그인
       </Button>
-      <Button className='relative h-12 bg-black hover:bg-black'>
+      <Button
+        onClick={() => handleOAuthLogin('github')}
+        className='relative h-12 bg-black hover:bg-black'
+      >
         <Image
           src='/icons/github.png'
           alt='GitHub 아이콘'
