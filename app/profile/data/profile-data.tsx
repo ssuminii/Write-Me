@@ -19,8 +19,13 @@ export const ProfileCards = (
   {
     id: 'profile-project',
     title: '프로젝트',
-    content: <Project />,
-    markdown: ``,
+    content: <Project projects={state.projects} onProjectsChange={handlers.onProjectsChange} />,
+    markdown: [
+      '## Project',
+      ...state.projects.flatMap(({ title, desc, link }) =>
+        [`#### ${title}`, desc, `🔗 [${link}](${link})`].join('\n\n')
+      ),
+    ].join('\n'),
     collapsed: collapse['profile-project'] ?? false,
     onToggleCollapse: () => onToggleCollapse('profile-project'),
   },
