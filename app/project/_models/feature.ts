@@ -6,5 +6,5 @@ export interface Featrue {
 
 export interface FeaturesProps {
   features: Featrue[]
-  onFeaturesChange: (roles: Featrue[]) => void
+  onFeaturesChange: (features: Featrue[]) => void
 }
