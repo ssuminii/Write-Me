@@ -11,7 +11,7 @@ const Project = ({ projects, onProjectsChange }: ProjectsProps) => {
   })
 
   return (
-    <div>
+    <div className='flex flex-col gap-4'>
       {projects.map((project, idx) => (
         <InputCard
           key={project.id}
