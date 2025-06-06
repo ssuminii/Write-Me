@@ -32,8 +32,18 @@ export const ProfileCards = (
   {
     id: 'profile-achievements',
     title: '외부 활동 및 수상 내역',
-    content: <Achievements />,
-    markdown: '',
+    content: (
+      <Achievements
+        achievements={state.achievements}
+        onAchievementsChange={handlers.onAchievementsChange}
+      />
+    ),
+    markdown: [
+      '## 외부 활동 및 수상 내역',
+      ...state.achievements.flatMap(({ title, desc, start, end }) =>
+        [`#### ${title}`, `활동 기간: ${start} ~ ${end}`, desc].join('\n\n')
+      ),
+    ].join('\n'),
     collapsed: collapse['profile-achievements'] ?? false,
     onToggleCollapse: () => onToggleCollapse('profile-achievements'),
   },

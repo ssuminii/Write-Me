@@ -16,7 +16,7 @@ export const PeriodInput = ({ id, label, startValue, endValue, start, end }: Per
   return (
     <div className='flex flex-col gap-2'>
       <label htmlFor={startId}>{label}</label>
-      <div className='flex gap-6'>
+      <div className='flex gap-6 items-center'>
         <Input
           type='date'
           id={startId}

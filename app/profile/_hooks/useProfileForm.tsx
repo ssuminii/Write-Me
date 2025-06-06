@@ -7,11 +7,13 @@ export function useProfileForm() {
   const [state, setState] = useState<ProfileState>({
     introduce: '',
     projects: [{ id: Date.now(), title: '', desc: '', link: '' }],
+    achievements: [{ id: Date.now(), title: '', start: '', end: '', desc: '' }],
   })
 
   const handlers: ProfileHandlers = {
     onIntroduceChange: (v) => setState((prev) => ({ ...prev, introduce: v })),
     onProjectsChange: (v) => setState((prev) => ({ ...prev, projects: v })),
+    onAchievementsChange: (v) => setState((prev) => ({ ...prev, achievements: v })),
   }
 
   return { state, handlers }
