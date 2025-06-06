@@ -1,4 +1,4 @@
-import { Introduce, Project } from '../_components'
+import { Achievements, Introduce, Project } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
 
@@ -28,5 +28,13 @@ export const ProfileCards = (
     ].join('\n'),
     collapsed: collapse['profile-project'] ?? false,
     onToggleCollapse: () => onToggleCollapse('profile-project'),
+  },
+  {
+    id: 'profile-achievements',
+    title: '외부 활동 및 수상 내역',
+    content: <Achievements />,
+    markdown: '',
+    collapsed: collapse['profile-achievements'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('profile-achievements'),
   },
 ]
