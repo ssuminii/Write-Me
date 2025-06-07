@@ -1,4 +1,4 @@
-import { Project, Achievement, TechStack } from '../_modles'
+import type { Project, Achievement, TechStack, CapsuleRender } from '../_modles'
 
 export interface ProfileState {
   introduce: string
@@ -8,6 +8,7 @@ export interface ProfileState {
   stats: string
   streak: string
   techStacks: TechStack[]
+  capsuleRender: CapsuleRender
 }
 
 export interface ProfileHandlers {
@@ -18,4 +19,5 @@ export interface ProfileHandlers {
   onStatsChange: (value: string) => void
   onStreakChange: (value: string) => void
   onTechStacksChange: (value: TechStack[]) => void
+  onCapsuleRenderChange: (value: CapsuleRender ) => void
 }

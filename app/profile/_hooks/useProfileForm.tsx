@@ -12,6 +12,15 @@ export function useProfileForm() {
     stats: '',
     streak: '',
     techStacks: [{ id: Date.now(), style: '', name: '', bgColor: '', logoColor: '' }],
+    capsuleRender: {
+      type: '',
+      height: '',
+      background: '',
+      text: '',
+      textColor: '',
+      textAnimation: '',
+      theme: '',
+    },
   })
 
   const handlers: ProfileHandlers = {
@@ -22,6 +31,7 @@ export function useProfileForm() {
     onStatsChange: (v) => setState((prev) => ({ ...prev, stats: v })),
     onStreakChange: (v) => setState((prev) => ({ ...prev, streak: v })),
     onTechStacksChange: (v) => setState((prev) => ({ ...prev, techStacks: v })),
+    onCapsuleRenderChange: (v) => setState((prev) => ({ ...prev, capsuleRender: v })),
   }
 
   return { state, handlers }

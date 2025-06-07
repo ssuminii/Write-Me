@@ -1,5 +1,6 @@
 import type { CardItem } from '@/types'
 import type { Member, Stack } from '@/app/project/_models'
+import type { CapsuleRender } from '@/app/profile/_modles'
 
 // Dnd 카드 정렬
 export const getMarkdownFromCards = (cards: CardItem[]) =>
@@ -32,4 +33,22 @@ function generateBadgeUrl(name: string): string {
   const lower = name.toLowerCase()
   const logo = encodeURIComponent(lower)
   return `https://img.shields.io/badge/${logo}-%23000000.svg?style=for-the-badge&logo=${logo}&logoColor=white`
+}
+
+export const generateCapsuleRender = (config: CapsuleRender): string => {
+  const { type, height, background, text, textColor, textAnimation, theme } = config
+
+  const queryParams = [
+    `type=${type}`,
+    height && `height=${height}`,
+    background && `color=${background}`,
+    text && `text=${encodeURIComponent(text)}`,
+    textColor && `fontColor=${textColor}`,
+    textAnimation && `animation=${textAnimation}`,
+    theme && `theme=${theme}`,
+  ]
+    .filter(Boolean)
+    .join('&')
+
+  return `![header](https://capsule-render.vercel.app/api?${queryParams})`
 }
