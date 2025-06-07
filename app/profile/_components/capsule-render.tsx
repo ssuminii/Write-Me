@@ -42,7 +42,7 @@ const CapsuleRender = ({ capsuleRender, onCapsuleRenderChange }: CapsuleRenderPr
         id='render-color'
         label='Background'
         placeholder='배경 색상을 선택해주세요.'
-        helpText='Hex Color 값으로 입력해주세요.'
+        helpText='Hex 값으로 입력해주세요.'
         value={capsuleRender.background}
         onChange={(value) => onCapsuleRenderChange({ ...capsuleRender, background: value })}
         options={['auto', 'timeAuto', 'random', 'gradient', 'timeGradient']}
@@ -62,7 +62,7 @@ const CapsuleRender = ({ capsuleRender, onCapsuleRenderChange }: CapsuleRenderPr
         id='render-text-color'
         label='Font Color'
         placeholder='Text 색상을 입력해주세요.'
-        helpText='Hex Color 값으로 입력해주세요.'
+        helpText='Hex 값으로 입력해주세요.'
         value={capsuleRender.textColor}
         onChange={(value) => onCapsuleRenderChange({ ...capsuleRender, textColor: value })}
         pos='row'
