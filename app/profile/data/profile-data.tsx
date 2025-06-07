@@ -1,3 +1,4 @@
+import { generateCapsuleRender } from '@/utils/markdown'
 import {
   Achievements,
   Introduce,
@@ -6,6 +7,7 @@ import {
   Stats,
   Streak,
   TechStack,
+  CapsuleRender,
 } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
@@ -16,6 +18,19 @@ export const ProfileCards = (
   collapse: Record<string, boolean>,
   onToggleCollapse: (id: string) => void
 ): CardItem[] => [
+  {
+    id: 'capsule-render',
+    title: 'Capsule Render',
+    content: (
+      <CapsuleRender
+        capsuleRender={state.capsuleRender}
+        onCapsuleRenderChange={handlers.onCapsuleRenderChange}
+      />
+    ),
+    markdown: generateCapsuleRender(state.capsuleRender),
+    collapsed: collapse['capsule-render'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('capsule-render'),
+  },
   {
     id: 'profile-introduce',
     title: '간단 자기소개',
