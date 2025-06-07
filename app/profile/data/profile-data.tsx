@@ -2,7 +2,7 @@ import {
   Achievements,
   Introduce,
   Project,
-  MostUsedLanguages,
+  TopLangs,
   Stats,
   Streak,
   TechStack,
@@ -72,17 +72,12 @@ export const ProfileCards = (
     onToggleCollapse: () => onToggleCollapse('streak-stats'),
   },
   {
-    id: 'most-used-languages',
+    id: 'top-langs',
     title: 'Most Used Languages',
-    content: (
-      <MostUsedLanguages
-        value={state.mostUsedLanguages}
-        onChange={handlers.onMostUsedLanguagesChange}
-      />
-    ),
-    markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.mostUsedLanguages}&layout=compact)`,
-    collapsed: collapse['most-used-languages'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('most-used-languages'),
+    content: <TopLangs value={state.topLangs} onChange={handlers.onTopLangsChange} />,
+    markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.topLangs}&layout=compact)`,
+    collapsed: collapse['top-langs'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('top-langs'),
   },
   {
     id: 'tech-stack',
