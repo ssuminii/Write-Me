@@ -9,13 +9,15 @@ export function useProfileForm() {
     projects: [{ id: Date.now(), title: '', desc: '', link: '' }],
     achievements: [{ id: Date.now(), title: '', start: '', end: '', desc: '' }],
     mostUsedLanguages: '',
+    stats: '',
   })
 
   const handlers: ProfileHandlers = {
     onIntroduceChange: (v) => setState((prev) => ({ ...prev, introduce: v })),
     onProjectsChange: (v) => setState((prev) => ({ ...prev, projects: v })),
     onAchievementsChange: (v) => setState((prev) => ({ ...prev, achievements: v })),
-    onMostUsedLanguages: (v) => setState((prev) => ({ ...prev, mostUsedLanguages: v })),
+    onMostUsedLanguagesChange: (v) => setState((prev) => ({ ...prev, mostUsedLanguages: v })),
+    onStatsChange: (v) => setState((prev) => ({ ...prev, stats: v })),
   }
 
   return { state, handlers }
