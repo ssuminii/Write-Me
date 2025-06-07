@@ -1,4 +1,4 @@
-import { Project, Achievement } from '../_modles'
+import { Project, Achievement, TechStack } from '../_modles'
 
 export interface ProfileState {
   introduce: string
@@ -7,6 +7,7 @@ export interface ProfileState {
   mostUsedLanguages: string
   stats: string
   streak: string
+  techStacks: TechStack[]
 }
 
 export interface ProfileHandlers {
@@ -16,4 +17,5 @@ export interface ProfileHandlers {
   onMostUsedLanguagesChange: (value: string) => void
   onStatsChange: (value: string) => void
   onStreakChange: (value: string) => void
+  onTechStacksChange: (value: TechStack[]) => void
 }
