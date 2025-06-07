@@ -9,6 +9,7 @@ interface LabelInputProps {
   value: string
   onChange: (value: string) => void
   pos?: Position
+  labelWidth?: number
 }
 
 export const LabelInput = ({
@@ -17,13 +18,16 @@ export const LabelInput = ({
   placeholder,
   value,
   onChange,
+  labelWidth,
   pos = 'col',
 }: LabelInputProps) => {
   const isRow = pos === 'row'
 
   return (
     <div className={isRow ? 'flex items-center gap-4' : 'flex flex-col gap-3'}>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} className={labelWidth ? `w-${labelWidth}` : ''}>
+        {label}
+      </Label>
       <Input
         id={id}
         value={value}

@@ -18,6 +18,7 @@ interface LabelSelectProps {
   onChange: (value: string) => void
   options: string[]
   pos?: Position
+  labelWidth?: number
 }
 
 export const LabelSelect = ({
@@ -27,13 +28,16 @@ export const LabelSelect = ({
   value,
   onChange,
   options,
+  labelWidth,
   pos = 'col',
 }: LabelSelectProps) => {
   const isRow = pos === 'row'
 
   return (
     <div className={isRow ? 'flex items-center gap-4' : 'flex flex-col gap-3'}>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} className={labelWidth ? `w-${labelWidth}` : ''}>
+        {label}
+      </Label>
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger id={id} className={isRow ? 'flex-1' : 'w-full'}>
           <SelectValue placeholder={placeholder} />
