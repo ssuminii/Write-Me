@@ -1,4 +1,4 @@
-import { Achievements, Introduce, Project } from '../_components'
+import { Achievements, Introduce, Project, MostUsedLanguages } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
 
@@ -46,5 +46,15 @@ export const ProfileCards = (
     ].join('\n'),
     collapsed: collapse['profile-achievements'] ?? false,
     onToggleCollapse: () => onToggleCollapse('profile-achievements'),
+  },
+  {
+    id: 'most-used-languages',
+    title: 'Most Used Languages',
+    content: (
+      <MostUsedLanguages value={state.mostUsedLanguages} onChange={handlers.onMostUsedLanguages} />
+    ),
+    markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.mostUsedLanguages}&layout=compact)`,
+    collapsed: collapse['most-used-languages'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('most-used-languages'),
   },
 ]
