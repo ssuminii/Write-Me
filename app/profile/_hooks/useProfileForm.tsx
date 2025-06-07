@@ -11,6 +11,7 @@ export function useProfileForm() {
     mostUsedLanguages: '',
     stats: '',
     streak: '',
+    techStacks: [{ id: Date.now(), style: '', name: '', bgColor: '', logoColor: '' }],
   })
 
   const handlers: ProfileHandlers = {
@@ -20,6 +21,7 @@ export function useProfileForm() {
     onMostUsedLanguagesChange: (v) => setState((prev) => ({ ...prev, mostUsedLanguages: v })),
     onStatsChange: (v) => setState((prev) => ({ ...prev, stats: v })),
     onStreakChange: (v) => setState((prev) => ({ ...prev, streak: v })),
+    onTechStacksChange: (v) => setState((prev) => ({ ...prev, techStacks: v })),
   }
 
   return { state, handlers }

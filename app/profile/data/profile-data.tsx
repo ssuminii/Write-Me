@@ -1,4 +1,12 @@
-import { Achievements, Introduce, Project, MostUsedLanguages, Stats, Streak } from '../_components'
+import {
+  Achievements,
+  Introduce,
+  Project,
+  MostUsedLanguages,
+  Stats,
+  Streak,
+  TechStack,
+} from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
 
@@ -22,7 +30,7 @@ export const ProfileCards = (
     content: <Project projects={state.projects} onProjectsChange={handlers.onProjectsChange} />,
     markdown: [
       '## Project',
-      ...state.projects.flatMap(({ title, desc, link }) =>
+      ...state.projects.map(({ title, desc, link }) =>
         [`#### ${title}`, desc, `🔗 [${link}](${link})`].join('\n\n')
       ),
     ].join('\n'),
@@ -40,7 +48,7 @@ export const ProfileCards = (
     ),
     markdown: [
       '## 외부 활동 및 수상 내역',
-      ...state.achievements.flatMap(({ title, desc, start, end }) =>
+      ...state.achievements.map(({ title, desc, start, end }) =>
         [`#### ${title}`, `활동 기간: ${start} ~ ${end}`, desc].join('\n\n')
       ),
     ].join('\n'),
@@ -75,5 +83,25 @@ export const ProfileCards = (
     markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.mostUsedLanguages}&layout=compact)`,
     collapsed: collapse['most-used-languages'] ?? false,
     onToggleCollapse: () => onToggleCollapse('most-used-languages'),
+  },
+  {
+    id: 'tech-stack',
+    title: 'Tech Stack',
+    content: (
+      <TechStack techStacks={state.techStacks} onTechStacksChange={handlers.onTechStacksChange} />
+    ),
+    markdown: [
+      '## Tech Stack',
+      ...state.techStacks.map(
+        ({ style, name, bgColor, logoColor }) =>
+          `![${name}](https://img.shields.io/badge/${name}-${
+            bgColor ? bgColor.replace(/^#/, '') : 'black'
+          }?${style === '---' ? '' : `style=${style}`}&logo=${name}&logoColor=${
+            logoColor ? logoColor.replace(/^#/, '') : 'white'
+          })`
+      ),
+    ].join('\n'),
+    collapsed: collapse['tech-stack'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('tech-stack'),
   },
 ]
