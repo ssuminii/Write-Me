@@ -6,6 +6,7 @@ export interface ProfileState {
   achievements: Achievement[]
   mostUsedLanguages: string
   stats: string
+  streak: string
 }
 
 export interface ProfileHandlers {
@@ -14,4 +15,5 @@ export interface ProfileHandlers {
   onAchievementsChange: (value: Achievement[]) => void
   onMostUsedLanguagesChange: (value: string) => void
   onStatsChange: (value: string) => void
+  onStreakChange: (value: string) => void
 }

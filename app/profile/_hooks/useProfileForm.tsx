@@ -10,6 +10,7 @@ export function useProfileForm() {
     achievements: [{ id: Date.now(), title: '', start: '', end: '', desc: '' }],
     mostUsedLanguages: '',
     stats: '',
+    streak: '',
   })
 
   const handlers: ProfileHandlers = {
@@ -18,6 +19,7 @@ export function useProfileForm() {
     onAchievementsChange: (v) => setState((prev) => ({ ...prev, achievements: v })),
     onMostUsedLanguagesChange: (v) => setState((prev) => ({ ...prev, mostUsedLanguages: v })),
     onStatsChange: (v) => setState((prev) => ({ ...prev, stats: v })),
+    onStreakChange: (v) => setState((prev) => ({ ...prev, streak: v })),
   }
 
   return { state, handlers }
