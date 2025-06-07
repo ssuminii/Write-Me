@@ -1,11 +1,11 @@
 import { LabelInput } from '@/components/ui'
 
-interface MostUsedLanguagesProps {
+interface TopLangsProps {
   value: string
   onChange: (value: string) => void
 }
 
-const MostUsedLanguages = ({ value, onChange }: MostUsedLanguagesProps) => {
+const TopLangs = ({ value, onChange }: TopLangsProps) => {
   return (
     <LabelInput
       id='github-id'
@@ -18,4 +18,4 @@ const MostUsedLanguages = ({ value, onChange }: MostUsedLanguagesProps) => {
   )
 }
 
-export default MostUsedLanguages
+export default TopLangs
