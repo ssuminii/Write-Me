@@ -1,4 +1,4 @@
-import { Input } from './input'
+import { Input, Label } from './'
 
 type Position = 'row' | 'col'
 
@@ -22,8 +22,8 @@ export const LabelInput = ({
   const isRow = pos === 'row'
 
   return (
-    <div className={isRow ? 'flex items-center gap-6' : 'flex flex-col gap-2'}>
-      <label htmlFor={id}>{label}</label>
+    <div className={isRow ? 'flex items-center gap-4' : 'flex flex-col gap-3'}>
+      <Label htmlFor={id}>{label}</Label>
       <Input
         id={id}
         value={value}

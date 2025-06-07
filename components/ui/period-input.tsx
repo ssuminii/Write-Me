@@ -1,4 +1,4 @@
-import { Input } from '@/components/ui/input'
+import { Input, Label } from '@/components/ui'
 
 interface PeriodInputProps {
   id: string
@@ -14,8 +14,8 @@ export const PeriodInput = ({ id, label, startValue, endValue, start, end }: Per
   const endId = `end-${id}`
 
   return (
-    <div className='flex flex-col gap-2'>
-      <label htmlFor={startId}>{label}</label>
+    <div className='flex flex-col gap-3'>
+      <Label htmlFor={startId}>{label}</Label>
       <div className='flex gap-6 items-center'>
         <Input
           type='date'
