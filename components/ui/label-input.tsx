@@ -1,3 +1,4 @@
+import HelpText from './help-text'
 import { Input, Label } from './'
 
 type Position = 'row' | 'col'
@@ -10,6 +11,7 @@ interface LabelInputProps {
   onChange: (value: string) => void
   pos?: Position
   labelWidth?: number
+  helpText?: string
 }
 
 export const LabelInput = ({
@@ -20,6 +22,7 @@ export const LabelInput = ({
   onChange,
   labelWidth,
   pos = 'col',
+  helpText,
 }: LabelInputProps) => {
   const isRow = pos === 'row'
 
@@ -28,13 +31,16 @@ export const LabelInput = ({
       <Label htmlFor={id} className={labelWidth ? `w-${labelWidth}` : ''}>
         {label}
       </Label>
-      <Input
-        id={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={isRow ? 'flex-1' : ''}
-      />
+      <div className='flex-1 relative'>
+        <Input
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={isRow ? 'flex-1' : ''}
+        />
+        {helpText && <HelpText helpText={helpText} />}
+      </div>
     </div>
   )
 }

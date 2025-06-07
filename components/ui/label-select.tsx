@@ -7,6 +7,7 @@ import {
   SelectGroup,
   SelectItem,
 } from './'
+import HelpText from './help-text'
 
 type Position = 'row' | 'col'
 
@@ -19,6 +20,7 @@ interface LabelSelectProps {
   options: string[]
   pos?: Position
   labelWidth?: number
+  helpText?: string
 }
 
 export const LabelSelect = ({
@@ -30,28 +32,33 @@ export const LabelSelect = ({
   options,
   labelWidth,
   pos = 'col',
+  helpText,
 }: LabelSelectProps) => {
   const isRow = pos === 'row'
 
   return (
-    <div className={isRow ? 'flex items-center gap-4' : 'flex flex-col gap-3'}>
+    <div className={isRow ? `flex items-center gap-4` : 'flex flex-col gap-3'}>
       <Label htmlFor={id} className={labelWidth ? `w-${labelWidth}` : ''}>
         {label}
       </Label>
-      <Select value={value} onValueChange={onChange}>
-        <SelectTrigger id={id} className={isRow ? 'flex-1' : 'w-full'}>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {options.map((option) => (
-              <SelectItem key={option} value={option}>
-                {option}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+
+      <div className={isRow ? 'flex-1 relative' : 'w-full relative'}>
+        <Select value={value} onValueChange={onChange}>
+          <SelectTrigger id={id} className='w-full'>
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {options.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        {helpText && <HelpText helpText={helpText} />}
+      </div>
     </div>
   )
 }
