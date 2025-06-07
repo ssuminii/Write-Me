@@ -1,4 +1,4 @@
-import { Achievements, Introduce, Project, MostUsedLanguages } from '../_components'
+import { Achievements, Introduce, Project, MostUsedLanguages, Stats } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
 
@@ -48,10 +48,21 @@ export const ProfileCards = (
     onToggleCollapse: () => onToggleCollapse('profile-achievements'),
   },
   {
+    id: 'github-stats',
+    title: 'GitHub Stats',
+    content: <Stats value={state.stats} onChange={handlers.onStatsChange} />,
+    markdown: `![${state.stats}'s GitHub stats](https://github-readme-stats.vercel.app/api?username=${state.stats}&show_icons=true&count_private=true)`,
+    collapsed: collapse['github-stats'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('github-stats'),
+  },
+  {
     id: 'most-used-languages',
     title: 'Most Used Languages',
     content: (
-      <MostUsedLanguages value={state.mostUsedLanguages} onChange={handlers.onMostUsedLanguages} />
+      <MostUsedLanguages
+        value={state.mostUsedLanguages}
+        onChange={handlers.onMostUsedLanguagesChange}
+      />
     ),
     markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.mostUsedLanguages}&layout=compact)`,
     collapsed: collapse['most-used-languages'] ?? false,
