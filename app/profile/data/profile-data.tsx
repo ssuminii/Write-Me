@@ -1,4 +1,4 @@
-import { Achievements, Introduce, Project, MostUsedLanguages, Stats } from '../_components'
+import { Achievements, Introduce, Project, MostUsedLanguages, Stats, Streak } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
 
@@ -54,6 +54,14 @@ export const ProfileCards = (
     markdown: `![${state.stats}'s GitHub stats](https://github-readme-stats.vercel.app/api?username=${state.stats}&show_icons=true&count_private=true)`,
     collapsed: collapse['github-stats'] ?? false,
     onToggleCollapse: () => onToggleCollapse('github-stats'),
+  },
+  {
+    id: 'streak-stats',
+    title: 'GitHub Streak',
+    content: <Streak value={state.streak} onChange={handlers.onStreakChange} />,
+    markdown: `[![GitHub Streak](https://streak-stats.demolab.com/?user=${state.streak})](https://git.io/streak-stats)`,
+    collapsed: collapse['streak-stats'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('streak-stats'),
   },
   {
     id: 'most-used-languages',
