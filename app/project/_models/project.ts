@@ -1,4 +1,5 @@
-import type { Member, Phase, SiteInfo, TotalDurationInfo, Stack, Role, Featrue, ImageUpload } from '../_models'
+import type { Member, Phase, SiteInfo, TotalDurationInfo, Stack, Role, Featrue } from '../_models'
+import type { ImageUpload } from '@/types'
 
 export interface ProjectState {
   title: string
@@ -11,7 +12,7 @@ export interface ProjectState {
   stacks: Stack[]
   roles: Role[]
   features: Featrue[]
-  imageUpload: ImageUpload
+  mainImageUpload: ImageUpload
 }
 
 export interface ProjectHandlers {
@@ -25,5 +26,5 @@ export interface ProjectHandlers {
   onStacksChange: (stacks: Stack[]) => void
   onRolesChange: (roles: Role[]) => void
   onFeaturesChange: (features: Featrue[]) => void
-  onImageUploadChange: (imageUpload: ImageUpload) => void
+  onMainImageUploadChange: (mainImageUpload: ImageUpload) => void
 }

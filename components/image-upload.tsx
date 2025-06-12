@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import { Button, LabelInput } from '@/components/ui'
 import { uploadImage } from '@/api/uploadImage'
-import type { ImageUploadProps } from '@/app/project/_models'
+import type { ImageUploadProps } from '@/types'
 
 const ImageUpload = ({ image, onImageUploadChange }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
