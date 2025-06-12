@@ -15,7 +15,7 @@ export function useProjectForm() {
     stacks: [{ id: Date.now(), stack: '', reason: '' }],
     roles: [{ id: Date.now(), name: '', role: '' }],
     features: [{ id: Date.now(), feature: '', description: '' }],
-    imageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
+    mainImageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
   })
 
   const handlers: ProjectHandlers = {
@@ -29,7 +29,7 @@ export function useProjectForm() {
     onStacksChange: (v) => setState((prev) => ({ ...prev, stacks: v })),
     onRolesChange: (v) => setState((prev) => ({ ...prev, roles: v })),
     onFeaturesChange: (v) => setState((prev) => ({ ...prev, features: v })),
-    onImageUploadChange: (v) => setState((prev) => ({ ...prev, imageUpload: v })),
+    onMainImageUploadChange: (v) => setState((prev) => ({ ...prev, mainImageUpload: v })),
   }
 
   return { state, handlers }

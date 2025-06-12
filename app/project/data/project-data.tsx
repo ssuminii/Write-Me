@@ -1,6 +1,5 @@
 import {
   Title,
-  ImageUpload,
   Overview,
   Site,
   FolderStructure,
@@ -13,6 +12,7 @@ import {
 import type { CardItem } from '@/types'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
 import { generateStackMDTable, generateTeamMDTable } from '@/utils/markdown'
+import ImageUpload from '@/components/image-upload'
 
 export const ProjectCards = (
   state: ProjectState,
@@ -30,14 +30,17 @@ export const ProjectCards = (
   },
 
   {
-    id: 'project-image',
+    id: 'project-main-image',
     title: '프로젝트 메인 이미지 업로드',
     content: (
-      <ImageUpload image={state.imageUpload} onImageUploadChange={handlers.onImageUploadChange} />
+      <ImageUpload
+        image={state.mainImageUpload}
+        onImageUploadChange={handlers.onMainImageUploadChange}
+      />
     ),
-    markdown: `<img width="${state.imageUpload.size.width}" height="${state.imageUpload.size.height}" alt="Main-Image" src="${state.imageUpload.imageUrl}" />`,
-    collapsed: collapse['project-image'] ?? false,
-    onToggleCollapse: () => onToggleCollapse('project-image'),
+    markdown: `<img width="${state.mainImageUpload.size.width}" height="${state.mainImageUpload.size.height}" alt="Main-Image" src="${state.mainImageUpload.imageUrl}" />`,
+    collapsed: collapse['project-main-image'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('project-main-image'),
   },
 
   {
