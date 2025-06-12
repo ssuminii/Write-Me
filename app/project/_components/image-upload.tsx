@@ -1,50 +1,48 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Button, Input } from '@/components/ui'
+import { Button, LabelInput } from '@/components/ui'
+import { uploadImage } from '@/api/uploadImage'
+import type { ImageUploadProps } from '@/app/project/_models'
 
-interface SizeProps {
-  width: number
-  height: number
-}
-
-interface ImageUploadProps {
-  onImageUpload: (markdownImageHtml: string) => void
-}
-
-const ImageUpload = ({ onImageUpload }: ImageUploadProps) => {
+const ImageUpload = ({ image, onImageUploadChange }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [file, setFile] = useState<File | null>(null)
-  const [size, setSize] = useState<SizeProps | null>(null)
 
   const handleUpload = () => {
     fileInputRef.current?.click()
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
     if (!selectedFile) return
 
     setFile(selectedFile)
 
-    const img = new Image()
-    const imageUrl = URL.createObjectURL(selectedFile)
+    const imageUrl = await uploadImage(selectedFile)
+    if (!imageUrl) return
 
+    const img = new Image()
     img.src = imageUrl
 
     img.onload = () => {
-      setSize({ width: img.width, height: img.height })
-
-      const markdown = `
-            <p align="center">
-              <img src="${imageUrl} alt="mainImage"" />
-            </p>
-                  `.trim()
-
-      onImageUpload(markdown)
-
-      URL.revokeObjectURL(img.src)
+      onImageUploadChange({
+        imageUrl: imageUrl,
+        size: {
+          width: img.width,
+          height: img.height,
+        },
+      })
     }
+  }
+
+  const handleSizeChange = (key: 'width' | 'height', value: string) => {
+    const num = parseInt(value) || 0
+    const newSize = {
+      width: key === 'width' ? num : image.size.width,
+      height: key === 'height' ? num : image.size.height,
+    }
+    onImageUploadChange({ imageUrl: image.imageUrl, size: newSize })
   }
 
   return (
@@ -69,20 +67,21 @@ const ImageUpload = ({ onImageUpload }: ImageUploadProps) => {
 
       {file && <span className='text-primary'>선택된 파일: {file.name}</span>}
 
-      <div className='flex gap-6'>
-        <div className='flex items-center gap-4'>
-          <label htmlFor='width' className='w-16'>
-            Width
-          </label>
-          <Input id='width' name='width' value={size?.width ?? ''} readOnly />
-        </div>
-
-        <div className='flex items-center gap-4'>
-          <label htmlFor='height' className='w-16'>
-            Height
-          </label>
-          <Input id='height' name='height' value={size?.height ?? ''} readOnly />
-        </div>
+      <div className='flex gap-8'>
+        <LabelInput
+          id='width'
+          label='Width'
+          value={image?.size?.width?.toString() ?? ''}
+          onChange={(value) => handleSizeChange('width', value)}
+          pos='row'
+        />
+        <LabelInput
+          id='height'
+          label='Height'
+          value={image?.size?.height?.toString() ?? ''}
+          onChange={(value) => handleSizeChange('height', value)}
+          pos='row'
+        />
       </div>
     </form>
   )

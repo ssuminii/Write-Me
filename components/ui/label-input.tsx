@@ -6,7 +6,7 @@ type Position = 'row' | 'col'
 interface LabelInputProps {
   id: string
   label: string
-  placeholder: string
+  placeholder?: string
   value: string
   onChange: (value: string) => void
   pos?: Position
