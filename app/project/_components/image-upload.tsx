@@ -71,16 +71,20 @@ const ImageUpload = ({ image, onImageUploadChange }: ImageUploadProps) => {
         <LabelInput
           id='width'
           label='Width'
-          value={image?.size?.width?.toString() ?? ''}
+          type='number'
+          value={image?.size?.width?.toString() ?? 0}
           onChange={(value) => handleSizeChange('width', value)}
           pos='row'
+          disabled={!image.imageUrl}
         />
         <LabelInput
           id='height'
           label='Height'
-          value={image?.size?.height?.toString() ?? ''}
+          type='number'
+          value={image?.size?.height?.toString() ?? 0}
           onChange={(value) => handleSizeChange('height', value)}
           pos='row'
+          disabled={!image.imageUrl}
         />
       </div>
     </form>
