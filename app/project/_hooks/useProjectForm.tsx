@@ -15,13 +15,13 @@ export function useProjectForm() {
     stacks: [{ id: Date.now(), stack: '', reason: '' }],
     roles: [{ id: Date.now(), name: '', role: '' }],
     features: [{ id: Date.now(), feature: '', description: '' }],
+    imageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
   })
 
   const handlers: ProjectHandlers = {
     onTitleChange: (v) => setState((prev) => ({ ...prev, title: v })),
     onOverviewChange: (v) => setState((prev) => ({ ...prev, overview: v })),
     onSiteChange: (v) => setState((prev) => ({ ...prev, site: v })),
-    onImageUpload: (html) => console.log('이미지 업로드:', html),
     onFolderStructureChange: (v) => setState((prev) => ({ ...prev, folderStructure: v })),
     onDurationChange: (v) => setState((prev) => ({ ...prev, duration: v })),
     onPhasesChange: (v) => setState((prev) => ({ ...prev, phases: v })),
@@ -29,6 +29,7 @@ export function useProjectForm() {
     onStacksChange: (v) => setState((prev) => ({ ...prev, stacks: v })),
     onRolesChange: (v) => setState((prev) => ({ ...prev, roles: v })),
     onFeaturesChange: (v) => setState((prev) => ({ ...prev, features: v })),
+    onImageUploadChange: (v) => setState((prev) => ({ ...prev, imageUpload: v })),
   }
 
   return { state, handlers }
