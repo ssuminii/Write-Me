@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import HelpText from './help-text'
 import { Input, Label } from './'
 
@@ -25,7 +26,14 @@ export const LabelInput = ({
 
   return (
     <div className={isRow ? 'flex items-center gap-4' : 'flex flex-col gap-3'}>
-      <Label htmlFor={label} className={labelWidth ? `w-${labelWidth}` : ''}>
+      <Label
+        htmlFor={label}
+        className={clsx({
+          'w-24': labelWidth === 24,
+          'w-32': labelWidth === 32,
+          'w-40': labelWidth === 40,
+        })}
+      >
         {label}
       </Label>
       <div className='flex-1 relative'>
