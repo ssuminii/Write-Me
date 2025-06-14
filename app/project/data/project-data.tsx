@@ -3,11 +3,11 @@ import {
   Overview,
   Site,
   FolderStructure,
-  TeamMembers,
   Timeframe,
   Stack,
   Roles,
   FeatureSection,
+  TeamMembers,
 } from '../_components'
 import type { CardItem } from '@/types'
 import type { ProjectState, ProjectHandlers } from '../_models/project'
