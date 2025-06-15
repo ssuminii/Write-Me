@@ -13,12 +13,11 @@ export default function MainNav() {
   if (!mounted) return null
 
   const currentTheme = theme === 'system' ? systemTheme : theme
-  const logoSrc = currentTheme === 'dark' ? '/logo/logo-dark.svg' : '/logo/logo-light.svg'
 
   return (
     <div className='flex items-center gap-8'>
       <Link href='/'>
-        <Image src={logoSrc} alt='write-me-logo' width={128} height={60} />
+        <Image src={`/logo/logo-${currentTheme}.svg`} alt='write-me-logo' width={128} height={60} />
       </Link>
       <nav className='flex gap-4'>
         {mainNav.map((item) => (
