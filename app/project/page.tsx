@@ -7,7 +7,7 @@ import { useProjectForm } from './_hooks/useProjectForm'
 import { getMarkdownFromCards } from '@/utils/markdown'
 import { useState, useEffect } from 'react'
 import type { UniqueIdentifier } from '@dnd-kit/core'
-import useCardCollapse from '@/hooks/useCardCollapse'
+import { useCardCollapse } from '@/hooks'
 
 export default function Project() {
   const [order, setOrder] = useState<UniqueIdentifier[]>([])

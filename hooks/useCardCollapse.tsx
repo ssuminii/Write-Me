@@ -3,7 +3,7 @@
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { useState } from 'react'
 
-const useCardCollapse = () => {
+export const useCardCollapse = () => {
   const [collapse, setCollapse] = useState<Record<string, boolean>>({})
 
   const onToggleCollapse = (id: UniqueIdentifier) => {
@@ -12,5 +12,3 @@ const useCardCollapse = () => {
 
   return { collapse, onToggleCollapse }
 }
-
-export default useCardCollapse
