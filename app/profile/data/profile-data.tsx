@@ -1,4 +1,4 @@
-import { generateCapsuleRender } from '@/utils/markdown'
+import { generateBadgeUrl, generateCapsuleRender } from '@/utils/markdown'
 import {
   Achievements,
   Introduce,
@@ -102,13 +102,8 @@ export const ProfileCards = (
     ),
     markdown: [
       '## Tech Stack',
-      ...state.techStacks.map(
-        ({ style, name, bgColor, logoColor }) =>
-          `![${name}](https://img.shields.io/badge/${name}-${
-            bgColor ? bgColor.replace(/^#/, '') : 'black'
-          }?${style === '---' ? '' : `style=${style}`}&logo=${name}&logoColor=${
-            logoColor ? logoColor.replace(/^#/, '') : 'white'
-          })`
+      ...state.techStacks.map(({ name, style, bgColor, logoColor }) =>
+        generateBadgeUrl(name, style, bgColor, logoColor)
       ),
     ].join('\n'),
     collapsed: collapse['tech-stack'] ?? false,

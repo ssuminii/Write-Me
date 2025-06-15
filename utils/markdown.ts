@@ -29,7 +29,8 @@ export function generateStackMDTable(stacks: Stack[]): string {
   return [header, separator, ...rows].join('\n')
 }
 
-function generateBadgeUrl(stack: string, style: string, bgColor: string, iconColor: string): string {
+// 기술 뱃지
+export function generateBadgeUrl(stack: string, style: string, bgColor: string, iconColor: string): string {
   return `![${stack}](https://img.shields.io/badge/${stack}-${bgColor ? bgColor.replace(/^#/, '') : 'black'}?${style === '---' ? '' : `style=${style}`}&logo=${stack}&logoColor=${iconColor ? iconColor.replace(/^#/, '') : 'white'})`
 }
 
