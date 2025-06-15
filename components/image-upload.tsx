@@ -1,11 +1,11 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Button, LabelInput } from '@/components/ui'
+import { Button, Label, LabelInput } from '@/components/ui'
 import { uploadImage } from '@/api/uploadImage'
 import type { ImageUploadProps } from '@/types'
 
-const ImageUpload = ({ image, onImageUploadChange }: ImageUploadProps) => {
+const ImageUpload = ({ image, onImageUploadChange, label }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [file, setFile] = useState<File | null>(null)
 
@@ -47,45 +47,49 @@ const ImageUpload = ({ image, onImageUploadChange }: ImageUploadProps) => {
 
   return (
     <form
-      className='flex flex-col items-center gap-4'
+      className='flex flex-col gap-4'
       onSubmit={(e) => {
         e.preventDefault()
         handleUpload()
       }}
     >
-      <Button type='submit' className='w-[300px]'>
-        Image Upload
-      </Button>
+      {label && <Label>이미지 업로드</Label>}
 
-      <input
-        ref={fileInputRef}
-        type='file'
-        accept='image/*'
-        onChange={handleFileChange}
-        className='hidden'
-      />
+      <div className='flex flex-col items-center gap-4'>
+        <Button type='submit' className='w-[300px]'>
+          Image Upload
+        </Button>
 
-      {file && <span className='text-primary'>선택된 파일: {file.name}</span>}
-
-      <div className='flex gap-8'>
-        <LabelInput
-          id='width'
-          label='Width'
-          type='number'
-          value={image?.size?.width?.toString() ?? 0}
-          onChange={(value) => handleSizeChange('width', value)}
-          pos='row'
-          disabled={!image.imageUrl}
+        <input
+          ref={fileInputRef}
+          type='file'
+          accept='image/*'
+          onChange={handleFileChange}
+          className='hidden'
         />
-        <LabelInput
-          id='height'
-          label='Height'
-          type='number'
-          value={image?.size?.height?.toString() ?? 0}
-          onChange={(value) => handleSizeChange('height', value)}
-          pos='row'
-          disabled={!image.imageUrl}
-        />
+
+        {file && <span className='text-primary text-sm'>선택된 파일: {file.name}</span>}
+
+        <div className='flex gap-8'>
+          <LabelInput
+            id='width'
+            label='Width'
+            type='number'
+            value={image?.size?.width?.toString() ?? 0}
+            onChange={(value) => handleSizeChange('width', value)}
+            pos='row'
+            disabled={!image.imageUrl}
+          />
+          <LabelInput
+            id='height'
+            label='Height'
+            type='number'
+            value={image?.size?.height?.toString() ?? 0}
+            onChange={(value) => handleSizeChange('height', value)}
+            pos='row'
+            disabled={!image.imageUrl}
+          />
+        </div>
       </div>
     </form>
   )
