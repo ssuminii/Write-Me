@@ -7,6 +7,7 @@ export interface ImageUpload {
 }
 
 export interface ImageUploadProps {
+  label?: boolean
   image: ImageUpload
   onImageUploadChange: (image: ImageUpload) => void
 }
