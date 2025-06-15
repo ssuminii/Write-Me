@@ -14,7 +14,14 @@ export function useProjectForm() {
     members: [{ id: Date.now(), role: '', name: '', github: '' }],
     stacks: [{ id: Date.now(), stack: '', reason: '' }],
     roles: [{ id: Date.now(), name: '', role: '' }],
-    features: [{ id: Date.now(), feature: '', description: '' }],
+    features: [
+      {
+        id: Date.now(),
+        feature: '',
+        description: '',
+        imageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
+      },
+    ],
     mainImageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
   })
 

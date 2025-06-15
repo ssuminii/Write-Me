@@ -53,7 +53,7 @@ const ImageUpload = ({ image, onImageUploadChange, label }: ImageUploadProps) =>
         handleUpload()
       }}
     >
-      {label && <Label>이미지 업로드</Label>}
+      {label && <Label>{label}</Label>}
 
       <div className='flex flex-col items-center gap-4'>
         <Button type='submit' className='w-[300px]'>
