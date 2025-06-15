@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-type FieldUpdater<T> = (id: number, field: keyof T, value: string) => void
+type FieldUpdater<T> = (id: number, field: keyof T, value: T[keyof T]) => void
 
 export function useDynamicList<T extends {id: number}>(
   items:T[], 

@@ -123,10 +123,13 @@ export const ProjectCards = (
     ),
     markdown: [
       '## 🚀 주요 기능',
-      ...state.features.flatMap(({ feature, description }) => [
-        `### ${feature}`,
-        description.trim(),
-      ]),
+      ...state.features.map(({ feature, description, imageUpload }) =>
+        [
+          `### ${feature}`,
+          description,
+          `<img width="${imageUpload.size.width}" height="${imageUpload.size.height}" src="${imageUpload.imageUrl}" alt="${feature}-image" />`,
+        ].join('\n\n')
+      ),
     ].join('\n\n'),
     collapsed: collapse['project-features'] ?? false,
     onToggleCollapse: () => onToggleCollapse('project-features'),

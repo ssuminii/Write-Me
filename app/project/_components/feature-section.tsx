@@ -2,11 +2,18 @@ import type { FeaturesProps } from '../_models'
 import { useDynamicList } from '@/hooks/useDynamicList'
 import InputCard from '@/components/input-card'
 import { Label, LabelInput, Textarea } from '@/components/ui'
+import ImageUpload from '@/components/image-upload'
+
+const FEATURE_PLACEHOLDER = `ex) 회원가입 폼 유효성 검사
+- 이메일, 비밀번호 입력 시 실시간 유효성 검사 적용
+- 비밀번호 보안 규칙(최소 8자, 특수문자 포함 등) 안내 및 검증
+- 에러 메시지와 함께 즉각적인 피드백 제공`
 
 const FeatureSection = ({ features, onFeaturesChange }: FeaturesProps) => {
   const { handleAdd, handleRemove, handleChange } = useDynamicList(features, onFeaturesChange, {
     feature: '',
     description: '',
+    imageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
   })
 
   return (
@@ -30,12 +37,14 @@ const FeatureSection = ({ features, onFeaturesChange }: FeaturesProps) => {
               id='feature-description'
               value={feature.description}
               onChange={(e) => handleChange(feature.id, 'description', e.target.value)}
-              placeholder={`ex) 회원가입 폼 유효성 검사
-  - 이메일, 비밀번호 입력 시 실시간 유효성 검사 적용
-  - 비밀번호 보안 규칙(최소 8자, 특수문자 포함 등) 안내 및 검증
-  - 에러 메시지와 함께 즉각적인 피드백 제공`}
+              placeholder={FEATURE_PLACEHOLDER}
             />
           </div>
+          <ImageUpload
+            label='관련 이미지 첨부'
+            image={feature.imageUpload}
+            onImageUploadChange={(newImage) => handleChange(feature.id, 'imageUpload', newImage)}
+          />
         </InputCard>
       ))}
     </div>
