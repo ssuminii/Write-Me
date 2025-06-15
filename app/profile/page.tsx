@@ -5,9 +5,9 @@ import DndCardList from '@/components/dnd/card-list'
 import { ProfileCards } from './data/profile-data'
 import { useState, useEffect } from 'react'
 import type { UniqueIdentifier } from '@dnd-kit/core'
-import useCardCollapse from '@/hooks/useCardCollapse'
+import { useCardCollapse } from '@/hooks'
 import { getMarkdownFromCards } from '@/utils/markdown'
-import { useProfileForm } from '@/app/profile/_hooks/useProfileForm'
+import { useProfileForm } from './_hooks/useProfileForm'
 
 export default function Profile() {
   const [order, setOrder] = useState<UniqueIdentifier[]>([])
