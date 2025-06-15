@@ -22,17 +22,15 @@ export function generateStackMDTable(stacks: Stack[]): string {
   const separator = '| --- | --- |'
 
   const rows = stacks.map((stack) => {
-    const badgeUrl = generateBadgeUrl(stack.stack)
-    return `| ![${stack.stack}](${badgeUrl}) | ${stack.reason} |`
+    const badgeUrl = generateBadgeUrl(stack.stack, stack.style, stack.bgColor, stack.iconColor)
+    return `| ${badgeUrl} | ${stack.reason} |`
   })
 
   return [header, separator, ...rows].join('\n')
 }
 
-function generateBadgeUrl(name: string): string {
-  const lower = name.toLowerCase()
-  const logo = encodeURIComponent(lower)
-  return `https://img.shields.io/badge/${logo}-%23000000.svg?style=for-the-badge&logo=${logo}&logoColor=white`
+function generateBadgeUrl(stack: string, style: string, bgColor: string, iconColor: string): string {
+  return `![${stack}](https://img.shields.io/badge/${stack}-${bgColor ? bgColor.replace(/^#/, '') : 'black'}?${style === '---' ? '' : `style=${style}`}&logo=${stack}&logoColor=${iconColor ? iconColor.replace(/^#/, '') : 'white'})`
 }
 
 export const generateCapsuleRender = (config: CapsuleRender): string => {

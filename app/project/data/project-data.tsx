@@ -141,7 +141,7 @@ export const ProjectCards = (
     content: <Roles roles={state.roles} onRolesChange={handlers.onRolesChange} />,
     markdown: [
       '## 👩🏻‍💻 역할분담',
-      ...state.roles.flatMap(({ name, role }) => [`### ▪ ${name}`, role.trim()]),
+      ...state.roles.map(({ name, role }) => [`### ▪ ${name}`, role.trim()]),
     ].join('\n\n'),
     collapsed: collapse['project-roles'] ?? false,
     onToggleCollapse: () => onToggleCollapse('project-roles'),

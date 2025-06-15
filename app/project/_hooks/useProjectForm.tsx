@@ -12,7 +12,7 @@ export function useProjectForm() {
     duration: { start: '', end: '' },
     phases: [{ id: Date.now(), name: '', start: '', end: '' }],
     members: [{ id: Date.now(), role: '', name: '', github: '' }],
-    stacks: [{ id: Date.now(), stack: '', reason: '' }],
+    stacks: [{ id: Date.now(), stack: '', reason: '', style: '', bgColor: '', iconColor: '' }],
     roles: [{ id: Date.now(), name: '', role: '' }],
     features: [
       {
