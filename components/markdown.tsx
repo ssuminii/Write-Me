@@ -20,7 +20,15 @@ const Markdown = ({ className, value }: MarkdownProps) => {
 
   return (
     <div className={className} data-color-mode={mode}>
-      <MDEditor value={value} height='100%' />
+      <MDEditor
+        value={value}
+        height='100%'
+        previewOptions={{
+          components: {
+            img: ({ src = '', alt }) => (src === '' ? null : <img src={src} alt={alt} />),
+          },
+        }}
+      />
     </div>
   )
 }
