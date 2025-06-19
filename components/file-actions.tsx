@@ -1,5 +1,5 @@
-import { CopyBtn, DownloadBtn } from '@/components/button'
-import { Card } from '@/components/ui'
+import { Card, IconButton } from '@/components/ui'
+import { Copy, Download } from 'lucide-react'
 
 const FileActions = () => {
   return (
@@ -10,13 +10,13 @@ const FileActions = () => {
           <span className='text-sm text-center'>
             마크다운 파일 <br /> 다운로드
           </span>
-          <DownloadBtn />
+          <IconButton icon={Download} text='Download' />
         </div>
         <div className='flex items-center justify-center gap-3 rounded-lg border p-3 shadow-sm'>
           <span className='text-sm text-center'>
             마크다운 <br /> 복사
           </span>
-          <CopyBtn />
+          <IconButton icon={Copy} text='Copy' />
         </div>
       </div>
     </Card>
