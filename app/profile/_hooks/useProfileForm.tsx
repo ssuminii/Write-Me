@@ -22,6 +22,7 @@ export function useProfileForm() {
       theme: '',
     },
     profileImageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
+    badges: [{ id: Date.now(), style: '', logo: '', link: '', bgColor: '', logoColor: '' }],
   })
 
   const handlers: ProfileHandlers = {
@@ -34,6 +35,7 @@ export function useProfileForm() {
     onTechStacksChange: (v) => setState((prev) => ({ ...prev, techStacks: v })),
     onCapsuleRenderChange: (v) => setState((prev) => ({ ...prev, capsuleRender: v })),
     onProfileImageUpload: (v) => setState((prev) => ({ ...prev, profileImageUpload: v })),
+    onBadgesChange: (v) => setState((prev) => ({ ...prev, badges: v })),
   }
 
   return { state, handlers }

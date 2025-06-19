@@ -8,6 +8,7 @@ import {
   Streak,
   TechStack,
   CapsuleRender,
+  Badge,
 } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
@@ -138,5 +139,17 @@ export const ProfileCards = (
     ].join('\n'),
     collapsed: collapse['tech-stack'] ?? false,
     onToggleCollapse: () => onToggleCollapse('tech-stack'),
+  },
+  {
+    id: 'badge',
+    title: 'Link Badge',
+    content: <Badge badges={state.badges} onBadgesChange={handlers.onBadgesChange} />,
+    markdown: [
+      ...state.badges.map(({ style, link, logo, bgColor, logoColor }) =>
+        generateBadgeUrl(logo, style, bgColor, logoColor, link)
+      ),
+    ].join('\n'),
+    collapsed: collapse['badge'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('badge'),
   },
 ]
