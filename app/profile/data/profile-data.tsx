@@ -101,8 +101,12 @@ export const ProfileCards = (
   {
     id: 'streak-stats',
     title: 'GitHub Streak',
-    content: <Streak value={state.streak} onChange={handlers.onStreakChange} />,
-    markdown: `[![GitHub Streak](https://streak-stats.demolab.com/?user=${state.streak})](https://git.io/streak-stats)`,
+    content: <Streak streak={state.streak} onStreakChange={handlers.onStreakChange} />,
+    markdown: `![GitHub Streak](https://github-readme-streak-stats-eight.vercel.app/?user=${
+      state.streak.id
+    }${
+      state.streak.theme && state.streak.theme !== 'default' ? `&theme=${state.streak.theme}` : ''
+    })`,
     collapsed: collapse['streak-stats'] ?? false,
     onToggleCollapse: () => onToggleCollapse('streak-stats'),
   },
