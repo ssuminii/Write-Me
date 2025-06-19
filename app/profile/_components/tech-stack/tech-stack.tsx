@@ -30,7 +30,7 @@ const TechStack = ({ techStacks, onTechStacksChange }: TechStacksProps) => {
             value={techStack.style}
             onChange={(value) => handleChange(techStack.id, 'style', value)}
             pos='row'
-            labelWidth={20}
+            labelWidth={24}
           />
           <LabelInput
             id='stack-name'
@@ -39,7 +39,7 @@ const TechStack = ({ techStacks, onTechStacksChange }: TechStacksProps) => {
             value={techStack.name}
             onChange={(value) => handleChange(techStack.id, 'name', value)}
             pos='row'
-            labelWidth={20}
+            labelWidth={24}
           />
           <LabelInput
             id='bg-color'
@@ -48,7 +48,7 @@ const TechStack = ({ techStacks, onTechStacksChange }: TechStacksProps) => {
             value={techStack.bgColor}
             onChange={(value) => handleChange(techStack.id, 'bgColor', value)}
             pos='row'
-            labelWidth={20}
+            labelWidth={24}
           />
           <LabelSelect
             id='logo-color'
@@ -58,7 +58,7 @@ const TechStack = ({ techStacks, onTechStacksChange }: TechStacksProps) => {
             value={techStack.logoColor}
             onChange={(value) => handleChange(techStack.id, 'logoColor', value)}
             pos='row'
-            labelWidth={20}
+            labelWidth={24}
           />
         </InputCard>
       ))}
