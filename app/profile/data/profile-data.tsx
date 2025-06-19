@@ -103,8 +103,14 @@ export const ProfileCards = (
   {
     id: 'top-langs',
     title: 'Most Used Languages',
-    content: <TopLangs value={state.topLangs} onChange={handlers.onTopLangsChange} />,
-    markdown: `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.topLangs}&layout=compact)`,
+    content: <TopLangs topLangs={state.topLangs} onTopLangsChange={handlers.onTopLangsChange} />,
+    markdown: [
+      `![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=${state.topLangs.id}`,
+      state.topLangs.layout && state.topLangs.layout !== 'none'
+        ? `&layout=${state.topLangs.layout})`
+        : ')',
+      ,
+    ].join(''),
     collapsed: collapse['top-langs'] ?? false,
     onToggleCollapse: () => onToggleCollapse('top-langs'),
   },

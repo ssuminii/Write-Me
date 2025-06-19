@@ -8,7 +8,7 @@ export function useProfileForm() {
     introduce: '',
     projects: [{ id: Date.now(), title: '', desc: '', link: '' }],
     achievements: [{ id: Date.now(), title: '', start: '', end: '', desc: '' }],
-    topLangs: '',
+    topLangs: { id: '', layout: '' },
     stats: '',
     streak: '',
     techStacks: [{ id: Date.now(), style: '', name: '', bgColor: '', logoColor: '' }],
