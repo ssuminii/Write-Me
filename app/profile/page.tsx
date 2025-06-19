@@ -8,6 +8,7 @@ import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useCardCollapse } from '@/hooks'
 import { getMarkdownFromCards } from '@/utils/markdown'
 import { useProfileForm } from './_hooks/useProfileForm'
+import InfoContents from '@/components/info-contents'
 
 export default function Profile() {
   const [order, setOrder] = useState<UniqueIdentifier[]>([])
@@ -26,12 +27,10 @@ export default function Profile() {
 
   return (
     <div className='flex w-full min-h-screen py-4'>
-      <DndCardList
-        className='flex-1'
-        items={cards}
-        onToggleCollapse={onToggleCollapse}
-        onReorder={setOrder}
-      />
+      <div className='flex flex-col flex-1 gap-4 px-10'>
+        <InfoContents />
+        <DndCardList items={cards} onToggleCollapse={onToggleCollapse} onReorder={setOrder} />
+      </div>
       <Markdown className='flex-2' value={markdown} />
     </div>
   )
