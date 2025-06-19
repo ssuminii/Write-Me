@@ -1,12 +1,12 @@
 import type { ImageUpload } from '@/types'
-import type { Project, Achievement, TechStack, CapsuleRender, TopLangs } from '../_modles'
+import type { Project, Achievement, TechStack, CapsuleRender, TopLangs, Stats } from '../_modles'
 
 export interface ProfileState {
   introduce: string
   projects: Project[]
   achievements: Achievement[]
   topLangs: TopLangs
-  stats: string
+  stats: Stats
   streak: string
   techStacks: TechStack[]
   capsuleRender: CapsuleRender
@@ -18,7 +18,7 @@ export interface ProfileHandlers {
   onProjectsChange: (value: Project[]) => void
   onAchievementsChange: (value: Achievement[]) => void
   onTopLangsChange: (value: TopLangs) => void
-  onStatsChange: (value: string) => void
+  onStatsChange: (value: Stats) => void
   onStreakChange: (value: string) => void
   onTechStacksChange: (value: TechStack[]) => void
   onCapsuleRenderChange: (value: CapsuleRender ) => void

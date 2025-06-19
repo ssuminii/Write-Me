@@ -87,8 +87,14 @@ export const ProfileCards = (
   {
     id: 'github-stats',
     title: 'GitHub Stats',
-    content: <Stats value={state.stats} onChange={handlers.onStatsChange} />,
-    markdown: `![${state.stats}'s GitHub stats](https://github-readme-stats.vercel.app/api?username=${state.stats}&show_icons=true&count_private=true)`,
+    content: <Stats stats={state.stats} onStatsChange={handlers.onStatsChange} />,
+    markdown: `![${
+      state.stats.id
+    }'s GitHub stats](https://github-readme-stats.vercel.app/api?username=${
+      state.stats.id
+    }&show_icons=true&count_private=true${
+      state.stats.theme && state.stats.theme !== 'none' ? `&theme=${state.stats.theme}` : ''
+    })`,
     collapsed: collapse['github-stats'] ?? false,
     onToggleCollapse: () => onToggleCollapse('github-stats'),
   },
