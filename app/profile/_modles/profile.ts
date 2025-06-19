@@ -1,3 +1,4 @@
+import type { ImageUpload } from '@/types'
 import type { Project, Achievement, TechStack, CapsuleRender } from '../_modles'
 
 export interface ProfileState {
@@ -9,6 +10,7 @@ export interface ProfileState {
   streak: string
   techStacks: TechStack[]
   capsuleRender: CapsuleRender
+  profileImageUpload: ImageUpload
 }
 
 export interface ProfileHandlers {
@@ -20,4 +22,5 @@ export interface ProfileHandlers {
   onStreakChange: (value: string) => void
   onTechStacksChange: (value: TechStack[]) => void
   onCapsuleRenderChange: (value: CapsuleRender ) => void
+  onProfileImageUpload: (profileImageUpload: ImageUpload) => void
 }
