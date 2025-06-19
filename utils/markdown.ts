@@ -30,8 +30,10 @@ export function generateStackMDTable(stacks: Stack[]): string {
 }
 
 // 기술 뱃지
-export function generateBadgeUrl(stack: string, style: string, bgColor: string, iconColor: string): string {
-  return `![${stack}](https://img.shields.io/badge/${stack}-${bgColor ? bgColor.replace(/^#/, '') : 'black'}?${style === '---' ? '' : `style=${style}`}&logo=${stack}&logoColor=${iconColor ? iconColor.replace(/^#/, '') : 'white'})`
+export function generateBadgeUrl(stack: string, style: string, bgColor: string, iconColor: string, link?: string): string {
+  return link 
+  ? `[![${stack}](https://img.shields.io/badge/${stack}-${bgColor ? bgColor.replace(/^#/, '') : 'black'}?${style === '---' ? '' : `style=${style}`}&logo=${stack}&logoColor=${iconColor ? iconColor.replace(/^#/, '') : 'white'})](${link})`
+  : `![${stack}](https://img.shields.io/badge/${stack}-${bgColor ? bgColor.replace(/^#/, '') : 'black'}?${style === '---' ? '' : `style=${style}`}&logo=${stack}&logoColor=${iconColor ? iconColor.replace(/^#/, '') : 'white'})`
 }
 
 export const generateCapsuleRender = (config: CapsuleRender): string => {
