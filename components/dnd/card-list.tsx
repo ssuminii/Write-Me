@@ -26,7 +26,7 @@ const DndCardList = ({ items, className, onReorder }: CardListProps) => {
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={order} strategy={verticalListSortingStrategy}>
-        <div className={`flex flex-col gap-4 px-10 ${className}`}>
+        <div className={`flex flex-col gap-4 ${className}`}>
           {sortedItems.map((item) => (
             <DndCard
               key={item.id}

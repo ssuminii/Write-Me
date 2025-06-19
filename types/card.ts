@@ -12,7 +12,7 @@ export interface CardItem {
 
 export interface CardListProps {
   items: CardItem[]
-  className: string
+  className?: string
   onToggleCollapse: (id: string) => void
   onReorder?: (newOrder: UniqueIdentifier[]) => void
 }
