@@ -11,6 +11,7 @@ import {
 } from '../_components'
 import type { ProfileHandlers, ProfileState } from '../_modles/profile'
 import type { CardItem } from '@/types'
+import ImageUpload from '@/components/image-upload'
 
 export const ProfileCards = (
   state: ProfileState,
@@ -30,6 +31,19 @@ export const ProfileCards = (
     markdown: generateCapsuleRender(state.capsuleRender),
     collapsed: collapse['capsule-render'] ?? false,
     onToggleCollapse: () => onToggleCollapse('capsule-render'),
+  },
+  {
+    id: 'profile-image',
+    title: '프로필 메인 이미지 업로드',
+    content: (
+      <ImageUpload
+        image={state.profileImageUpload}
+        onImageUploadChange={handlers.onProfileImageUpload}
+      />
+    ),
+    markdown: `<img width="${state.profileImageUpload.size.width}" height="${state.profileImageUpload.size.height}" alt="Main-Image" src="${state.profileImageUpload.imageUrl}" />`,
+    collapsed: collapse['profile-image'] ?? false,
+    onToggleCollapse: () => onToggleCollapse('profile-image'),
   },
   {
     id: 'profile-introduce',

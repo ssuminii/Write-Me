@@ -21,6 +21,7 @@ export function useProfileForm() {
       textAnimation: '',
       theme: '',
     },
+    profileImageUpload: { imageUrl: '', size: { width: 0, height: 0 } },
   })
 
   const handlers: ProfileHandlers = {
@@ -32,6 +33,7 @@ export function useProfileForm() {
     onStreakChange: (v) => setState((prev) => ({ ...prev, streak: v })),
     onTechStacksChange: (v) => setState((prev) => ({ ...prev, techStacks: v })),
     onCapsuleRenderChange: (v) => setState((prev) => ({ ...prev, capsuleRender: v })),
+    onProfileImageUpload: (v) => setState((prev) => ({ ...prev, profileImageUpload: v })),
   }
 
   return { state, handlers }
