@@ -10,7 +10,7 @@ export function useProfileForm() {
     achievements: [{ id: Date.now(), title: '', start: '', end: '', desc: '' }],
     topLangs: { id: '', layout: '' },
     stats: { id: '', theme: '' },
-    streak: '',
+    streak: { id: '', theme: '' },
     techStacks: [{ id: Date.now(), style: '', name: '', bgColor: '', logoColor: '' }],
     capsuleRender: {
       type: '',
