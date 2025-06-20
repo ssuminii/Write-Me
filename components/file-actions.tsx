@@ -1,5 +1,6 @@
 import { Card, IconButton } from '@/components/ui'
 import { Copy, Download } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface FileActionsProps {
   markdown: string
@@ -9,9 +10,10 @@ const FileActions = ({ markdown }: FileActionsProps) => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(markdown)
-      alert('복사되었습니다.')
+      toast.success('복사가 완료되었습니다! ✨')
     } catch (err) {
-      alert(err)
+      console.error(err)
+      toast.error('앗, 복사에 실패했어요. 다시 시도해주세요 😢')
     }
   }
 
