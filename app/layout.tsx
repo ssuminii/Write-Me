@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import Header from '@/components/layout/header'
 import { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from 'sonner'
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <Header />
           <main className='flex-1 overflow-auto'>{children}</main>
+          <Toaster richColors position='top-center' />
         </ThemeProvider>
       </body>
     </html>
