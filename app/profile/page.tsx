@@ -28,7 +28,7 @@ export default function Profile() {
   return (
     <div className='flex w-full min-h-screen py-4'>
       <div className='flex flex-col flex-1 gap-4 px-10'>
-        <InfoContents />
+        <InfoContents markdown={markdown} />
         <DndCardList items={cards} onToggleCollapse={onToggleCollapse} onReorder={setOrder} />
       </div>
       <Markdown className='flex-2' value={markdown} />
