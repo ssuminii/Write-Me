@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { Button, Label, LabelInput } from '@/components/ui'
-import { uploadImage } from '@/api/uploadImage'
+import { uploadImage } from '@/api'
 import type { ImageUploadProps } from '@/types'
 
 const ImageUpload = ({ image, onImageUploadChange, label }: ImageUploadProps) => {

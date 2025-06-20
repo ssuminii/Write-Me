@@ -2,22 +2,9 @@
 
 import Image from 'next/image'
 import { Button } from '@/components/ui'
-import { supabase } from '@/lib/supabaseClient'
+import { handleOAuthLogin } from '@/api'
 
 const SocialLogin = () => {
-  const handleOAuthLogin = async (provider: 'google' | 'github') => {
-    try {
-      await supabase.auth.signInWithOAuth({
-        provider,
-        options: {
-          redirectTo: `${window.location.origin}/`,
-        },
-      })
-    } catch (error) {
-      console.error(`${provider} 로그인 실패:`, error)
-    }
-  }
-
   return (
     <div className='flex flex-col gap-4'>
       <Button
