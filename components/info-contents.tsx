@@ -2,7 +2,11 @@ import FileActions from '@/components/file-actions'
 import { Card } from '@/components/ui'
 import { Menu, CircleMinus, CirclePlus } from 'lucide-react'
 
-const InfoContents = () => {
+interface InfoContentsProps {
+  markdown: string
+}
+
+const InfoContents = ({ markdown }: InfoContentsProps) => {
   return (
     <Card className='flex flex-col gap-4 p-6 bg-muted/20'>
       <h1 className='text-center mb-2 text-xl font-semibold'>🛠 Write-Me 이렇게 써보세요!</h1>
@@ -17,7 +21,7 @@ const InfoContents = () => {
           버튼으로 항목을 삭제하거나 추가할 수 있어요.
         </li>
       </ul>
-      <FileActions />
+      <FileActions markdown={markdown} />
     </Card>
   )
 }
