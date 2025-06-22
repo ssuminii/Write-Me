@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes'
 import { useMounted } from '@/hooks'
 
 interface MarkdownProps {
-  className: string
+  className?: string
   value: string
 }
 

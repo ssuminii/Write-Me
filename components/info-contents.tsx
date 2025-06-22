@@ -21,7 +21,10 @@ const InfoContents = ({ markdown }: InfoContentsProps) => {
           버튼으로 항목을 삭제하거나 추가할 수 있어요.
         </li>
       </ul>
-      <FileActions markdown={markdown} />
+      <Card className='flex flex-col gap-3 p-4 bg-muted/30'>
+        <h2 className='text-base font-semibold'>README 저장</h2>
+        <FileActions markdown={markdown} />
+      </Card>
     </Card>
   )
 }
