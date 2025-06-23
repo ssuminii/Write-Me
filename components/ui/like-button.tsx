@@ -5,14 +5,15 @@ interface LikeButtonProps {
   count: number
   liked?: boolean
   onClick?: () => void
+  className?: string
 }
 
-export const LikeButton = ({ count, liked, onClick }: LikeButtonProps) => {
+export const LikeButton = ({ count, liked, onClick, className }: LikeButtonProps) => {
   return (
     <button
       type='button'
       onClick={onClick}
-      className='flex items-center gap-1 text-sm text-gray-600 cursor-pointer transition-colors'
+      className={`flex items-center gap-1 text-sm text-gray-600 cursor-pointer transition-colors ${className}`}
     >
       <Heart
         size={18}
