@@ -1,18 +1,10 @@
-'use client'
-
 import { Comments } from './_components'
 import { LikeButton, TagList } from '@/components/ui'
-import MDEditor from '@uiw/react-md-editor'
 import Link from 'next/link'
 import { mockReadme } from '@/mocks/gallery'
-import { useTheme } from 'next-themes'
+import Preview from '@/components/preview'
 
 const Page = () => {
-  const { theme, systemTheme } = useTheme()
-
-  const currentTheme = theme === 'system' ? systemTheme : theme
-  const mode = currentTheme === 'dark' ? 'dark' : 'light'
-
   return (
     <main className='flex p-10 gap-20'>
       <article className='flex flex-col gap-6 flex-3'>
@@ -21,7 +13,7 @@ const Page = () => {
           <p className='text-sm text-gray-600'>@{mockReadme.author}</p>
           <div className='flex gap-2'>
             <Link
-              href={`/gallery/${mockReadme.id}}/fork`}
+              href={`/gallery/${mockReadme.id}/fork`}
               className='border py-1 text-center w-[68px] bg-point hover:bg-point-hover rounded-sm text-sm'
             >
               Fork
@@ -34,9 +26,7 @@ const Page = () => {
           </div>
           <TagList tags={mockReadme.hashtags} />
         </header>
-        <section data-color-mode={mode}>
-          <MDEditor.Markdown source={mockReadme.source} className='border p-8' />
-        </section>
+        <Preview source={mockReadme.source} />
       </article>
       <aside className='flex-1'>
         <Comments comments={mockReadme.comments} />
