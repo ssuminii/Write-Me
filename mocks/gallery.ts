@@ -1,4 +1,4 @@
-import type { ReadmeCardProps } from '@/types'
+import type { ReadmeCardProps, ReadmeData } from '@/types'
 
 export const mockReadmeCards: ReadmeCardProps[] = [
   { id: 1, title: '깔끔한 사이드 프로젝트 소개', author: 'ssuminii', thumbnailUrl: '/image.png', likes: 23, liked: true },
@@ -22,3 +22,44 @@ export const mockReadmeCards: ReadmeCardProps[] = [
   { id: 19, title: '스터디 기록용 README', author: 'studycat', thumbnailUrl: '/image.png', likes: 29, liked: true },
   { id: 20, title: '미니멀한 템플릿', author: 'minimalist', thumbnailUrl: '/image.png', likes: 11, liked: false },
 ]
+
+export const mockReadme: ReadmeData = {
+  id: 1, 
+  title: 'Simple Profile README', 
+  author: 'ssuminii', 
+  source: `
+# Hello, I'm ssuminii 🚀
+
+> 프론트엔드 개발자입니다.  
+> 주로 Next.js와 TypeScript를 활용하여 개발하고 있습니다.
+
+## Skills
+- JavaScript / TypeScript
+- React / Next.js
+- Tailwind CSS
+- Zustand
+- Supabase
+
+## Projects
+- Catch-Letter (사용자 중심 경험을 강조한 편지 서비스)
+- Write Me (개발자를 위한 README 생성 도구)
+
+`, 
+  hashtags: ['Project', 'Simple', 'Next.js'], 
+  likes: 32, 
+  liked: true, 
+  comments: [
+    {
+      id: 1,
+      username: 'juniorDev',
+      content: '정말 도움이 많이 되었습니다!',
+      createdAt: '2025-06-20',
+    },
+    {
+      id: 2,
+      username: 'codeMaster',
+      content: 'Markdown 활용이 좋네요!',
+      createdAt: '2025-06-21',
+    },
+  ],
+}

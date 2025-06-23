@@ -5,9 +5,10 @@ import { Tag } from './'
 
 interface TagListProps {
   tags: string[]
+  className?: string
 }
 
-export const TagList = ({ tags }: TagListProps) => {
+export const TagList = ({ tags, className }: TagListProps) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const handleToggle = (tag: string) => {
@@ -22,6 +23,7 @@ export const TagList = ({ tags }: TagListProps) => {
           label={tag}
           selected={selectedTags.includes(tag)}
           onClick={() => handleToggle(tag)}
+          className={className}
         />
       ))}
     </div>
