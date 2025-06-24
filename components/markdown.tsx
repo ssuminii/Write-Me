@@ -7,9 +7,10 @@ import { useMounted } from '@/hooks'
 interface MarkdownProps {
   className?: string
   value: string
+  onChange?: (value: string) => void
 }
 
-const Markdown = ({ className, value }: MarkdownProps) => {
+const Markdown = ({ className, value, onChange }: MarkdownProps) => {
   const { theme, systemTheme } = useTheme()
   const mounted = useMounted()
 
@@ -23,6 +24,7 @@ const Markdown = ({ className, value }: MarkdownProps) => {
       <MDEditor
         value={value}
         height='100%'
+        onChange={(value) => onChange?.(value ?? '')}
         previewOptions={{
           components: {
             img: ({ src = '', alt }) => (src === '' ? null : <img src={src} alt={alt} />),
