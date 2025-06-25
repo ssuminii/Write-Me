@@ -4,6 +4,7 @@ import Header from '@/components/layout/header'
 import { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from 'sonner'
+import { AppInitializer } from '@/components/system'
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
+          <AppInitializer />
           <Header />
           <main className='flex-1 overflow-auto'>{children}</main>
           <Toaster richColors position='top-center' />
