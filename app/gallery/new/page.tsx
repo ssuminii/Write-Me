@@ -1,7 +1,19 @@
 import Markdown from '@/components/markdown'
 import { Button, UnderlineInput } from '@/components/ui'
+import { createClient } from '@/lib/supabase-server'
+import { redirect } from 'next/navigation'
 
-const Page = () => {
+const Page = async () => {
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/login?error=unauthorized')
+  }
+
   return (
     <div className='flex flex-col gap-10 h-screen pt-10 relative'>
       <div className='flex flex-col gap-4 ml-10'>
