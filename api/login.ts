@@ -1,4 +1,4 @@
-  import { supabase } from '@/lib/supabaseClient'
+  import { supabase } from '@/lib/supabase-client'
   
   export const handleOAuthLogin = async (provider: 'google' | 'github') => {
     try {
@@ -12,3 +12,12 @@
       console.error(`${provider} 로그인 실패:`, error)
     }
   }
+
+export const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser()
+  if (error) {
+    console.error('유저 정보를 가져오는 데 실패했습니다:', error)
+    return null
+  }
+  return data.user
+}
