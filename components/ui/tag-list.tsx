@@ -6,9 +6,11 @@ import { Tag } from './'
 interface TagListProps {
   tags: string[]
   className?: string
+  onRemove?: (label: string) => void
+  selectable?: boolean
 }
 
-export const TagList = ({ tags, className }: TagListProps) => {
+export const TagList = ({ tags, className, onRemove, selectable }: TagListProps) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   const handleToggle = (tag: string) => {
@@ -21,8 +23,11 @@ export const TagList = ({ tags, className }: TagListProps) => {
         <Tag
           key={tag}
           label={tag}
-          selected={selectedTags.includes(tag)}
-          onClick={() => handleToggle(tag)}
+          selected={selectable ? selectedTags.includes(tag) : false}
+          onClick={() => {
+            if (selectable) handleToggle(tag)
+          }}
+          onRemove={selectable ? undefined : () => onRemove?.(tag)}
           className={className}
         />
       ))}
