@@ -9,7 +9,7 @@ export default function Gallery() {
       <Title />
       <div className='flex flex-col gap-4'>
         <SearchBar />
-        <TagList tags={TAGS} />
+        <TagList tags={TAGS} selectable />
       </div>
       <Contents />
     </div>
