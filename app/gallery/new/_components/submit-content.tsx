@@ -126,7 +126,7 @@ const SubmitContent = ({ title, tags, source }: SubmitContentProps) => {
         </div>
 
         <h2 className='font-semibold text-2xl mb-2'>{title}</h2>
-        <TagList tags={tags} />
+        <TagList tags={tags} isDefault />
       </div>
       <DialogFooter>
         <DialogClose asChild>
