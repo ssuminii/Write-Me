@@ -24,7 +24,7 @@ const Page = () => {
               className='border py-1 w-[68px] flex justify-center rounded-sm'
             />
           </div>
-          <TagList tags={mockReadme.hashtags} />
+          <TagList tags={mockReadme.hashtags} isDefault />
         </header>
         <Preview source={mockReadme.source} />
       </article>

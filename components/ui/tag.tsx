@@ -7,9 +7,17 @@ interface TagProps {
   onClick?: () => void
   onRemove?: () => void
   className?: string
+  isDefault?: boolean
 }
 
-export const Tag = ({ label, selected = false, onClick, onRemove, className }: TagProps) => {
+export const Tag = ({
+  label,
+  selected = false,
+  onClick,
+  onRemove,
+  className,
+  isDefault,
+}: TagProps) => {
   const baseClass =
     'flex gap-2 items-center justify-between w-fit text-sm px-4 py-1 rounded-full border transition-colors'
 
@@ -18,10 +26,11 @@ export const Tag = ({ label, selected = false, onClick, onRemove, className }: T
       type='button'
       onClick={onClick}
       className={clsx(
-        selected
-          ? `${baseClass} bg-primary text-white cursor-pointer`
-          : `${baseClass} cursor-pointer`,
-        !selected && baseClass,
+        baseClass,
+        {
+          'bg-primary text-white': selected,
+          'cursor-pointer': !isDefault && !onRemove,
+        },
         className
       )}
     >
