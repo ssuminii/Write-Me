@@ -21,9 +21,11 @@ export interface CommentData {
 }
 
 export interface CreateReadme {
+  id: string
   title: string
   author: string
   thumbnail: string
   hashtags: string[]
   source: string
+  created_at: string
 }

@@ -2,10 +2,14 @@
 
 import { ReadmeCard } from './'
 import { AddButton } from '@/components/ui'
-import { mockReadmeCards } from '@/mocks/gallery'
+import type { CreateReadme } from '@/types'
 import { useRouter } from 'next/navigation'
 
-const Contents = () => {
+interface ContentsProps {
+  readmes: CreateReadme[]
+}
+
+const Contents = ({ readmes }: ContentsProps) => {
   const router = useRouter()
 
   return (
@@ -19,8 +23,8 @@ const Contents = () => {
       />
 
       <div className='flex flex-wrap justify-center gap-6 mt-10'>
-        {mockReadmeCards.map((mockReadmeCard) => (
-          <ReadmeCard key={mockReadmeCard.id} {...mockReadmeCard} />
+        {readmes.map((readme) => (
+          <ReadmeCard key={readme.id} {...readme} />
         ))}
       </div>
     </div>
