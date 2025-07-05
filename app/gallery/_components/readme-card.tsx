@@ -14,7 +14,9 @@ const ReadmeCard = ({ id, title, author, thumbnail, hashtags }: CreateReadme) =>
       onClick={() => router.push(`/gallery/${id}`)}
     >
       <h1 className='text-lg font-semibold'>{title}</h1>
-      <span className='text-sm text-gray-600'>{author}</span>
+      <span className='text-sm text-gray-600'>
+        {author.includes('@') ? author.split('@')[0] : author}
+      </span>
       <Image
         src={thumbnail ?? ''}
         alt={`${title} thumnail`}
