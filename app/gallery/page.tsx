@@ -4,8 +4,9 @@ import { getReadmes } from '@/lib/get-readme'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 
-export default async function Gallery() {
-  const readmes = await getReadmes()
+export default async function Gallery({ searchParams }: { searchParams: { q?: string } }) {
+  const keyword = searchParams.q || ''
+  const readmes = await getReadmes(keyword)
 
   return (
     <div className='flex flex-col items-center gap-8 p-10'>
