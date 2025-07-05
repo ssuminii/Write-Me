@@ -3,9 +3,9 @@
 import { Button, Card, LikeButton, TagList } from '@/components/ui'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import type { ReadmeCardProps } from '@/types'
+import type { CreateReadme } from '@/types'
 
-const ReadmeCard = ({ id, title, author, thumbnailUrl, liked, likes }: ReadmeCardProps) => {
+const ReadmeCard = ({ id, title, author, thumbnail, hashtags }: CreateReadme) => {
   const router = useRouter()
 
   return (
@@ -15,21 +15,29 @@ const ReadmeCard = ({ id, title, author, thumbnailUrl, liked, likes }: ReadmeCar
     >
       <h1 className='text-lg font-semibold'>{title}</h1>
       <span className='text-sm text-gray-600'>{author}</span>
-      <Image src={thumbnailUrl ?? ''} alt={`${title} thumnail`} width={300} height={120} />
+      <Image
+        src={thumbnail ?? ''}
+        alt={`${title} thumnail`}
+        width={300}
+        height={160}
+        className='w-[300px] h-[160px] object-cover'
+      />
       <div className='flex justify-between items-center'>
         <Button
           className='bg-point rounded-lg w-fit text-black font-semibold py-0 hover:bg-point-hover'
           onClick={(e) => {
             e.stopPropagation()
-            router.push('/gallery/1/fork')
+            router.push(`/gallery/${id}/fork`)
           }}
         >
           Fork
         </Button>
-        <LikeButton count={likes} liked={liked} onClick={() => console.log('❤️')} />
+        <LikeButton count={30} liked={true} onClick={() => console.log('❤️')} />
       </div>
       <div className='flex-grow border-t border-gray-300 mt-2 mb-2' />
-      <TagList tags={['frontend', 'simple']} isDefault />
+      <div>
+        <TagList tags={hashtags} isDefault />
+      </div>
     </Card>
   )
 }
