@@ -1,7 +1,9 @@
-import { supabase } from './supabase-client';
+import { createClient } from '@/lib/supabase-server';
 import type { CreateReadme } from '@/types';
 
 export async function getReadmes(keyword?: string): Promise<CreateReadme[]> {
+  const supabase = await createClient()
+
   let query = supabase
     .from('readmes')
     .select('*')

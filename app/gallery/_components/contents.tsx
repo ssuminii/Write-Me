@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 interface ContentsProps {
   readmes: CreateReadme[]
 }
-
+// tanstack query placeholderData
 const Contents = ({ readmes }: ContentsProps) => {
   const router = useRouter()
 
