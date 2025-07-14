@@ -4,8 +4,9 @@ import { getReadmes } from '@/lib/get-readme'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 
-export default async function Gallery({ searchParams }: { searchParams: { q?: string } }) {
-  const keyword = searchParams.q || ''
+export default async function Gallery({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q } = await searchParams
+  const keyword = q || ''
   const readmes = await getReadmes(keyword)
 
   return (
