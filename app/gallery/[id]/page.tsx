@@ -1,5 +1,6 @@
 import { Comments } from './_components'
-import { LikeButton, TagList } from '@/components/ui'
+import { TagList } from '@/components/ui'
+import { LikeButton } from '@/components/like'
 import Link from 'next/link'
 import { mockReadme } from '@/mocks/gallery'
 import Preview from '@/components/preview'

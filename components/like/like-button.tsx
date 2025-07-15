@@ -4,7 +4,7 @@ import clsx from 'clsx'
 interface LikeButtonProps {
   count: number
   liked?: boolean
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   className?: string
 }
 
