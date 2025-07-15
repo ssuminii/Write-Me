@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase-client'
-import { createReadme } from '@/lib/create-readme'
+import { supabase } from '@/lib/supabase/supabase-client'
+import { createReadme } from '@/lib/readme/create-readme'
 
 export async function POST(req: NextRequest) {
   try {

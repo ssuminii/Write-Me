@@ -1,4 +1,4 @@
-import { supabase } from './supabase-client';
+import { supabase } from '../supabase/supabase-client';
 import type { CreateReadme } from '@/types';
 
 export async function createReadme(params: CreateReadme) {

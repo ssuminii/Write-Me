@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase-client'
+import { supabase } from '@/lib/supabase/supabase-client'
 
 export const handleOAuthLogin = async (provider: 'google' | 'github') => {
   try {

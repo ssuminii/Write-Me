@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Button } from '@/components/ui'
-import { handleOAuthLogin } from '@/lib/auth'
+import { handleOAuthLogin } from '@/lib/auth/auth'
 
 const SocialLogin = () => {
   return (

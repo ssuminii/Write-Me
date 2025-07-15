@@ -1,6 +1,6 @@
 import { TagList } from '@/components/ui'
 import { Contents, SearchBar, Title } from './_components'
-import { getReadmes } from '@/lib/get-readme'
+import { getReadmes } from '@/lib/readme/get-readme'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 

@@ -2,7 +2,7 @@
 
 import MainNav from '@/components/layout/main-nav'
 import ModeToggle from '@/components/mode-toggle'
-import { supabase } from '@/lib/supabase-client'
+import { supabase } from '@/lib/supabase/supabase-client'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
