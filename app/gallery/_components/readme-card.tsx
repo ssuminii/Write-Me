@@ -1,6 +1,7 @@
 'use client'
 
-import { Button, Card, LikeButton, TagList } from '@/components/ui'
+import { Button, Card, TagList } from '@/components/ui'
+import { LikeButtonContainer } from '@/components/like'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type { CreateReadme } from '@/types'
@@ -34,7 +35,7 @@ const ReadmeCard = ({ id, title, author, thumbnail, hashtags }: CreateReadme) =>
         >
           Fork
         </Button>
-        <LikeButton count={30} liked={true} onClick={() => console.log('❤️')} />
+        <LikeButtonContainer readmeId={id} />
       </div>
       <div className='flex-grow border-t border-gray-300 mt-2 mb-2' />
       <div>
