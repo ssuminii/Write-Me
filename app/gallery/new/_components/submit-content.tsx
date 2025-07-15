@@ -10,7 +10,7 @@ import {
 } from '@/components/ui'
 import { ImagePlus } from 'lucide-react'
 import { useRef, useState } from 'react'
-import { supabase } from '@/lib/supabase-client'
+import { supabase } from '@/lib/supabase/supabase-client'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 

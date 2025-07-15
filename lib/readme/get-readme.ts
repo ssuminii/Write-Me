@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase-server';
+import { createClient } from '@/lib/supabase/supabase-server';
 import type { CreateReadme } from '@/types';
 
 export async function getReadmes(keyword?: string): Promise<CreateReadme[]> {
