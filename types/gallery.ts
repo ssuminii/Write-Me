@@ -15,9 +15,10 @@ export interface ReadmeData extends ReadmeCardProps {
 
 export interface CommentData {
   id: number
-  username: string
+  user_id?: string
+  user_email: string
   content: string
-  createdAt: string
+  created_at: string
 }
 
 export interface CreateReadme {
