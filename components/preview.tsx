@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import MDEditor from '@uiw/react-md-editor'
 
 interface PreviewProps {
-  source: string
+  source: string | undefined
 }
 
 const Preview = ({ source }: PreviewProps) => {
