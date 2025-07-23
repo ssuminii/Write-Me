@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Tag } from './'
 
 interface TagListProps {
-  tags: string[]
+  tags: string[] | undefined
   className?: string
   onRemove?: (label: string) => void
   selectable?: boolean
@@ -24,7 +24,7 @@ export const TagList = ({ tags, className, onRemove, selectable, isDefault }: Ta
 
   return (
     <div className='flex flex-wrap gap-2'>
-      {tags.map((tag) => (
+      {tags?.map((tag) => (
         <Tag
           key={tag}
           label={tag}
