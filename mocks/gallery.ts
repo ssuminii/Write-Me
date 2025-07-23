@@ -51,15 +51,15 @@ export const mockReadme: ReadmeData = {
   comments: [
     {
       id: 1,
-      username: 'juniorDev',
+      user_id: 'juniorDev',
       content: '정말 도움이 많이 되었습니다!',
-      createdAt: '2025-06-20',
+      created_at: '2025-06-20',
     },
     {
       id: 2,
-      username: 'codeMaster',
+      user_id: 'codeMaster',
       content: 'Markdown 활용이 좋네요!',
-      createdAt: '2025-06-21',
+      created_at: '2025-06-21',
     },
   ],
 }
