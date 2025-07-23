@@ -34,7 +34,7 @@ export default function Header() {
       <MainNav />
       <nav className='flex items-center gap-4'>
         {isLogin ? (
-          <div onClick={handleLogout} className=' hover:text-primary-hover'>
+          <div onClick={handleLogout} className=' hover:text-primary-hover cursor-pointer'>
             Logout
           </div>
         ) : (
