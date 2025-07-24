@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from 'sonner'
 import { AppInitializer } from '@/components/system'
+import { QueryProvider } from '@/lib/query-provider'
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -30,17 +31,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' className={`${pretendard.variable}`}>
       <body className={`${pretendard.className} w-full h-screen flex flex-col`}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AppInitializer />
-          <Header />
-          <main className='flex-1 overflow-auto'>{children}</main>
-          <Toaster richColors position='top-center' />
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AppInitializer />
+            <Header />
+            <main className='flex-1 overflow-auto'>{children}</main>
+            <Toaster richColors position='top-center' />
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   )
