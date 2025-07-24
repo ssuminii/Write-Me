@@ -13,6 +13,7 @@ import { useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase/supabase-client'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { createReadme } from '@/lib/readme/create-readme'
 
 interface SubmitContentProps {
   title: string
@@ -55,29 +56,23 @@ const SubmitContent = ({ title, tags, source }: SubmitContentProps) => {
     }
 
     const {
-      data: { session },
-    } = await supabase.auth.getSession()
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser()
 
-    if (!session?.access_token) {
-      toast.error('로그인이 필요합니다.')
+    if (userError || !user) {
+      toast.error('로그인이 필요한 기능입니다.')
+      route.push('/login')
       return
     }
 
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('title', title)
-    formData.append('tags', JSON.stringify(tags))
-    formData.append('source', source)
-
-    const res = await fetch('/api/create-readme', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-      },
+    const result = await createReadme({
+      file,
+      title,
+      hashtags: tags,
+      source,
+      author: user.email ?? '',
     })
-
-    const result = await res.json()
 
     if (result.success) {
       toast.success('README가 성공적으로 업로드 되었습니다!')
