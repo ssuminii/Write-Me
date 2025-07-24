@@ -13,7 +13,7 @@ import { useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase/supabase-client'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import { createReadme } from '@/lib/readme/create-readme'
+import { createReadme } from '@/lib/readme'
 
 interface SubmitContentProps {
   title: string
