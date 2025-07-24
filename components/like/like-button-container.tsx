@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { likeReadme, unlikeReadme, getLikeStatus } from '@/lib/supabase/likes'
 import { LikeButton } from './like-button'
 import { toast } from 'sonner'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 interface LikeButtonContainerProps {
   readmeId: string
@@ -12,12 +13,13 @@ interface LikeButtonContainerProps {
 }
 
 export const LikeButtonContainer = ({ readmeId, className }: LikeButtonContainerProps) => {
+  const user = useAuthStore((state) => state.user)
   const [liked, setLiked] = useState(false)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
     const fetchStatus = async () => {
-      const { liked, count } = await getLikeStatus(readmeId)
+      const { liked, count } = await getLikeStatus(readmeId, user)
       setLiked(liked)
       setCount(count)
     }
@@ -29,10 +31,10 @@ export const LikeButtonContainer = ({ readmeId, className }: LikeButtonContainer
 
     try {
       if (liked) {
-        await unlikeReadme(readmeId)
+        await unlikeReadme(readmeId, user)
         setCount((prev) => prev - 1)
       } else {
-        await likeReadme(readmeId)
+        await likeReadme(readmeId, user)
         setCount((prev) => prev + 1)
       }
       setLiked(!liked)
