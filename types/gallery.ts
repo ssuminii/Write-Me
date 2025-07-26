@@ -30,3 +30,11 @@ export interface CreateReadme {
   source: string
   created_at: string
 }
+
+export interface CreateReadmeInput {
+  file: File
+  title: string
+  hashtags: string[]
+  source: string
+  author: string
+}
