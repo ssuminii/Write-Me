@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { likeReadme, unlikeReadme, getLikeStatus } from '@/lib/supabase/likes'
 import { LikeButton } from './like-button'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/useAuthStore'
+import { useLikeMutation, useLikeStatus, useUnlikeMutation } from '@/hooks/queries'
 
 interface LikeButtonContainerProps {
   readmeId: string
@@ -14,35 +13,32 @@ interface LikeButtonContainerProps {
 
 export const LikeButtonContainer = ({ readmeId, className }: LikeButtonContainerProps) => {
   const user = useAuthStore((state) => state.user)
-  const [liked, setLiked] = useState(false)
-  const [count, setCount] = useState(0)
 
-  useEffect(() => {
-    const fetchStatus = async () => {
-      const { liked, count } = await getLikeStatus(readmeId, user)
-      setLiked(liked)
-      setCount(count)
-    }
-    fetchStatus()
-  }, [readmeId])
+  const { data } = useLikeStatus(readmeId, user)
+  const likeMutation = useLikeMutation(readmeId, user)
+  const unlikeMutation = useUnlikeMutation(readmeId, user)
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
 
-    try {
-      if (liked) {
-        await unlikeReadme(readmeId, user)
-        setCount((prev) => prev - 1)
-      } else {
-        await likeReadme(readmeId, user)
-        setCount((prev) => prev + 1)
-      }
-      setLiked(!liked)
-    } catch (error) {
-      console.error(error)
+    if (!user) {
       toast.error('로그인이 필요한 기능입니다.')
+      return
+    }
+
+    if (data?.liked) {
+      unlikeMutation.mutate()
+    } else {
+      likeMutation.mutate()
     }
   }
 
-  return <LikeButton liked={liked} count={count} onClick={handleClick} className={className} />
+  return (
+    <LikeButton
+      liked={data?.liked}
+      count={data?.count ?? 0}
+      onClick={handleClick}
+      className={className}
+    />
+  )
 }
