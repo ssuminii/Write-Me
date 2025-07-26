@@ -6,6 +6,6 @@ export function useReadmesQuery(keyword: string) {
     queryKey: ['readmes', keyword],
     queryFn: () => getReadmes(keyword),
     staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
+    placeholderData: (previousData) => previousData,
   })
 }
