@@ -1,2 +1,2 @@
-export * from './useReadmesQuery'
+export * from './readme'
 export * from './likes'

@@ -13,7 +13,8 @@ import { useRef, useState } from 'react'
 import { supabase } from '@/lib/supabase/supabase-client'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import { createReadme } from '@/lib/readme'
+import { useCreateReadmeMutation } from '@/hooks/queries'
+import type { CreateReadmeInput } from '@/types'
 
 interface SubmitContentProps {
   title: string
@@ -25,7 +26,8 @@ const SubmitContent = ({ title, tags, source }: SubmitContentProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-  const route = useRouter()
+  const router = useRouter()
+  const { mutate } = useCreateReadmeMutation()
 
   const handleImageUpload = () => {
     fileInputRef.current?.click()
@@ -62,24 +64,28 @@ const SubmitContent = ({ title, tags, source }: SubmitContentProps) => {
 
     if (userError || !user) {
       toast.error('로그인이 필요한 기능입니다.')
-      route.push('/login')
+      router.push('/login')
       return
     }
 
-    const result = await createReadme({
+    const form: CreateReadmeInput = {
       file,
       title,
       hashtags: tags,
       source,
       author: user.email ?? '',
-    })
-
-    if (result.success) {
-      toast.success('README가 성공적으로 업로드 되었습니다!')
-      route.push('/gallery')
-    } else {
-      toast.error(`등록 실패: ${result.error}`)
     }
+
+    mutate(form, {
+      onSuccess: () => {
+        toast.success('README가 성공적으로 업로드 되었습니다!')
+        router.push('/gallery')
+      },
+      onError: (err) => {
+        console.error(err)
+        toast.error('등록 실패: 문제가 발생했습니다.')
+      },
+    })
   }
 
   return (

@@ -1,21 +1,26 @@
+'use client'
+
 import Link from 'next/link'
 import Preview from '@/components/preview'
 import { TagList } from '@/components/ui'
-import { Comments } from './_components'
+// import { Comments } from './_components'
 import { LikeButtonContainer } from '@/components/like'
-import { getReadmeById, getCommentsByReadmeId } from '@/lib/readme'
+// import { getCommentsByReadmeId } from '@/lib/readme'
+import { useReadmeByIdQuery } from '@/hooks/queries'
+import { useParams } from 'next/navigation'
 
-const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params
-  const readme = await getReadmeById(id)
-  const comments = await getCommentsByReadmeId(id)
+const Page = () => {
+  const params = useParams()
+  const id = params?.id as string
+  const { data } = useReadmeByIdQuery(id)
+  // const comments = getCommentsByReadmeId(id)
 
   return (
     <main className='flex p-10 gap-20'>
       <article className='flex flex-col gap-6 flex-3'>
         <header className='flex flex-col gap-2'>
-          <h1 className='text-2xl font-semibold'>{readme?.title}</h1>
-          <p className='text-sm text-gray-600'>@{readme?.author.split('@')[0]}</p>
+          <h1 className='text-2xl font-semibold'>{data?.title}</h1>
+          <p className='text-sm text-gray-600'>@{data?.author.split('@')[0]}</p>
           <div className='flex gap-2'>
             <Link
               href={`/gallery/${id}/fork`}
@@ -25,13 +30,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </Link>
             <LikeButtonContainer readmeId={id} />
           </div>
-          <TagList tags={readme?.hashtags} isDefault />
+          <TagList tags={data?.hashtags} isDefault />
         </header>
-        <Preview source={readme?.source} />
+        <Preview source={data?.source} />
       </article>
-      <aside className='flex-1'>
-        <Comments comments={comments} readmeId={id} />
-      </aside>
+      <aside className='flex-1'>{/* <Comments comments={comments} readmeId={id} /> */}</aside>
     </main>
   )
 }

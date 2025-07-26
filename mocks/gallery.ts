@@ -49,17 +49,5 @@ export const mockReadme: ReadmeData = {
   likes: 32, 
   liked: true, 
   comments: [
-    {
-      id: 1,
-      user_id: 'juniorDev',
-      content: '정말 도움이 많이 되었습니다!',
-      created_at: '2025-06-20',
-    },
-    {
-      id: 2,
-      user_id: 'codeMaster',
-      content: 'Markdown 활용이 좋네요!',
-      created_at: '2025-06-21',
-    },
   ],
 }
