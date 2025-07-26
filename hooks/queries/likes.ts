@@ -7,7 +7,7 @@ export function useLikeStatus(readmeId: string, user: User | null) {
   return useQuery ({
     queryKey: ['likeStatus', readmeId, user?.id],
     queryFn: () => getLikeStatus(readmeId, user),
-    enabled: !!readmeId && !!user,
+    enabled: !!readmeId,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   })
