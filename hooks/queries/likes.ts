@@ -5,6 +5,7 @@ import { getLikeStatus, likeReadme, unlikeReadme } from '@/lib/supabase/likes';
 // 좋아요 상태 가져오기
 export function useLikeStatus(readmeId: string, user: User | null) {
   return useQuery ({
+
     queryKey: ['likeStatus', readmeId, user?.id],
     queryFn: () => getLikeStatus(readmeId, user),
     enabled: !!readmeId,

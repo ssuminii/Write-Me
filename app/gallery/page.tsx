@@ -1,6 +1,5 @@
 import { TagList } from '@/components/ui'
 import { Contents, SearchBar, Title } from './_components'
-import { Suspense } from 'react'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 
@@ -14,9 +13,7 @@ export default async function Gallery({ searchParams }: { searchParams: Promise<
         <SearchBar />
         <TagList tags={TAGS} selectable />
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Contents keyword={keyword} />
-      </Suspense>
+      <Contents keyword={keyword} />
     </div>
   )
 }
