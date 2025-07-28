@@ -2,9 +2,7 @@ import { Comments } from './_components'
 import { DetailContent } from './_components'
 import { Suspense } from 'react'
 
-type Params = { id: string }
-
-const Page = async ({ params }: { params: Params }) => {
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
 
   return (
