@@ -1,19 +1,22 @@
+'use client'
+
+import { useCommentsQuery } from '@/hooks/queries'
 import CommentInput from './comment-Input'
-import type { CommentData } from '@/types'
 
 interface CommentsProps {
   readmeId: string
-  comments: CommentData[]
   className?: string
 }
 
-const Comments = ({ readmeId, comments, className }: CommentsProps) => {
+const Comments = ({ readmeId, className }: CommentsProps) => {
+  const { data: comments } = useCommentsQuery(readmeId)
+
   return (
     <div className={`flex flex-col gap-4 ${className}`}>
-      <h2 className='text-lg font-semibold'>댓글 {comments.length}개</h2>
+      <h2 className='text-lg font-semibold'>댓글 {comments?.length}개</h2>
       <CommentInput readmeId={readmeId} />
       <ul className='flex flex-col gap-4 mt-4'>
-        {comments.map((comment) => (
+        {comments?.map((comment) => (
           <li key={comment.id} className='border-b pb-4 last:border-b-0'>
             <div className='flex justify-between items-center'>
               <span className='text-sm font-medium text-primary'>
