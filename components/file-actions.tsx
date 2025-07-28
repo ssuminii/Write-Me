@@ -33,7 +33,7 @@ const FileActions = ({ markdown }: FileActionsProps) => {
     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
       <div className='flex items-center justify-center gap-3 rounded-lg border p-3 shadow-sm'>
         <span className='text-sm text-center'>
-          마크다운 파일 <br /> 다운로드
+          마크다운 file <br /> 다운로드
         </span>
         <IconButton icon={Download} text='Download' onClick={handleDownload} />
       </div>
