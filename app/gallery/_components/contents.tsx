@@ -3,15 +3,17 @@
 import { ReadmeCard } from './'
 import { AddButton } from '@/components/ui'
 import { useReadmesQuery } from '@/hooks/queries'
+import type { CreateReadme } from '@/types'
 import { useRouter } from 'next/navigation'
 
 interface ContentsProps {
   keyword: string
+  readmes: CreateReadme[]
 }
 
-const Contents = ({ keyword }: ContentsProps) => {
+const Contents = ({ keyword, readmes }: ContentsProps) => {
   const router = useRouter()
-  const { data } = useReadmesQuery(keyword)
+  const { data } = useReadmesQuery(keyword, readmes)
 
   return (
     <div className='relative flex flex-col items-center w-full'>
