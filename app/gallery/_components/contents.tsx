@@ -2,15 +2,16 @@
 
 import { ReadmeCard } from './'
 import { AddButton } from '@/components/ui'
-import type { CreateReadme } from '@/types'
+import { useReadmesQuery } from '@/hooks/queries'
 import { useRouter } from 'next/navigation'
 
 interface ContentsProps {
-  readmes: CreateReadme[]
+  keyword: string
 }
-// tanstack query placeholderData
-const Contents = ({ readmes }: ContentsProps) => {
+
+const Contents = ({ keyword }: ContentsProps) => {
   const router = useRouter()
+  const { data } = useReadmesQuery(keyword)
 
   return (
     <div className='relative flex flex-col items-center w-full'>
@@ -23,8 +24,8 @@ const Contents = ({ readmes }: ContentsProps) => {
       />
 
       <div className='flex flex-wrap justify-center gap-6 mt-10'>
-        {readmes.map((readme) => (
-          <ReadmeCard key={readme.id} {...readme} />
+        {data?.map((data) => (
+          <ReadmeCard key={data.id} {...data} />
         ))}
       </div>
     </div>
