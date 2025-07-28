@@ -1,16 +1,11 @@
-'use client'
-
 import { TagList } from '@/components/ui'
 import { Contents, SearchBar, Title } from './_components'
-import { useReadmesQuery } from '@/hooks/queries'
-import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 
-export default function Gallery() {
-  const searchParams = useSearchParams()
-  const keyword = searchParams.get('q') || ''
-  const { data } = useReadmesQuery(keyword)
+export default async function Gallery({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q: keyword = '' } = await searchParams
 
   return (
     <div className='flex flex-col items-center gap-8 p-10'>
@@ -19,7 +14,9 @@ export default function Gallery() {
         <SearchBar />
         <TagList tags={TAGS} selectable />
       </div>
-      <Contents readmes={data ?? []} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Contents keyword={keyword} />
+      </Suspense>
     </div>
   )
 }
