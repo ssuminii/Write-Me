@@ -1,10 +1,12 @@
 import { TagList } from '@/components/ui'
 import { Contents, SearchBar, Title } from './_components'
+import { getReadmes } from '@/lib/readme'
 
 const TAGS = ['Frontend', 'Backend', 'Stack', 'Profile', 'Project', 'Simple']
 
 export default async function Gallery({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const { q: keyword = '' } = await searchParams
+  const readmes = await getReadmes(keyword)
 
   return (
     <div className='flex flex-col items-center gap-8 p-10'>
@@ -13,7 +15,7 @@ export default async function Gallery({ searchParams }: { searchParams: Promise<
         <SearchBar />
         <TagList tags={TAGS} selectable />
       </div>
-      <Contents keyword={keyword} />
+      <Contents keyword={keyword} readmes={readmes} />
     </div>
   )
 }
