@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <div className='flex flex-col gap-6 py-6 h-full'>
       <div className='flex items-center justify-between mx-10 '>
-        <Info user={readme?.author ?? ''} />
+        <Info user={readme?.author.split('@')[0] ?? ''} />
         <FileActions markdown={markdown} />
       </div>
       <Markdown value={markdown} onChange={(value) => setMarkdown(value)} className='flex-1 px-2' />
