@@ -5,6 +5,8 @@ import { AddButton } from '@/components/ui'
 import { useReadmesQuery } from '@/hooks/queries'
 import type { CreateReadme } from '@/types'
 import { useRouter } from 'next/navigation'
+import { useBatchLikeStatus } from '@/hooks/queries'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 interface ContentsProps {
   keyword: string
@@ -14,6 +16,10 @@ interface ContentsProps {
 const Contents = ({ keyword, readmes }: ContentsProps) => {
   const router = useRouter()
   const { data } = useReadmesQuery(keyword, readmes)
+  const user = useAuthStore((state) => state.user)
+
+  const readmeIds = data?.map((r) => r.id) ?? []
+  const { data: likeStatuses } = useBatchLikeStatus(readmeIds, user)
 
   return (
     <div className='relative flex flex-col items-center w-full'>
@@ -26,9 +32,17 @@ const Contents = ({ keyword, readmes }: ContentsProps) => {
       />
 
       <div className='flex flex-wrap justify-center gap-6 mt-10'>
-        {data?.map((data) => (
-          <ReadmeCard key={data.id} {...data} />
-        ))}
+        {data?.map((data) => {
+          const status = likeStatuses?.find((s) => s.readmeId === data.id)
+          return (
+            <ReadmeCard
+              key={data.id}
+              {...data}
+              liked={status?.liked ?? false}
+              count={status?.count ?? 0}
+            />
+          )
+        })}
       </div>
     </div>
   )
