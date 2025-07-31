@@ -6,7 +6,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type { CreateReadme } from '@/types'
 
-const ReadmeCard = ({ id, title, author, thumbnail, hashtags }: CreateReadme) => {
+interface ReadmeCardProps extends CreateReadme {
+  liked: boolean
+  count: number
+}
+
+const ReadmeCard = ({ id, title, author, thumbnail, hashtags, liked, count }: ReadmeCardProps) => {
   const router = useRouter()
 
   return (
@@ -35,7 +40,7 @@ const ReadmeCard = ({ id, title, author, thumbnail, hashtags }: CreateReadme) =>
         >
           Fork
         </Button>
-        <LikeButtonContainer readmeId={id} />
+        <LikeButtonContainer readmeId={id} liked={liked} count={count} />
       </div>
       <div className='flex-grow border-t border-gray-300 mt-2 mb-2' />
       <div>

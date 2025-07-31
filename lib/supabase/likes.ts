@@ -1,5 +1,6 @@
-import type { User } from '@supabase/supabase-js'
 import { supabase } from './supabase-client'
+import type { User } from '@supabase/supabase-js'
+import type { LikeStatus } from '@/types'
 
 // 좋아요 추가
 export async function likeReadme(readmeId: string, user: User | null) {
@@ -44,4 +45,28 @@ export async function getLikeStatus(readmeId: string, user: User | null) {
     liked: !!myLike,
     count: count ?? 0,
   }
+}
+
+// 좋아요 일괄 조회
+export async function getBatchLikeStatus(readmeIds: string[], user: User | null): Promise<LikeStatus[]> {
+  if (readmeIds.length === 0) return []
+
+  const { data, error } = await supabase
+    .from('likes')
+    .select('readme_id, user_id')
+    .in('readme_id', readmeIds)
+
+  if (error) throw error
+
+  return readmeIds.map((id) => {
+    const filtered = data.filter((item) => item.readme_id === id)
+    const count = filtered.length
+    const liked = filtered.some((item) => item.user_id === user?.id)
+
+    return {
+      readmeId: id,
+      count,
+      liked,
+    }
+  })
 }

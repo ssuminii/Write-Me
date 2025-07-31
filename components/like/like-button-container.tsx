@@ -3,18 +3,23 @@
 import { LikeButton } from './like-button'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/useAuthStore'
-import { useLikeMutation, useLikeStatus, useUnlikeMutation } from '@/hooks/queries'
+import { useLikeMutation, useUnlikeMutation } from '@/hooks/queries'
 
 interface LikeButtonContainerProps {
   readmeId: string
+  liked?: boolean
+  count?: number
   onClick?: () => void
   className?: string
 }
 
-export const LikeButtonContainer = ({ readmeId, className }: LikeButtonContainerProps) => {
+export const LikeButtonContainer = ({
+  readmeId,
+  liked,
+  count,
+  className,
+}: LikeButtonContainerProps) => {
   const user = useAuthStore((state) => state.user)
-
-  const { data } = useLikeStatus(readmeId, user)
   const likeMutation = useLikeMutation(readmeId, user)
   const unlikeMutation = useUnlikeMutation(readmeId, user)
 
@@ -26,19 +31,12 @@ export const LikeButtonContainer = ({ readmeId, className }: LikeButtonContainer
       return
     }
 
-    if (data?.liked) {
+    if (liked) {
       unlikeMutation.mutate()
     } else {
       likeMutation.mutate()
     }
   }
 
-  return (
-    <LikeButton
-      liked={data?.liked}
-      count={data?.count ?? 0}
-      onClick={handleClick}
-      className={className}
-    />
-  )
+  return <LikeButton liked={liked} count={count ?? 0} onClick={handleClick} className={className} />
 }
