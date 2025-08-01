@@ -29,7 +29,7 @@ const ReadmeCard = ({
       className='flex flex-col p-4 gap-1 cursor-pointer'
       onClick={() => router.push(`/gallery/${id}`)}
     >
-      <h1 className='text-lg font-semibold'>{title}</h1>
+      <h1 className='text-lg font-semibold w-[300px] truncate'>{title}</h1>
       <span className='text-sm text-gray-600'>
         {author.includes('@') ? author.split('@')[0] : author}
       </span>
