@@ -9,9 +9,19 @@ import type { CreateReadme } from '@/types'
 interface ReadmeCardProps extends CreateReadme {
   liked: boolean
   count: number
+  readmeIds?: string[]
 }
 
-const ReadmeCard = ({ id, title, author, thumbnail, hashtags, liked, count }: ReadmeCardProps) => {
+const ReadmeCard = ({
+  id,
+  title,
+  author,
+  thumbnail,
+  hashtags,
+  liked,
+  count,
+  readmeIds,
+}: ReadmeCardProps) => {
   const router = useRouter()
 
   return (
@@ -40,7 +50,7 @@ const ReadmeCard = ({ id, title, author, thumbnail, hashtags, liked, count }: Re
         >
           Fork
         </Button>
-        <LikeButtonContainer readmeId={id} liked={liked} count={count} />
+        <LikeButtonContainer readmeId={id} liked={liked} count={count} readmeIds={readmeIds} />
       </div>
       <div className='flex-grow border-t border-gray-300 mt-2 mb-2' />
       <div>
