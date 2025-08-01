@@ -86,5 +86,6 @@ export function useBatchLikeStatus(readmeIds: string[], user: User | null) {
     queryKey: ['batchLikeStatus', readmeIds, user?.id],
     queryFn: () => getBatchLikeStatus(readmeIds, user),
     enabled: readmeIds.length > 0,
+    refetchOnWindowFocus: false,
   })
 }
