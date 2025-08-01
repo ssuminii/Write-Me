@@ -3,7 +3,7 @@
 import Markdown from '@/components/markdown'
 import { Info } from './_components'
 import FileActions from '@/components/file-actions'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useReadmeByIdQuery } from '@/hooks/queries'
 import { useParams } from 'next/navigation'
 
@@ -13,7 +13,13 @@ const Page = () => {
 
   const { data: readme } = useReadmeByIdQuery(id)
 
-  const [markdown, setMarkdown] = useState<string>(readme?.source ?? '')
+  const [markdown, setMarkdown] = useState<string>('')
+
+  useEffect(() => {
+    if (readme?.source) {
+      setMarkdown(readme.source)
+    }
+  }, [readme?.source])
 
   return (
     <div className='flex flex-col gap-6 py-6 h-full'>
