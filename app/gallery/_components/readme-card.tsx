@@ -1,10 +1,11 @@
 'use client'
 
-import { Button, Card, TagList } from '@/components/ui'
+import { Card, TagList } from '@/components/ui'
 import { LikeButtonContainer } from '@/components/like'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type { CreateReadme } from '@/types'
+import Link from 'next/link'
 
 interface ReadmeCardProps extends CreateReadme {
   liked: boolean
@@ -41,15 +42,15 @@ const ReadmeCard = ({
         className='w-[300px] h-[160px] object-cover'
       />
       <div className='flex justify-between items-center'>
-        <Button
-          className='bg-point rounded-lg w-fit text-black font-semibold py-0 hover:bg-point-hover'
+        <Link
+          href={`/gallery/${id}/fork`}
           onClick={(e) => {
             e.stopPropagation()
-            router.push(`/gallery/${id}/fork`)
           }}
+          className='border py-1 text-center w-[68px] bg-point hover:bg-point-hover rounded-sm text-sm font-medium text-gray-800'
         >
           Fork
-        </Button>
+        </Link>
         <LikeButtonContainer readmeId={id} liked={liked} count={count} readmeIds={readmeIds} />
       </div>
       <div className='flex-grow border-t border-gray-300 mt-2 mb-2' />
