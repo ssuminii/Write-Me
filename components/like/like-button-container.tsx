@@ -7,6 +7,7 @@ import { useLikeMutation, useUnlikeMutation } from '@/hooks/queries'
 
 interface LikeButtonContainerProps {
   readmeId: string
+  readmeIds?: string[]
   liked?: boolean
   count?: number
   onClick?: () => void
@@ -15,13 +16,14 @@ interface LikeButtonContainerProps {
 
 export const LikeButtonContainer = ({
   readmeId,
+  readmeIds,
   liked,
   count,
   className,
 }: LikeButtonContainerProps) => {
   const user = useAuthStore((state) => state.user)
-  const likeMutation = useLikeMutation(readmeId, user)
-  const unlikeMutation = useUnlikeMutation(readmeId, user)
+  const likeMutation = useLikeMutation(readmeId, user, readmeIds ?? [])
+  const unlikeMutation = useUnlikeMutation(readmeId, user, readmeIds ?? [])
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()

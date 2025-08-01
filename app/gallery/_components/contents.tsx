@@ -38,6 +38,7 @@ const Contents = ({ keyword, readmes }: ContentsProps) => {
             <ReadmeCard
               key={data.id}
               {...data}
+              readmeIds={readmeIds}
               liked={status?.liked ?? false}
               count={status?.count ?? 0}
             />
