@@ -133,7 +133,11 @@ const SubmitContent = ({ title, tags, source }: SubmitContentProps) => {
         <DialogClose asChild>
           <Button variant='outline'>취소</Button>
         </DialogClose>
-        <Button type='submit' onClick={handleSubmit}>
+        <Button
+          type='submit'
+          onClick={handleSubmit}
+          disabled={title.trim() === '' || tags.length === 0 || source.trim() === ''}
+        >
           등록하기
         </Button>
       </DialogFooter>

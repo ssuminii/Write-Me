@@ -57,7 +57,9 @@ const ReadmeCreate = () => {
         <div className='flex gap-2 fixed bottom-10 right-10 z-50'>
           <Button variant='outline'>임시저장</Button>
           <DialogTrigger asChild>
-            <Button>등록하기</Button>
+            <Button disabled={title.trim() === '' || tags.length === 0 || markdown.trim() === ''}>
+              등록하기
+            </Button>
           </DialogTrigger>
         </div>
         <Markdown
