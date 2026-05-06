@@ -1,12 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   images: {
-    domains: [
-      'mmttowtpkpvbjoimehqe.supabase.co'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'yxmuigbmujnimwkyokvl.supabase.co',
+      },
     ],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
