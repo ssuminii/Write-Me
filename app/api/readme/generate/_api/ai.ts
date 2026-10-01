@@ -19,6 +19,11 @@ export interface AiResult {
   outputTokens: number
 }
 
+export async function countTokens(text: string): Promise<number> {
+  const res = await ai.models.countTokens({ model: MODEL, contents: text })
+  return res.totalTokens ?? 0
+}
+
 export async function generateText(system: string, prompt: string): Promise<AiResult> {
   try {
     const res = await ai.models.generateContent({

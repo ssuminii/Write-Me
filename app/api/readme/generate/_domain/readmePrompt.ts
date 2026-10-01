@@ -45,35 +45,35 @@ export const README_SYSTEM = [
   '마크다운 본문만 출력하고, 앞뒤에 설명이나 ``` 코드 블록 감싸기를 붙이지 마.',
 ].join('\n')
 
-export function buildReadmePrompt(context: RepoContext, version: ReadmeVersion) {
+// 토큰 측정을 위해 항목별로 나눠서 만들고, 보낼 때는 합쳐서 보냄
+export function buildPromptParts(context: RepoContext, version: ReadmeVersion) {
   const period = `${context.createdAt.slice(0, 10)} ~ ${context.pushedAt.slice(0, 10)}`
   const team = context.contributors.map(({ login, name, avatarUrl, commits }) =>
     [`- ${name} (@${login}), 아바타: ${avatarUrl}`, ...commits.map((c) => `  - ${c}`)].join('\n'),
   )
 
-  return [
-    '다음 순서와 내용으로 README를 작성해줘.',
-    ...SECTIONS[version].map((section, i) => `${i + 1}. ${section}`),
-    '',
-    `## 저장소: ${context.owner}/${context.repo}`,
-    `설명: ${context.description ?? '없음'}`,
-    `배포 링크: ${context.homepage ?? '없음'}`,
-    `주 언어: ${context.language ?? '없음'}`,
-    `기간: ${period}`,
-    '',
-    '## package.json',
-    context.packageJson ?? '없음',
-    '',
-    '## 기존 README',
-    context.readme ?? '없음',
-    '',
-    '## DB 스키마 파일',
-    context.schema ?? '없음',
-    '',
-    '## 팀원 (커밋 수 순, 각자 최근 커밋 메시지)',
-    team.length ? team.join('\n') : '없음',
-    '',
-    '## 파일 목록',
-    context.tree.join('\n'),
-  ].join('\n')
+  return {
+    '섹션 지시': [
+      '다음 순서와 내용으로 README를 작성해줘.',
+      ...SECTIONS[version].map((section, i) => `${i + 1}. ${section}`),
+    ].join('\n'),
+    '저장소 정보': [
+      `## 저장소: ${context.owner}/${context.repo}`,
+      `설명: ${context.description ?? '없음'}`,
+      `배포 링크: ${context.homepage ?? '없음'}`,
+      `주 언어: ${context.language ?? '없음'}`,
+      `기간: ${period}`,
+    ].join('\n'),
+    'package.json': ['## package.json', context.packageJson ?? '없음'].join('\n'),
+    '기존 README': ['## 기존 README', context.readme ?? '없음'].join('\n'),
+    'DB 스키마': ['## DB 스키마 파일', context.schema ?? '없음'].join('\n'),
+    '팀원·커밋': [
+      '## 팀원 (커밋 수 순, 각자 최근 커밋 메시지)',
+      team.length ? team.join('\n') : '없음',
+    ].join('\n'),
+    '파일 목록': ['## 파일 목록', context.tree.join('\n')].join('\n'),
+  }
 }
+
+export const buildReadmePrompt = (context: RepoContext, version: ReadmeVersion) =>
+  Object.values(buildPromptParts(context, version)).join('\n\n')
