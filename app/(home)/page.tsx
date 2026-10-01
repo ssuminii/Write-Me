@@ -9,7 +9,7 @@ import { ExampleCards, ExampleChips, RepoInput } from './_components'
 import { toRepoUrl } from './_constants/examples'
 import { useGenerateReadme } from './_mutations/useGenerateReadme'
 
-export default function GeneratePage() {
+export default function HomePage() {
   const [repoUrl, setRepoUrl] = useState('')
   const [version, setVersion] = useState<ReadmeVersion>('simple')
   const [markdown, setMarkdown] = useState('')
@@ -39,7 +39,7 @@ export default function GeneratePage() {
   }
 
   return (
-    <div className='relative min-h-full overflow-hidden bg-secondary px-6 pb-16'>
+    <div className='relative -mt-18 min-h-[calc(100%+4.5rem)] overflow-hidden bg-secondary px-6 pb-16'>
       <div
         aria-hidden
         className='pointer-events-none absolute -right-32 top-20 size-[620px] rounded-full bg-[conic-gradient(from_90deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-4),var(--iris-5),var(--iris-1))] opacity-55 blur-[70px] dark:opacity-20'
@@ -49,7 +49,7 @@ export default function GeneratePage() {
         className='pointer-events-none absolute -bottom-20 -left-40 size-[520px] rounded-full bg-[conic-gradient(from_200deg,var(--iris-4),var(--iris-5),var(--iris-1),var(--iris-4))] opacity-55 blur-[70px] dark:opacity-20'
       />
 
-      <section className='relative mx-auto flex max-w-[860px] flex-col items-center gap-4 pt-28 text-center'>
+      <section className='relative mx-auto flex max-w-[860px] flex-col items-center gap-4 pt-44 text-center'>
         <h1 className='text-5xl font-extrabold tracking-tight sm:text-7xl'>README, 주소 하나로.</h1>
         <p className='text-lg text-foreground/70'>GitHub 주소만 넣으면 README 초안을 써드려요</p>
         <RepoInput

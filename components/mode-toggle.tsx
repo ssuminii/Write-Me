@@ -15,7 +15,7 @@ export default function ModeToggle() {
   return (
     <button
       onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
-      className='p-2 rounded-full border-1 cursor-pointer'
+      className='grid size-9 place-items-center rounded-full border border-foreground/12 bg-background/60'
     >
       {currentTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
       <span className='sr-only'>Toggle theme</span>

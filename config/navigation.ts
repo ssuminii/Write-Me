@@ -1,5 +1,5 @@
 export const mainNav = [
-  { title: "Profile", href: "/profile" },
-  { title: "Project", href: "/project" },
-  { title: "Gallery", href: "/gallery" },
+  { title: 'Project', href: '/' },
+  { title: 'Profile', href: '/profile' },
+  { title: 'Gallery', href: '/gallery' },
 ]
