@@ -3,6 +3,7 @@ import { X } from 'lucide-react'
 
 interface TagProps {
   label: string
+  prefix?: React.ReactNode
   selected?: boolean
   onClick?: () => void
   onRemove?: () => void
@@ -12,6 +13,7 @@ interface TagProps {
 
 export const Tag = ({
   label,
+  prefix = '#',
   selected = false,
   onClick,
   onRemove,
@@ -34,7 +36,7 @@ export const Tag = ({
         className
       )}
     >
-      # {label}
+      {prefix} {label}
       {onRemove && <X size={12} strokeWidth={3} onClick={onRemove} className='cursor-pointer' />}
     </button>
   )
