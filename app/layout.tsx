@@ -40,7 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             <AppInitializer />
             <Header />
-            <main className='flex-1 overflow-auto'>{children}</main>
+            <main className='flex-1 overflow-auto pt-18'>{children}</main>
             <Toaster richColors position='top-center' />
           </ThemeProvider>
         </QueryProvider>

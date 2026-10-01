@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 
 export default function Page() {
   return (
-    <div className='flex w-full h-[calc(100vh-88px)]'>
+    <div className='flex w-full h-[calc(100vh-4.5rem)]'>
       <LoginIntro />
       <LoginForm />
       <Suspense fallback={null}>

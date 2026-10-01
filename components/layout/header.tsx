@@ -30,9 +30,14 @@ export default function Header() {
   }
 
   return (
-    <header className='flex justify-between items-center h-22 px-12 font-semibold border-b border-gray-300'>
-      <MainNav />
-      <nav className='flex items-center gap-4'>
+    <header className='absolute inset-x-0 top-0 z-10 flex h-18 items-center justify-between px-14 font-semibold'>
+      <div className='flex items-center gap-10'>
+        <Link href='/' className='text-xl font-extrabold tracking-tight'>
+          Write-Me
+        </Link>
+        <MainNav />
+      </div>
+      <nav className='flex items-center gap-4 text-[15px]'>
         {isLogin ? (
           <div onClick={handleLogout} className=' hover:text-primary-hover cursor-pointer'>
             Logout
