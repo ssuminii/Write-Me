@@ -53,3 +53,15 @@ export const generateCapsuleRender = (config: CapsuleRender): string => {
 
   return `![header](https://capsule-render.vercel.app/api?${queryParams})`
 }
+
+// 마크다운 복사·다운로드
+export const copyMarkdown = (markdown: string) => navigator.clipboard.writeText(markdown)
+
+export function downloadMarkdown(markdown: string) {
+  const url = URL.createObjectURL(new Blob([markdown], { type: 'text/markdown' }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'README.md'
+  link.click()
+  URL.revokeObjectURL(url)
+}
