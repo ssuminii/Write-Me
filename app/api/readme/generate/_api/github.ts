@@ -21,7 +21,25 @@ export interface RepoContext {
   packageJson: string | null
   readme: string | null
   tree: string[]
+  schema: string | null
+  contributors: Contributor[]
 }
+
+export interface Contributor {
+  login: string
+  name: string
+  avatarUrl: string
+  commits: string[]
+}
+
+const MAX_CONTRIBUTORS = 6
+const COMMITS_PER_CONTRIBUTOR = 20
+// ponytail: 스키마 파일은 앞부분만 보냄. 잘리는 대형 스키마가 생기면 테이블 정의만 뽑기
+const MAX_SCHEMA_LENGTH = 8000
+
+const findSchemaPath = (tree: string[]) =>
+  tree.find((path) => path.endsWith('schema.prisma')) ??
+  tree.find((path) => /(^|\/)(migrations?|supabase)\/.*\.sql$|(^|\/)schema\.sql$/.test(path))
 
 export function parseRepoUrl(input: string) {
   const match = input
@@ -68,6 +86,11 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
   const tree: string[] = treeRes.ok
     ? (await treeRes.json()).tree.map((item: { path: string }) => item.path)
     : []
+  const schemaPath = findSchemaPath(tree)
+  const [contributors, schema] = await Promise.all([
+    fetchContributors(base),
+    schemaPath ? fetchRawFile(`${base}/contents/${schemaPath}`) : null,
+  ])
 
   return {
     owner,
@@ -81,5 +104,40 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     packageJson,
     readme,
     tree,
+    schema: schema?.slice(0, MAX_SCHEMA_LENGTH) ?? null,
+    contributors,
   }
+}
+
+interface GithubContributor {
+  login: string
+  type: string
+  avatar_url: string
+}
+
+interface GithubCommit {
+  commit: { message: string; author: { name: string } }
+}
+
+// 봇과 Claude(Co-Authored-By로 잡히는 기여자)는 제외
+const isPerson = ({ login, type }: GithubContributor) =>
+  type === 'User' && !login.endsWith('[bot]') && login.toLowerCase() !== 'claude'
+
+async function fetchContributors(base: string): Promise<Contributor[]> {
+  const res = await githubFetch(`${base}/contributors?per_page=20`)
+  if (!res.ok || res.status === 204) return []
+  const people = ((await res.json()) as GithubContributor[]).filter(isPerson).slice(0, MAX_CONTRIBUTORS)
+
+  return Promise.all(
+    people.map(async ({ login, avatar_url }) => {
+      const commitsRes = await githubFetch(`${base}/commits?author=${login}&per_page=${COMMITS_PER_CONTRIBUTOR}`)
+      const commits: GithubCommit[] = commitsRes.ok ? await commitsRes.json() : []
+      return {
+        login,
+        name: commits[0]?.commit.author.name ?? login,
+        avatarUrl: avatar_url,
+        commits: commits.map(({ commit }) => commit.message.split('\n')[0]),
+      }
+    }),
+  )
 }
