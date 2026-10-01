@@ -3,6 +3,7 @@
 import { IconButton } from '@/components/ui'
 import { Copy, Download } from 'lucide-react'
 import { toast } from 'sonner'
+import { copyMarkdown, downloadMarkdown } from '@/utils/markdown'
 
 interface FileActionsProps {
   markdown: string
@@ -11,7 +12,7 @@ interface FileActionsProps {
 const FileActions = ({ markdown }: FileActionsProps) => {
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(markdown)
+      await copyMarkdown(markdown)
       toast.success('복사가 완료되었습니다! ✨')
     } catch (err) {
       console.error(err)
@@ -19,15 +20,7 @@ const FileActions = ({ markdown }: FileActionsProps) => {
     }
   }
 
-  const handleDownload = () => {
-    const blob = new Blob([markdown], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'README.md'
-    link.click()
-    URL.revokeObjectURL(url)
-  }
+  const handleDownload = () => downloadMarkdown(markdown)
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
