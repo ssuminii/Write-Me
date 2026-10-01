@@ -50,8 +50,12 @@ export default function HomePage() {
       />
 
       <section className='relative mx-auto flex max-w-[860px] flex-col items-center gap-4 pt-44 text-center'>
-        <h1 className='text-5xl font-extrabold tracking-tight sm:text-7xl'>README, 주소 하나로.</h1>
-        <p className='text-lg text-foreground/70'>GitHub 주소만 넣으면 README 초안을 써드려요</p>
+        <h1 className='text-5xl font-extrabold tracking-tight sm:text-7xl'>
+          README, 주소 하나로 완성.
+        </h1>
+        <p className='text-lg text-foreground/70'>
+          GitHub 저장소 주소를 넣고, 프로젝트에 맞는 README를 만들어보세요.
+        </p>
         <RepoInput
           repoUrl={repoUrl}
           version={version}
@@ -66,7 +70,11 @@ export default function HomePage() {
       {markdown && (
         <section className='relative mx-auto mt-10 flex h-[600px] max-w-[1040px] flex-col overflow-hidden rounded-2xl border bg-background'>
           <div className='flex justify-end gap-2 border-b p-2'>
-            <button type='button' onClick={handleCopy} className='rounded-lg border px-3 py-1 text-sm'>
+            <button
+              type='button'
+              onClick={handleCopy}
+              className='rounded-lg border px-3 py-1 text-sm'
+            >
               복사
             </button>
             <button
