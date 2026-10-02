@@ -86,8 +86,11 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     fetchRawFile(`${base}/readme`),
     githubFetch(`${base}/git/trees/${info.default_branch}?recursive=1`),
   ])
+  // 파일(blob)만 남김. 폴더(tree)와 서브모듈(commit)은 제외
   const tree: string[] = treeRes.ok
-    ? (await treeRes.json()).tree.map((item: { path: string }) => item.path)
+    ? (await treeRes.json()).tree
+        .filter((item: { type: string }) => item.type === 'blob')
+        .map((item: { path: string }) => item.path)
     : []
   const schemaPath = findSchemaPath(tree)
   const [contributors, schema] = await Promise.all([
