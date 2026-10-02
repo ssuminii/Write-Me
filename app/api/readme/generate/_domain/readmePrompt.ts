@@ -10,8 +10,13 @@ const INTRO_SECTIONS = [
   '기술 스택: 배지 없이 분류마다 ### 소제목에 이모지를 붙이고(예: ### 🛠️ Tech Stack, ### 📈 Monitoring, ### ⚙️ Dev Tools) 짧은 목록. 관련 있는 것끼리 한 줄에 묶기(예: React, TypeScript, Vite). 패키지 이름(@tanstack/react-query)이 아니라 대표 이름(TanStack Query)으로. 확인된 분류만',
 ]
 
-const TEAM_SECTION =
-  '팀원: 표로 작성. 첫 줄은 역할, 둘째 줄은 굵은 이름, 셋째 줄은 프로필 사진(<img src="아바타주소" height=150 width=150>)과 @아이디를 GitHub 프로필로 연결. 팀원 정보가 없으면 생략'
+const TEAM_SECTION = [
+  '팀원: 팀원마다 열 하나인 표로. 머리글에는 "역할"이라는 글자 대신 각자의 실제 역할(FE, BE, Contributor 등)을 써. 표는 하나로, 팀원이 5명 이상이면 사진 크기를 height=100 width=100으로. 팀원 정보가 없으면 생략',
+  '   | FE | BE |',
+  '   | :---: | :---: |',
+  '   | **이름** | **이름** |',
+  '   | <img src="아바타주소" height=150 width=150><br>[@아이디](https://github.com/아이디) | (같은 형식) |',
+].join('\n')
 
 const START_SECTION =
   '시작하기: package.json의 패키지 매니저에 맞춰 설치 명령어(예: npm install)와 실행 명령어(예: npm run dev)를 반드시 둘 다 하나의 코드 블록에. git clone, cd 명령어는 넣지 마'
