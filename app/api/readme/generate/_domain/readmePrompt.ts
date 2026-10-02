@@ -28,7 +28,6 @@ const SECTIONS: Record<ReadmeVersion, string[]> = {
     'API 명세: 서버·API 라우트 파일(예: app/api/**/route.ts, pages/api, routes, controllers)이 있을 때만 메서드, 경로, 설명을 표로. 파일 경로와 이름으로 판단하고, 없으면 생략',
     TEAM_SECTION,
     '역할 분담: 팀원마다 ### 이름 소제목과 커밋 메시지를 근거로 한 담당 업무 2~3줄 목록',
-    '협업 방식: 커밋 메시지 형태로 본 커밋 컨벤션(예: feat, fix), .github 폴더의 PR·이슈 템플릿이 있으면 소개. 근거가 없으면 생략',
     START_SECTION,
   ],
 }
