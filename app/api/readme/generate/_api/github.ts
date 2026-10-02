@@ -1,6 +1,6 @@
 import { cleanCommitMessages } from '../_domain/commits'
 import { isIgnoredDir } from '../_domain/fileTree'
-import { findTitleFile } from '../_domain/projectName'
+import { extractHtmlTitle, findTitleFile } from '../_domain/projectName'
 const GITHUB_API = 'https://api.github.com'
 
 export class GithubError extends Error {
@@ -119,6 +119,7 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     branch: info.default_branch,
     tree,
     schema: schema?.slice(0, MAX_SCHEMA_LENGTH) ?? null,
+    htmlTitle: titleSource ? extractHtmlTitle(titleSource) : null,
     contributors,
   }
 }

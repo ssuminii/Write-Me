@@ -10,7 +10,7 @@ const TITLE_FILES = [
 
 // 템플릿이 만든 기본 제목은 서비스 이름이 아님
 const TEMPLATE_TITLE =
-  /^(vite\b.*|react app|create next app|getting started with create react app)$/i
+  /^(vite\b.*|.*\+\s*vite|react app|create next app|getting started with create react app)$/i
 
 export const findTitleFile = (tree: string[]) => TITLE_FILES.find((file) => tree.includes(file))
 
