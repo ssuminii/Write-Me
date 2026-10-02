@@ -132,7 +132,7 @@ interface GithubCommit {
 
 // 봇과 Claude(Co-Authored-By로 잡히는 기여자)는 제외
 const isPerson = ({ login, type }: GithubContributor) =>
-  type === 'User' && !login.endsWith('[bot]') && login.toLowerCase() !== 'claude'
+  type === 'User' && !/(\[bot\]|[-_]bot)$/i.test(login) && login.toLowerCase() !== 'claude'
 
 async function fetchContributors(base: string): Promise<Contributor[]> {
   const res = await githubFetch(`${base}/contributors?per_page=20`)
