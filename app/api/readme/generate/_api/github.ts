@@ -33,7 +33,6 @@ export interface RepoContext {
 export interface Contributor {
   login: string
   name: string
-  avatarUrl: string
   commits: string[]
 }
 
@@ -127,7 +126,6 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
 interface GithubContributor {
   login: string
   type: string
-  avatar_url: string
 }
 
 interface GithubCommit {
@@ -146,15 +144,16 @@ async function fetchContributors(base: string): Promise<Contributor[]> {
     .slice(0, MAX_CONTRIBUTORS)
 
   return Promise.all(
-    people.map(async ({ login, avatar_url }) => {
+    people.map(async ({ login }) => {
       const commitsRes = await githubFetch(
         `${base}/commits?author=${login}&per_page=${COMMITS_TO_FETCH}`,
       )
       const commits: GithubCommit[] = commitsRes.ok ? await commitsRes.json() : []
+      const name = commits[0]?.commit.author.name
       return {
         login,
-        name: commits[0]?.commit.author.name ?? login,
-        avatarUrl: avatar_url,
+        // 커밋 이름이 "—"처럼 글자가 없으면 아이디로
+        name: name && /[\p{L}\p{N}]/u.test(name) ? name : login,
         commits: cleanCommitMessages(
           commits.map(({ commit }) => commit.message),
           COMMITS_PER_CONTRIBUTOR,
