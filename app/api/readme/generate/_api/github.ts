@@ -1,5 +1,6 @@
 import { cleanCommitMessages } from '../_domain/commits'
 import { isIgnoredDir } from '../_domain/fileTree'
+import { findTitleFile } from '../_domain/projectName'
 const GITHUB_API = 'https://api.github.com'
 
 export class GithubError extends Error {
@@ -25,6 +26,7 @@ export interface RepoContext {
   branch: string
   tree: string[]
   schema: string | null
+  htmlTitle: string | null
   contributors: Contributor[]
 }
 
@@ -97,9 +99,11 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
         .map((item: { path: string }) => item.path)
     : []
   const schemaPath = findSchemaPath(tree)
-  const [contributors, schema] = await Promise.all([
+  const titleFile = findTitleFile(tree)
+  const [contributors, schema, titleSource] = await Promise.all([
     fetchContributors(base),
     schemaPath ? fetchRawFile(`${base}/contents/${schemaPath}`) : null,
+    titleFile ? fetchRawFile(`${base}/contents/${titleFile}`) : null,
   ])
 
   return {
