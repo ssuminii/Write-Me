@@ -1,0 +1,8 @@
+{
+  "repo": "facebook/react",
+  "version": "detailed",
+  "model": "gemini-3.5-flash-lite",
+  "inputTokens": 9188,
+  "outputTokens": 1417,
+  "createdAt": "2026-10-02"
+}

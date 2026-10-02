@@ -1,0 +1,8 @@
+{
+  "repo": "vercel/next.js",
+  "version": "detailed",
+  "model": "gemini-3.5-flash-lite",
+  "inputTokens": 10156,
+  "outputTokens": 1397,
+  "createdAt": "2026-10-02"
+}
