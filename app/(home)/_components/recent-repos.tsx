@@ -1,14 +1,16 @@
 import { Tag } from '@/components/ui'
-import { CHIP_EXAMPLES } from '../_constants/examples'
 
-interface ExampleChipsProps {
+interface RecentReposProps {
+  repos: string[]
   onSelect: (repo: string) => void
 }
 
-export default function ExampleChips({ onSelect }: ExampleChipsProps) {
+export default function RecentRepos({ repos, onSelect }: RecentReposProps) {
+  if (!repos.length) return null
+
   return (
     <div className='flex flex-wrap justify-center gap-2'>
-      {CHIP_EXAMPLES.map(({ repo }) => (
+      {repos.map((repo) => (
         <Tag
           key={repo}
           label={repo}
