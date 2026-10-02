@@ -5,8 +5,9 @@ import { toast } from 'sonner'
 import Markdown from '@/components/markdown'
 import type { ReadmeVersion } from '@/types'
 import { copyMarkdown, downloadMarkdown } from '@/utils/markdown'
-import { ExampleCards, ExampleChips, RepoInput } from './_components'
+import { ExampleCards, RecentRepos, RepoInput } from './_components'
 import { toRepoUrl } from './_constants/examples'
+import { useRecentRepos } from './_hooks/useRecentRepos'
 import { useGenerateReadme } from './_mutations/useGenerateReadme'
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
   const [version, setVersion] = useState<ReadmeVersion>('simple')
   const [markdown, setMarkdown] = useState('')
   const { mutate, isPending } = useGenerateReadme()
+  const { repos, addRepo } = useRecentRepos()
 
   const handleSubmit = () => {
     if (!repoUrl.trim()) {
@@ -23,7 +25,10 @@ export default function HomePage() {
     mutate(
       { repoUrl, version },
       {
-        onSuccess: (data) => setMarkdown(data.markdown),
+        onSuccess: (data) => {
+          setMarkdown(data.markdown)
+          addRepo(repoUrl)
+        },
         onError: (error) => toast.error(error.message),
       },
     )
@@ -64,7 +69,7 @@ export default function HomePage() {
           onVersionChange={setVersion}
           onSubmit={handleSubmit}
         />
-        <ExampleChips onSelect={(repo) => setRepoUrl(toRepoUrl(repo))} />
+        <RecentRepos repos={repos} onSelect={(repo) => setRepoUrl(toRepoUrl(repo))} />
       </section>
 
       {markdown && (

@@ -14,12 +14,34 @@ export interface ReadmeExample {
 }
 
 export const EXAMPLES: ReadmeExample[] = [
-  { repo: 'ssuminii/Write-Me', name: 'Write-Me', description: 'README 생성기', version: 'detailed', color: 'var(--iris-1)' },
-  { repo: 'Catch-Letter/Catch-Letter-FE', name: 'Catch-Letter', description: '편지 플랫폼', version: 'simple', color: 'var(--iris-3)' },
-  { repo: 'Digginn/Diggin-landing', name: 'Diggin Landing', description: '랜딩 페이지', version: 'simple', color: 'var(--iris-5)' },
-  { repo: 'pmndrs/zustand', name: 'Zustand', description: '상태 관리', version: 'simple', color: 'var(--iris-2)' },
+  {
+    repo: 'ssuminii/Write-Me',
+    name: 'Write-Me',
+    description: 'README 생성기',
+    version: 'detailed',
+    color: 'var(--iris-1)',
+  },
+  {
+    repo: 'Catch-Letter/Catch-Letter-FE',
+    name: 'Catch-Letter',
+    description: '편지 플랫폼',
+    version: 'simple',
+    color: 'var(--iris-3)',
+  },
+  {
+    repo: 'react/react',
+    name: 'React',
+    description: 'UI 라이브러리',
+    version: 'simple',
+    color: 'var(--iris-5)',
+  },
+  {
+    repo: 'pmndrs/zustand',
+    name: 'Zustand',
+    description: '상태 관리',
+    version: 'simple',
+    color: 'var(--iris-2)',
+  },
 ]
-
-export const CHIP_EXAMPLES = EXAMPLES.filter(({ repo }) => repo !== 'pmndrs/zustand')
 
 export const toRepoUrl = (repo: string) => `https://github.com/${repo}`
