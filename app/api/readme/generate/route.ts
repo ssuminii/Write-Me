@@ -1,6 +1,7 @@
 import { AiError, countTokens, generateText } from './_api/ai'
 import { fetchRepoContext, GithubError, parseRepoUrl } from './_api/github'
 import type { ReadmeVersion } from '@/types'
+import { cleanReadme } from './_domain/cleanReadme'
 import { buildPromptParts, buildReadmePrompt, README_SYSTEM } from './_domain/readmePrompt'
 import type { RepoContext } from './_api/github'
 
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
       buildReadmePrompt(context, readmeVersion),
     )
 
-    return Response.json({ markdown: text, usage: { inputTokens, outputTokens } })
+    return Response.json({ markdown: cleanReadme(text), usage: { inputTokens, outputTokens } })
   } catch (error) {
     if (error instanceof GithubError || error instanceof AiError) {
       return Response.json({ message: error.message }, { status: error.status })
