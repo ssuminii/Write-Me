@@ -1,3 +1,4 @@
+import { cleanCommitMessages } from '../_domain/commits'
 import { isIgnoredDir } from '../_domain/fileTree'
 const GITHUB_API = 'https://api.github.com'
 
@@ -36,13 +37,16 @@ export interface Contributor {
 
 const MAX_CONTRIBUTORS = 6
 const COMMITS_PER_CONTRIBUTOR = 20
+const COMMITS_TO_FETCH = 30
 // ponytail: 스키마 파일은 앞부분만 보냄. 잘리는 대형 스키마가 생기면 테이블 정의만 뽑기
 const MAX_SCHEMA_LENGTH = 8000
 
 const findSchemaPath = (tree: string[]) =>
   // 예제·테스트 폴더의 스키마는 실제 서비스 DB가 아니라 제외
   tree.filter((path) => !isIgnoredDir(path)).find((path) => path.endsWith('schema.prisma')) ??
-  tree.filter((path) => !isIgnoredDir(path)).find((path) => /(^|\/)(migrations?|supabase)\/.*\.sql$|(^|\/)schema\.sql$/.test(path))
+  tree
+    .filter((path) => !isIgnoredDir(path))
+    .find((path) => /(^|\/)(migrations?|supabase)\/.*\.sql$|(^|\/)schema\.sql$/.test(path))
 
 export function parseRepoUrl(input: string) {
   const match = input
@@ -133,17 +137,24 @@ const isPerson = ({ login, type }: GithubContributor) =>
 async function fetchContributors(base: string): Promise<Contributor[]> {
   const res = await githubFetch(`${base}/contributors?per_page=20`)
   if (!res.ok || res.status === 204) return []
-  const people = ((await res.json()) as GithubContributor[]).filter(isPerson).slice(0, MAX_CONTRIBUTORS)
+  const people = ((await res.json()) as GithubContributor[])
+    .filter(isPerson)
+    .slice(0, MAX_CONTRIBUTORS)
 
   return Promise.all(
     people.map(async ({ login, avatar_url }) => {
-      const commitsRes = await githubFetch(`${base}/commits?author=${login}&per_page=${COMMITS_PER_CONTRIBUTOR}`)
+      const commitsRes = await githubFetch(
+        `${base}/commits?author=${login}&per_page=${COMMITS_TO_FETCH}`,
+      )
       const commits: GithubCommit[] = commitsRes.ok ? await commitsRes.json() : []
       return {
         login,
         name: commits[0]?.commit.author.name ?? login,
         avatarUrl: avatar_url,
-        commits: commits.map(({ commit }) => commit.message.split('\n')[0]),
+        commits: cleanCommitMessages(
+          commits.map(({ commit }) => commit.message),
+          COMMITS_PER_CONTRIBUTOR,
+        ),
       }
     }),
   )
