@@ -2,6 +2,7 @@ import type { ReadmeVersion } from '@/types'
 import type { RepoContext } from '../_api/github'
 import { findLogoCandidates, summarizeTree } from './fileTree'
 import { summarizePackageJson } from './packageJson'
+import { absolutizeImages } from './readmeImages'
 
 const INTRO_SECTIONS = [
   '제목: 이모지 + 프로젝트 이름. 대표 이미지는 기존 README에 있는 메인 이미지(배지 제외)를 먼저 쓰고, 없으면 대표 이미지 후보 중 프로젝트 자신의 로고를, 둘 다 없으면 생략. 넣을 때는 제목 아래 빈 줄 뒤에 가운데 정렬로 (<p align="center"><img src="이미지 주소" width="600"></p>). 그 아래 빈 줄, 한 줄 소개를 인용문(>)으로. 배포 링크가 있으면 다시 빈 줄 뒤에 가운데 정렬로, 링크 글자는 "프로젝트 이름 + 서비스" (예: <p align="center">🔗 <a href="배포주소">Catch-Letter 서비스</a></p>)',
@@ -54,6 +55,7 @@ export const README_SYSTEM = [
 // 토큰 측정을 위해 항목별로 나눠서 만들고, 보낼 때는 합쳐서 보냄
 export function buildPromptParts(context: RepoContext, version: ReadmeVersion) {
   const period = `${context.createdAt.slice(0, 10)} ~ ${context.pushedAt.slice(0, 10)}`
+  const rawBase = `https://raw.githubusercontent.com/${context.owner}/${context.repo}/${context.branch}`
   const team = context.contributors.map(({ login, name, avatarUrl, commits }) =>
     [`- ${name} (@${login}), 아바타: ${avatarUrl}`, ...commits.map((c) => `  - ${c}`)].join('\n'),
   )
@@ -74,14 +76,17 @@ export function buildPromptParts(context: RepoContext, version: ReadmeVersion) {
       '## package.json (라이브러리는 이름만)',
       summarizePackageJson(context.packageJson, context.tree),
     ].join('\n'),
-    '기존 README': ['## 기존 README', context.readme ?? '없음'].join('\n'),
+    '기존 README': [
+      '## 기존 README',
+      context.readme ? absolutizeImages(context.readme, rawBase) : '없음',
+    ].join('\n'),
     'DB 스키마': ['## DB 스키마 파일', context.schema ?? '없음'].join('\n'),
     '팀원·커밋': [
       '## 팀원 (커밋 수 순, 각자 최근 커밋 메시지)',
       team.length ? team.join('\n') : '없음',
     ].join('\n'),
     '대표 이미지 후보': [
-      `## 대표 이미지 후보 (이미지 주소: https://raw.githubusercontent.com/${context.owner}/${context.repo}/${context.branch}/경로)`,
+      `## 대표 이미지 후보 (이미지 주소: ${rawBase}/경로)`,
       findLogoCandidates(context.tree).join('\n') || '없음',
     ].join('\n'),
     '파일 목록': [
