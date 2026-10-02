@@ -29,7 +29,7 @@ export function summarizeTree(tree: string[], maxDepth = 3, maxLines = 300): str
   const folders = new Map<string, number>()
 
   for (const path of tree) {
-    if (!path.includes('.') || isIgnored(path)) continue
+    if (isIgnored(path)) continue
     const segments = path.split('/')
     if (segments.length === 1 || KEPT_FILE.some((re) => re.test(path))) {
       kept.push(path)
