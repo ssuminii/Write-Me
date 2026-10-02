@@ -1,3 +1,4 @@
+import { isIgnoredDir } from '../_domain/fileTree'
 const GITHUB_API = 'https://api.github.com'
 
 export class GithubError extends Error {
@@ -20,6 +21,7 @@ export interface RepoContext {
   pushedAt: string
   packageJson: string | null
   readme: string | null
+  branch: string
   tree: string[]
   schema: string | null
   contributors: Contributor[]
@@ -38,8 +40,9 @@ const COMMITS_PER_CONTRIBUTOR = 20
 const MAX_SCHEMA_LENGTH = 8000
 
 const findSchemaPath = (tree: string[]) =>
-  tree.find((path) => path.endsWith('schema.prisma')) ??
-  tree.find((path) => /(^|\/)(migrations?|supabase)\/.*\.sql$|(^|\/)schema\.sql$/.test(path))
+  // 예제·테스트 폴더의 스키마는 실제 서비스 DB가 아니라 제외
+  tree.filter((path) => !isIgnoredDir(path)).find((path) => path.endsWith('schema.prisma')) ??
+  tree.filter((path) => !isIgnoredDir(path)).find((path) => /(^|\/)(migrations?|supabase)\/.*\.sql$|(^|\/)schema\.sql$/.test(path))
 
 export function parseRepoUrl(input: string) {
   const match = input
@@ -103,6 +106,7 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     pushedAt: info.pushed_at,
     packageJson,
     readme,
+    branch: info.default_branch,
     tree,
     schema: schema?.slice(0, MAX_SCHEMA_LENGTH) ?? null,
     contributors,
