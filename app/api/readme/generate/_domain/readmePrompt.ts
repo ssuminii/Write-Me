@@ -1,6 +1,7 @@
 import type { ReadmeVersion } from '@/types'
 import type { RepoContext } from '../_api/github'
 import { findLogoCandidates, summarizeTree } from './fileTree'
+import { summarizePackageJson } from './packageJson'
 
 const INTRO_SECTIONS = [
   '제목: 이모지 + 프로젝트 이름. 대표 이미지 후보가 있으면 제목 아래 빈 줄 뒤에 가장 어울리는 하나를 가운데 정렬로 (<p align="center"><img src="이미지 주소" width="600"></p>). 그 아래 빈 줄, 한 줄 소개를 인용문(>)으로. 배포 링크가 있으면 다시 빈 줄 뒤에 가운데 정렬로, 링크 글자는 "프로젝트 이름 + 서비스" (예: <p align="center">🔗 <a href="배포주소">Catch-Letter 서비스</a></p>)',
@@ -13,7 +14,7 @@ const TEAM_SECTION =
   '팀원: 표로 작성. 첫 줄은 역할, 둘째 줄은 굵은 이름, 셋째 줄은 프로필 사진(<img src="아바타주소" height=150 width=150>)과 @아이디를 GitHub 프로필로 연결. 팀원 정보가 없으면 생략'
 
 const START_SECTION =
-  '시작하기: 패키지 매니저(lock 파일로 판단)에 맞춰 설치 명령어(예: npm install)와 실행 명령어(예: npm run dev)를 반드시 둘 다 하나의 코드 블록에. git clone, cd 명령어는 넣지 마'
+  '시작하기: package.json의 패키지 매니저에 맞춰 설치 명령어(예: npm install)와 실행 명령어(예: npm run dev)를 반드시 둘 다 하나의 코드 블록에. git clone, cd 명령어는 넣지 마'
 
 const SECTIONS: Record<ReadmeVersion, string[]> = {
   simple: [...INTRO_SECTIONS, TEAM_SECTION, START_SECTION],
@@ -65,7 +66,10 @@ export function buildPromptParts(context: RepoContext, version: ReadmeVersion) {
       `주 언어: ${context.language ?? '없음'}`,
       `기간: ${period}`,
     ].join('\n'),
-    'package.json': ['## package.json', context.packageJson ?? '없음'].join('\n'),
+    'package.json': [
+      '## package.json (라이브러리는 이름만)',
+      summarizePackageJson(context.packageJson, context.tree),
+    ].join('\n'),
     '기존 README': ['## 기존 README', context.readme ?? '없음'].join('\n'),
     'DB 스키마': ['## DB 스키마 파일', context.schema ?? '없음'].join('\n'),
     '팀원·커밋': [
