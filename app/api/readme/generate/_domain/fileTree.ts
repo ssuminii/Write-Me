@@ -20,8 +20,11 @@ export const isIgnoredDir = (path: string) => IGNORED_DIR.test(path)
 
 const isIgnored = (path: string) => isIgnoredDir(path) || IGNORED_EXT.test(path) || IGNORED_FILE.test(path)
 
+// 폴더 2단계까지만 (public/logo/logo.png). 더 깊으면 기능 안의 아이콘(src/assets/shareSNS/...)일 가능성이 큼
+const isShallow = (path: string) => path.split('/').length <= 3
+
 export const findLogoCandidates = (tree: string[], max = 5) =>
-  tree.filter((path) => LOGO.test(path) && !isIgnoredDir(path)).slice(0, max)
+  tree.filter((path) => LOGO.test(path) && isShallow(path) && !isIgnoredDir(path)).slice(0, max)
 
 // 파일을 폴더(maxDepth 단계)별로 묶어서 "폴더/ (파일 N개)"로 요약
 export function summarizeTree(tree: string[], maxDepth = 3, maxLines = 300): string[] {
