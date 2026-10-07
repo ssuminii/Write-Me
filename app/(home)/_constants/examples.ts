@@ -18,21 +18,21 @@ export const EXAMPLES: ReadmeExample[] = [
     repo: 'ssuminii/Write-Me',
     name: 'Write-Me',
     description: 'README 생성기',
-    version: 'detailed',
+    version: 'simple',
     color: 'var(--iris-1)',
   },
   {
     repo: 'Catch-Letter/Catch-Letter-FE',
     name: 'Catch-Letter',
     description: '편지 플랫폼',
-    version: 'simple',
+    version: 'detailed',
     color: 'var(--iris-3)',
   },
   {
     repo: 'react/react',
     name: 'React',
     description: 'UI 라이브러리',
-    version: 'simple',
+    version: 'detailed',
     color: 'var(--iris-5)',
   },
   {
@@ -45,3 +45,6 @@ export const EXAMPLES: ReadmeExample[] = [
 ]
 
 export const toRepoUrl = (repo: string) => `https://github.com/${repo}`
+
+// 미리 만들어 둔 예시 README (public/examples/저장소이름.md)
+export const toExamplePath = (repo: string) => `/examples/${repo.split('/')[1].toLowerCase()}.md`

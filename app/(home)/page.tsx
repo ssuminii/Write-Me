@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 import Markdown from '@/components/markdown'
 import type { ReadmeVersion } from '@/types'
 import { copyMarkdown, downloadMarkdown } from '@/utils/markdown'
 import { ExampleCards, RecentRepos, RepoInput } from './_components'
-import { toRepoUrl } from './_constants/examples'
+import { toExamplePath, toRepoUrl, type ReadmeExample } from './_constants/examples'
 import { useRecentRepos } from './_hooks/useRecentRepos'
 import { useGenerateReadme } from './_mutations/useGenerateReadme'
 
@@ -16,6 +16,7 @@ export default function HomePage() {
   const [markdown, setMarkdown] = useState('')
   const { mutate, isPending } = useGenerateReadme()
   const { repos, addRepo } = useRecentRepos()
+  const resultRef = useRef<HTMLElement>(null)
 
   const handleSubmit = () => {
     if (!repoUrl.trim()) {
@@ -32,6 +33,19 @@ export default function HomePage() {
         onError: (error) => toast.error(error.message),
       },
     )
+  }
+
+  const handleExampleSelect = async (example: ReadmeExample) => {
+    setRepoUrl(toRepoUrl(example.repo))
+    setVersion(example.version)
+    try {
+      const res = await fetch(toExamplePath(example.repo))
+      if (!res.ok) throw new Error()
+      setMarkdown(await res.text())
+      requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: 'smooth' }))
+    } catch {
+      toast.error('예시를 불러오지 못했어요.')
+    }
   }
 
   const handleCopy = async () => {
@@ -73,7 +87,10 @@ export default function HomePage() {
       </section>
 
       {markdown && (
-        <section className='relative mx-auto mt-10 flex h-[600px] max-w-[1040px] flex-col overflow-hidden rounded-2xl border bg-background'>
+        <section
+          ref={resultRef}
+          className='relative mx-auto mt-10 flex h-[600px] max-w-[1040px] flex-col overflow-hidden rounded-2xl border bg-background'
+        >
           <div className='flex justify-end gap-2 border-b p-2'>
             <button
               type='button'
@@ -94,12 +111,7 @@ export default function HomePage() {
         </section>
       )}
 
-      <ExampleCards
-        onSelect={(example) => {
-          setRepoUrl(toRepoUrl(example.repo))
-          setVersion(example.version)
-        }}
-      />
+      <ExampleCards onSelect={handleExampleSelect} />
     </div>
   )
 }
