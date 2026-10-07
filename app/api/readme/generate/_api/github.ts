@@ -1,3 +1,4 @@
+import { BUILD_FILES, summarizeBuildFiles } from '../_domain/buildFiles'
 import { cleanCommitMessages } from '../_domain/commits'
 import { isIgnoredDir } from '../_domain/fileTree'
 import { extractHtmlTitle, findTitleFile } from '../_domain/projectName'
@@ -27,6 +28,7 @@ export interface RepoContext {
   tree: string[]
   schema: string | null
   htmlTitle: string | null
+  buildFiles: string | null
   contributors: Contributor[]
 }
 
@@ -99,11 +101,16 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     : []
   const schemaPath = findSchemaPath(tree)
   const titleFile = findTitleFile(tree)
-  const [contributors, schema, titleSource] = await Promise.all([
+  const buildFilePaths = BUILD_FILES.filter((file) => tree.includes(file))
+  const [contributors, schema, titleSource, buildSources] = await Promise.all([
     fetchContributors(base),
     schemaPath ? fetchRawFile(`${base}/contents/${schemaPath}`) : null,
     titleFile ? fetchRawFile(`${base}/contents/${titleFile}`) : null,
+    Promise.all(buildFilePaths.map((file) => fetchRawFile(`${base}/contents/${file}`))),
   ])
+  const buildFiles = Object.fromEntries(
+    buildFilePaths.flatMap((file, i) => (buildSources[i] ? [[file, buildSources[i]]] : [])),
+  )
 
   return {
     owner,
@@ -120,6 +127,7 @@ export async function fetchRepoContext(owner: string, repo: string): Promise<Rep
     tree,
     schema: schema?.slice(0, MAX_SCHEMA_LENGTH) ?? null,
     htmlTitle: titleSource ? extractHtmlTitle(titleSource) : null,
+    buildFiles: summarizeBuildFiles(buildFiles),
     contributors,
   }
 }

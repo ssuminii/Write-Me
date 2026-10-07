@@ -22,14 +22,14 @@ const TEAM_SECTION = [
 ].join('\n')
 
 const START_SECTION =
-  '시작하기: package.json의 패키지 매니저에 맞춰 설치 명령어(예: npm install)와 실행 명령어(예: npm run dev)를 반드시 둘 다 하나의 코드 블록에. git clone, cd 명령어는 넣지 마'
+  '시작하기: package.json의 패키지 매니저나 빌드 도구에 맞춰 설치 명령어(예: npm install, ./gradlew build)와 실행 명령어(예: npm run dev, ./gradlew bootRun, ./mvnw spring-boot:run)를 반드시 둘 다 하나의 코드 블록에. git clone, cd 명령어는 넣지 마'
 
 const SECTIONS: Record<ReadmeVersion, string[]> = {
   simple: [...INTRO_SECTIONS, TEAM_SECTION, START_SECTION],
   detailed: [
     ...INTRO_SECTIONS,
     '주요 기능 상세: 기능마다 ### 소제목과 2~4줄 목록. 각 줄은 문장이 아니라 명사형으로 짧게 (예: "사용자가 입력한 텍스트 음성으로 변환", "생성된 음성 파일 다운로드"). 페이지 폴더, 컴포넌트 이름, 기존 README를 근거로',
-    '시스템 아키텍처: 사용자, 프론트엔드, 서버·API, DB, 외부 서비스, 배포를 ```mermaid flowchart LR``` 그림으로. 의존성과 설정 파일에서 확인된 것만',
+    '시스템 아키텍처: ```mermaid flowchart LR``` 그림으로. 상자 이름은 실제 기술 이름으로(예: Next.js, Supabase, Vercel, Gemini API). package.json·빌드 파일·docker-compose·설정 파일·API 경로로 확인된 것만 넣고 근거 없는 상자는 넣지 마. 노드는 A[Next.js]처럼 짧은 영문 ID와 대괄호 안 이름으로. 라이브러리처럼 사용자가 접속하는 서비스 구조가 없으면 섹션을 생략',
     '개발 기간: 저장소 생성일 ~ 마지막 업데이트',
     '폴더 구조: 파일 목록을 2단계 깊이까지 트리로, 주요 폴더 옆에 짧은 설명 주석',
     'ERD: DB 스키마 파일이 있을 때만 ```mermaid erDiagram```으로. 없으면 생략',
@@ -50,7 +50,7 @@ export const README_SYSTEM = [
   '섹션(##)과 섹션 사이에는 여백을 위해 빈 줄, <br>, 빈 줄 순서로 넣어.',
   '기술 이름, 라이브러리 이름, 커밋 메시지에 나온 영역 이름과 기술 용어(예: Fiber, Flight, DOM nesting)는 한글로 옮기지 말고 영어 원문 그대로 써.',
   '팀원 이름은 기존 README에 같은 아이디의 이름이 있으면 그 이름을, 없으면 주어진 이름 그대로 쓰고, 지어내지 마.',
-  '기술 스택은 package.json과 설정 파일(예: .github/workflows → GitHub Actions, vercel.json → Vercel)에서 확인된 것만 핵심 위주로 써.',
+  '기술 스택은 package.json, 빌드 파일(build.gradle, pom.xml), docker-compose, 설정 파일(예: .github/workflows → GitHub Actions, vercel.json → Vercel)에서 확인된 것만 핵심 위주로 써.',
   '팀원 역할은 기존 README 팀원 표에 있으면 그대로 쓰고, 없으면 package.json으로 저장소 성격(React·Next.js·Vite 등은 FE, Express·NestJS 등은 BE)을 기본으로 정하고, 각자 커밋 메시지로 다르게 보이면 조정해. 애매하면 Contributor로 써.',
   '저장소 정보에서 알 수 없는 내용(연락처, 성과 수치 등)은 지어내지 말고 섹션째 생략해.',
   '마크다운 본문만 출력하고, 앞뒤에 설명이나 ``` 코드 블록 감싸기를 붙이지 마.',
@@ -81,6 +81,7 @@ export function buildPromptParts(context: RepoContext, version: ReadmeVersion) {
       `주 언어: ${context.language ?? '없음'}`,
       `기간: ${period}`,
     ].join('\n'),
+    '빌드 파일': ['## 빌드 파일·docker-compose (라이브러리는 이름만)', context.buildFiles ?? '없음'].join('\n'),
     'package.json': [
       '## package.json (라이브러리는 이름만)',
       summarizePackageJson(context.packageJson, context.tree),
